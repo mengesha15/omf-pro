@@ -15,7 +15,22 @@ class CreateApprovedLoansTable extends Migration
     {
         Schema::create('approved_loans', function (Blueprint $table) {
             $table->id();
+            $table->double('approved_amount');
+            $table->unsignedBigInteger('approved_loan_id');
+            $table->unsignedBigInteger('ruquested_by');
+            $table->unsignedBigInteger('approved_by');
+            $table->unsignedBigInteger('loan_service_id');
             $table->timestamps();
+            $table->string('status');
+
+            $table->foreign('approved_loan_id')->references('id')->on('borrowers')->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('ruquested_by')->references('id')->on('users')->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('approved_by')->references('id')->on('users')->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('loan_service_id')->references('id')->on('loan_services')->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 
