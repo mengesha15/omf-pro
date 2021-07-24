@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 
-class isAuditorMiddleware
+class isCustomerServiceOfficerMiddleware
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class isAuditorMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check() && Auth::user()->role == "Auditor"){
+        if(Auth::check() && Auth::user()->role == "Customer service officer"){
             return $next($request);
         }else{
             return redirect()->route('login');

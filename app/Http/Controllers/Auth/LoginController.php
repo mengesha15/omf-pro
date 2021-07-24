@@ -36,6 +36,12 @@ class LoginController extends Controller
         elseif(Aut()->user()->role = 2){
             return route('auditor.dashboard');
         }
+        elseif(Aut()->user()->role = 3){
+            return route('customerRelationOfficer.dashboard');
+        }
+        elseif(Aut()->user()->role = 4){
+            return route('customerServiceOfficer.dashboard');
+        }
     }
 
     /**
@@ -56,12 +62,21 @@ class LoginController extends Controller
         ]);
 
         if(auth()->attempt(array('email'=>$input['email'],'password'=>$input['password']))){
-            if(auth()->user()->role = 1){
+
+            if(auth()->user()->role = "Admin"){
                 return redirect()->route('admin.dashboard');
             }
 
-            elseif(auth()->user()->role = 2){
+            elseif(auth()->user()->role = "Auditor"){
                 return redirect()->route('auditor.dashboard');
+            }
+
+            elseif(auth()->user()->role = "Customer relation officer"){
+                return redirect()->route('customerRelationOfficer.dashboard');
+            }
+
+            elseif(auth()->user()->role = "Customer service officer"){
+                return redirect()->route('customerServiceOfficer.dashboard');
             }
         }else{
             return redirect()->route('login')->with('error','Email and passworsd are wrong');
