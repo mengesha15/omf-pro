@@ -30,16 +30,16 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
     protected function redirectTo(){
-        if(Aut()->user()->role = 1){
+        if(Aut()->user()->role = "Admin"){
             return route('admin.dashboard');
         }
-        elseif(Aut()->user()->role = 2){
+        elseif(Aut()->user()->role = "Auditor"){
             return route('auditor.dashboard');
         }
-        elseif(Aut()->user()->role = 3){
+        elseif(Aut()->user()->role = "Customer relation officer"){
             return route('customerRelationOfficer.dashboard');
         }
-        elseif(Aut()->user()->role = 4){
+        elseif(Aut()->user()->role = "Customer service officer"){
             return route('customerServiceOfficer.dashboard');
         }
     }
@@ -57,11 +57,11 @@ class LoginController extends Controller
     public function login(Request $request){
         $input = $request->all();
         $this->validate($request,[
-            'email'=>'required|email',
+            'username'=>'required',
             'password'=>'required'
         ]);
 
-        if(auth()->attempt(array('email'=>$input['email'],'password'=>$input['password']))){
+        if(auth()->attempt(array('username'=>$input['username'],'password'=>$input['password']))){
 
             if(auth()->user()->role = "Admin"){
                 return redirect()->route('admin.dashboard');
@@ -81,5 +81,9 @@ class LoginController extends Controller
         }else{
             return redirect()->route('login')->with('error','Email and passworsd are wrong');
         }
+    }
+
+    public function username(){
+        return 'username';
     }
 }
