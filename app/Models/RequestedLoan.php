@@ -3,6 +3,8 @@
 namespace App\Models;
 use App\Models\LoanService;
 use App\Models\Borrower;
+use App\Models\User;
+
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +20,7 @@ class RequestedLoan extends Model
      */
     protected $fillable = [
         'requesed_amount',
-        'requested_loan_id',
+        'borrower_id',
         'ruquested_by',
         'approved_by',
         'loan_service_id',
@@ -33,5 +35,8 @@ class RequestedLoan extends Model
     }
     public function borrower(){
         return $this->belongsTo(Borrower::class);
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

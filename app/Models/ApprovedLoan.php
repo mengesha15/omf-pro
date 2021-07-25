@@ -18,8 +18,8 @@ class ApprovedLoan extends Model
      * @var array
      */
     protected $fillable = [
+        'approved_amount',
         'approved_loan_id',
-        'role',
         'ruquested_by',
         'approved_by',
         'loan_service_id',

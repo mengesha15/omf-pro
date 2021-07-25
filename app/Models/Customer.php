@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Models\Account;
 use App\Models\Branch;
 use App\Models\SavingService;
 use App\Models\SavingTransaction;
@@ -22,7 +23,7 @@ class Customer extends Model
         'middleName',
         'lastName',
         'address',
-        'customer_status',
+        'customer_status', // what is the job of this customer
         'birthDate',
         'account_balance',
         'phoneNumber',

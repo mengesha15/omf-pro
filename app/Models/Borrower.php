@@ -45,7 +45,7 @@ class Borrower extends Model
 
 
     public function branch(){
-        return $this->hasMany(Branch::class);
+        return $this->belongsTo(Branch::class);
     }
     public function loanService(){
         return $this->belongsTo(LoanService::class);

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Customer;  // It is needed to make relation between Account and Custemer class
 
 class Account extends Model
 {

@@ -16,14 +16,14 @@ class CreateRequestedLoansTable extends Migration
         Schema::create('requested_loans', function (Blueprint $table) {
             $table->id();
             $table->double('requesed_amount');
-            $table->unsignedBigInteger('requested_loan_id'); // Borrrower of the requested loan
+            $table->unsignedBigInteger('borrower_id'); // Borrrower of the requested loan
             $table->unsignedBigInteger('ruquested_by');
             $table->unsignedBigInteger('approved_by');
             $table->unsignedBigInteger('loan_service_id');
             $table->timestamps();
             $table->string('status'); // approved or pending 
 
-            $table->foreign('requested_loan_id')->references('id')->on('borrowers')->onUpdate('cascade')
+            $table->foreign('borrower_id')->references('id')->on('borrowers')->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->foreign('ruquested_by')->references('id')->on('users')->onUpdate('cascade')
                 ->onDelete('cascade');

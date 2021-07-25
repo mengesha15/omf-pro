@@ -5,6 +5,8 @@ use App\Models\Employee;
 use App\Models\Borrower;
 use App\Models\Customer;
 use App\Models\SavingTransaction;
+use App\Models\LoanDisburseRecord;
+
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
