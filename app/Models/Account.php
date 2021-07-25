@@ -8,22 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Account extends Model
 {
     use HasFactory;
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'account_number',
-    ];
+    protected $fillable = 'account_number';
 
-    /**
-     * Get the user that owns the Account
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function customer(): BelongsTo
-    {
+    public function customer(){
         return $this->belongsTo(Customer::class);
     }
     

@@ -22,7 +22,6 @@ class CreateBorrowersTable extends Migration
             $table->date('birthDate');
             $table->integer('phoneNumber');
             $table->string('borrower_status'); //job status of the borrower
-            $table->string('loan_type');
             $table->double('borrowed_amount');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('branch_id');
