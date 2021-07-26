@@ -344,11 +344,8 @@
                                         </ul>
                                     </li>
                                 </li>
-
-
-
                              <li class="nav-item">
-                            <li class="nav-item">
+                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-edit"></i>
                                     <p>
@@ -384,7 +381,7 @@
                                     <li class="nav-item">
                                         <a href="pages/forms/validation.html" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Delete delete service</p>
+                                            <p>Delete saving service</p>
                                         </a>
                                     </li>
                                 </ul>

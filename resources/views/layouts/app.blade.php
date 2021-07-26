@@ -90,108 +90,73 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
-                                    Manage employee
+                                    Saving services
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/layout/top-nav.html" class="nav-link">
+                                    <a href="./services/savingService/female_saving_service.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Add new employee</p>
+                                        <p>Female saving service</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Delete employee</p>
+                                        <p>Adult saving service</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/layout/boxed.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Edit employee</p>
+                                        <p>Handura saving service</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/layout/fixed-sidebar.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>View employees</p>
+                                        <p>Group saving</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
-                                    Manage loan
-                                    <i class="right fas fa-angle-left"></i>
+                                    Loan services
+                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="nav-icon fas fa-edit"></i>
-                                        <p>
-                                            Approved loan
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
+                                    <a href="./services/savingService/female_saving_service.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Female loan service</p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="pages/charts/chartjs.html" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>View approved loans</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="pages/charts/flot.html" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Approved loan detail</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="pages/charts/inline.html" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Delete approved loan</p>
-                                            </a>
-                                        </li>
-
-                                    </ul>
+                                </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="nav-icon fas fa-edit"></i>
-                                        <p>
-                                            Requested loan
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
+                                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Adult loan service</p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="pages/charts/chartjs.html" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Approve requested loan</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="pages/charts/flot.html" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Reques loan detail</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="pages/charts/inline.html" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Delete approved loan</p>
-                                            </a>
-                                        </li>
-
-                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/layout/boxed.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Handura loan service</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Group loan</p>
+                                    </a>
                                 </li>
                             </ul>
                         </li>
-
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
