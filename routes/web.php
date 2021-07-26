@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\http\Controllers\User;
 use App\http\Controllers\AdminController;
 use App\http\Controllers\AuditorController;
 use App\http\Controllers\CustomerRelationOfficer;
@@ -25,12 +26,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//To 
+//To protect logout and back to the loged in page
 Route::middleware(['middleware'=>'PreventBackHistory'])->group(function () {
     Auth::routes();
 });
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/register', [App\Http\Controllers\HomeController::class, 'index'])->name('register');
 
 
 Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHistory']], function(){
