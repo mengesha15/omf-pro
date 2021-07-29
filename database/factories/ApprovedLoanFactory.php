@@ -22,7 +22,7 @@ class ApprovedLoanFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'approved_amount' =>$this->faker->randomFloat(2,25,100),
         ];
     }
 }

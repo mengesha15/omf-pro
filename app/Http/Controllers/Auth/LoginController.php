@@ -30,16 +30,16 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
     protected function redirectTo(){
-        if(Auth()->user()->role = "Admin"){
+        if(Auth()->user()->user_role = "Admin"){
             return route('admin.dashboard');
         }
-        elseif(Auth()->user()->role = "Auditor"){
+        elseif(Auth()->user()->user_role = "Auditor"){
             return route('auditor.dashboard');
         }
-        elseif(Auth()->user()->role = "Customer relation officer"){
+        elseif(Auth()->user()->user_role = "Customer relation officer"){
             return route('customerRelationOfficer.dashboard');
         }
-        elseif(Auth()->user()->role = "Customer service officer"){
+        elseif(Auth()->user()->user_role = "Customer service officer"){
             return route('customerServiceOfficer.dashboard');
         }
     }
@@ -60,25 +60,26 @@ class LoginController extends Controller
             'username'=>'required',
             'password'=>'required'
         ]);
-
+        
         if(auth()->attempt(array('username'=>$input['username'],'password'=>$input['password']))){
 
-            if(auth()->user()->role = "Admin"){
+            if(auth()->user()->user_role = "Admin"){
                 return redirect()->route('admin.dashboard');
             }
 
-            elseif(auth()->user()->role = "Auditor"){
+            elseif(auth()->user()->user_role = "Auditor"){
                 return redirect()->route('auditor.dashboard');
             }
 
-            elseif(auth()->user()->role = "Customer relation officer"){
+            elseif(auth()->user()->user_role = "Customer relation officer"){
                 return redirect()->route('customerRelationOfficer.dashboard');
             }
 
-            elseif(auth()->user()->role = "Customer service officer"){
+            elseif(auth()->user()->user_role = "Customer service officer"){
                 return redirect()->route('customerServiceOfficer.dashboard');
             }
-        }else{
+         }
+        else{
             return redirect()->route('login')->with('error','Email and passworsd are wrong');
         }
     }

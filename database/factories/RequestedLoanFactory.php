@@ -22,7 +22,7 @@ class RequestedLoanFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'requesed_amount' =>$this->faker->randomFloat(2,25,100),
         ];
     }
 }

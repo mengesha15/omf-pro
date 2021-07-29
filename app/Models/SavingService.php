@@ -17,12 +17,12 @@ class SavingService extends Model
      * @var array
      */
     protected $fillable = [
-        'Saving_service_name',
-        'discription',
-        'interest_rate',
+        'saving_service_name',
+        'saving_service_description',
+        'saving_service_interest_rate',
     ];
 
-    public function customer(){
+    public function customers(){
         return $this->hasMany(Customer::class);
     }
 }

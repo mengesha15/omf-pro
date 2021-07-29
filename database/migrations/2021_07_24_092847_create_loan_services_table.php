@@ -16,8 +16,8 @@ class CreateLoanServicesTable extends Migration
         Schema::create('loan_services', function (Blueprint $table) {
             $table->id();
             $table->string('loan_service_name');
-            $table->string('discription');
-            $table->double('interest_rate');
+            $table->string('loan_service_description');
+            $table->double('loan_service_interest_rate');
             $table->timestamps();
         });
     }

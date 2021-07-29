@@ -21,24 +21,24 @@ class Branch extends Model
      * @var array
      */
     protected $fillable = [
-        'branchName',
-        'location',
+        'branch_name',
+        'branch_location',
     ];
     
     
-    public function employee(){
+    public function employees(){
         return $this->hasMany(Employee::class);
     }
-    public function borrower(){
+    public function borrowers(){
         return $this->hasMany(Borrower::class);
     }
-    public function customer(){
+    public function customers(){
         return $this->hasMany(Customer::class);
     }
-    public function disbursedRecord(){
+    public function disbursed_record(){
         return $this->hasMany(LoanDisburseRecord::class);
     }
-    public function savingTransaction(){
+    public function saving_transactions(){
         return $this->hasMany(SavingTransaction::class);
     }
 }

@@ -118,7 +118,7 @@
                         <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a class="d-block">{{ Auth::user()->username." : ".Auth::user()->role }}</a>
+                        <a class="d-block">{{ Auth::user()->username." : (".Auth::user()->user_role.")" }}</a>
                     </div>
                 </div>
 
@@ -138,7 +138,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
-                                    Manage employee
+                                    Employee management
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -173,7 +173,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
-                                    Manage loan
+                                    Loan management
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -243,7 +243,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
-                                    Manage users
+                                    Users management
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>

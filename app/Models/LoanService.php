@@ -20,18 +20,18 @@ class LoanService extends Model
      */
     protected $fillable = [
         'loan_service_name',
-        'discription',
-        'interest_rate',
+        'loan_service_description',
+        'loan_service_interest_rate',
     ];
 
     public function borrower(){
         return $this->hasMany(Borrower::class);
     }
-    public function approvedLoan(){
+    public function approve_loan(){
         return $this->hasMany(ApprovedLoan::class);
     }
 
-    public function requestedLoan(){
+    public function requested_loan(){
         return $this->hasMany(RequestedLoan::class);
     }
 }

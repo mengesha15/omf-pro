@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Account;
+use App\Models\AccountNumber;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class AccountFactory extends Factory
+class AccountNumberFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Account::class;
+    protected $model = AccountNumber::class;
 
     /**
      * Define the model's default state.
@@ -23,7 +22,7 @@ class AccountFactory extends Factory
     public function definition()
     {
         return [
-            'account_number' => $this->faker->account_number(),
+            'account_number'=>$this->faker->randomNumber(8),
         ];
     }
 }

@@ -1,0 +1,6 @@
+
+Seedign multiple models with foreign key constraint
+
+/*$loanService = LoanService::factory()->create();
+        Branch::factory(4)->has(Employee::factory()->count(2)->has(User::Factory()->count(1)->has(Borrower::factory()->count(1)->for($loanService))))->create();
+*/

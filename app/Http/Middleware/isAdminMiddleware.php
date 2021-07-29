@@ -18,7 +18,7 @@ class isAdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check() && Auth::user()->role == "Admin"){
+        if(Auth::check() && Auth::user()->user_role == "Admin"){
             return $next($request);
         }else{
             return redirect()->route('login');

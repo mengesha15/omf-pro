@@ -30,7 +30,7 @@ class RequestedLoan extends Model
         'status'
     ];
 
-    public function loanService(){
+    public function loan_service(){
         return $this->belongsTo(LoanService::class);
     }
     public function borrower(){

@@ -23,7 +23,7 @@ class ApprovedLoan extends Model
         'ruquested_by',
         'approved_by',
         'loan_service_id',
-
+        'status'
     ];
 
     /**
@@ -32,7 +32,7 @@ class ApprovedLoan extends Model
      * @var array
      */
     protected $hidden = [
-        'status'
+        
     ];
 
     public function loanService(){

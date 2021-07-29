@@ -22,7 +22,8 @@ class SavingTransactionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'withdrawals' =>$this->faker->randomFloat(2,0,15000),
+            'deposits',
         ];
     }
 }

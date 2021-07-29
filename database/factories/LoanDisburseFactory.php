@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\LoanDisburseRecord;
+use App\Models\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class LoanDisburseRecordFactory extends Factory
+class LoanDisburseFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = LoanDisburseRecord::class;
+    protected $model = Model::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +22,8 @@ class LoanDisburseRecordFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'remaining_amount' =>$this->faker->randomFloat(2,0,15000),
+            'disburse_amount' =>$this->faker->randomFloat(2,50,15000),
         ];
     }
 }

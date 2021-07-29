@@ -19,31 +19,32 @@ class Customer extends Model
      * @var array
      */
     protected $fillable = [
-        'firstName',
-        'middleName',
-        'lastName',
-        'address',
-        'customer_status', // what is the job of this customer
-        'birthDate',
+        'first_name',
+        'middle_name',
+        'last_name',
+        'customer_address',
+        'birth_date',
         'account_balance',
-        'phoneNumber',
+        'phone_number',
         'branch_id',
         'account_number',
         'saving_service_id',
-        'customerPhoto',
+        'customer_photo',
+        'customer_status', // what is the job of this customer
+
     ];
 
 
-    public function account(){
+    public function account_numbers(){
         return $this->hasMany(Account::class);
     }
     public function branch(){
         return $this->belongsTo(Branch::class);
     }
     public function savingService(){
-        return $this->belongsTo(SavingService::class);
+        return $this->hasMany(SavingService::class);
     }
-    public function savingTransaction(){
+    public function saving_transactions(){
         return $this->hasMany(SavingTransaction::class);
     }
 }

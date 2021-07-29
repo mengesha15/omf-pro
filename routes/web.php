@@ -1,8 +1,5 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
-
-use App\http\Controllers\User;
 use App\http\Controllers\AdminController;
 use App\http\Controllers\AuditorController;
 use App\http\Controllers\CustomerRelationOfficer;
@@ -26,16 +23,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//To protect logout and back to the loged in page
+
+//To protect back history after logout
 Route::middleware(['middleware'=>'PreventBackHistory'])->group(function () {
-    Auth::routes();
+    Auth::routes(); 
 });
 
-// Route::get('/register', [App\Http\Controllers\HomeController::class, 'index'])->name('register');
 
-
-Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHistory']], function(){
-    Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
+Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHistory']], function( $name = null){
+    Route::get('dashboard/{name?}',[AdminController::class,'index'])->name('admin.dashboard');
     Route::get('profile',[AdminController::class,'profile'])->name('admin.profile');
     Route::get('settings',[AdminController::class,'settings'])->name('admin.settings');
 });

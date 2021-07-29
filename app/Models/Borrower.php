@@ -20,18 +20,19 @@ class Borrower extends Model
      * @var array
      */
     protected $fillable = [
-        'firstName',
-        'middleName',
-        'lastName',
-        'address',
-        'birthDate',
-        'phoneNumber',
-        'borrower_status',
+        'first_name',
+        'middle_name',
+        'last_name',
+        'borrower_address',
+        'birth_date',
+        'phone_number',
         'borrowed_amount',
         'user_id',
         'branch_id',
         'loan_service_id',
-        'borrowerPhoto',
+        'borrower_photo',
+        'borrower_status',
+        
     ];
 
     /**
@@ -40,23 +41,23 @@ class Borrower extends Model
      * @var array
      */
     protected $hidden = [
-        'status',
+        
     ];
 
 
     public function branch(){
         return $this->belongsTo(Branch::class);
     }
-    public function loanService(){
+    public function loan_service(){
         return $this->belongsTo(LoanService::class);
     }
-    public function approvedLoan(){
-        return $this->hasMany(ApprovedLoan::class);
+    public function approved_loan(){
+        return $this->hasOne(ApprovedLoan::class);
     }
-    public function disburseRecord(){
+    public function disburse_records(){
         return $this->hasMany(LoanDisburseRecord::class);
     }
-    public function requestedLoan(){
+    public function requested_loan(){
         return $this->hasOne(RequestedLoan::class);
     }
 }

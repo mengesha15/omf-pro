@@ -15,9 +15,9 @@ class CreateSavingServicesTable extends Migration
     {
         Schema::create('saving_services', function (Blueprint $table) {
             $table->id();
-            $table->string('Saving_service_name');
-            $table->string('discription');
-            $table->double('interest_rate');
+            $table->string('saving_service_name');
+            $table->string('saving_service_description');
+            $table->double('saving_service_interest_rate');
             $table->timestamps();
         });
     }

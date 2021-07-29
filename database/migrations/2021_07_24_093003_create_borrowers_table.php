@@ -15,18 +15,18 @@ class CreateBorrowersTable extends Migration
     {
         Schema::create('borrowers', function (Blueprint $table) {
             $table->id();
-            $table->string('firstName');
-            $table->string('middleName');
-            $table->string('lastName');
-            $table->string('address');
-            $table->date('birthDate');
-            $table->integer('phoneNumber');
+            $table->string('first_name');
+            $table->string('middle_name');
+            $table->string('last_name');
+            $table->string('borrower_address');
+            $table->date('birth_date');
+            $table->string('phone_number');
             $table->string('borrower_status'); //job status of the borrower
             $table->double('borrowed_amount');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('branch_id');
             $table->unsignedBigInteger('loan_service_id');
-            $table->binary('borrowerPhoto');
+            $table->binary('borrower_photo');
             $table->timestamps();
             $table->string('status'); // approved or pending
 

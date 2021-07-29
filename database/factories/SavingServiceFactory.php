@@ -22,7 +22,9 @@ class SavingServiceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'saving_service_name'=>$this->faker->sentence(3),
+            'saving_service_description'=>$this->faker->sentence(9),
+            'saving_service_interest_rate'=>$this->faker->randomFloat(2,8,17),
         ];
     }
 }

@@ -25,16 +25,16 @@ class RedirectIfAuthenticated
             // if (Auth::guard($guard)->check()) {
             //     return redirect(RouteServiceProvider::HOME);
             // }
-            if(Auth::guard($guard)->check() && Auth::user()->role == "Admin"){
+            if(Auth::guard($guard)->check() && Auth::user()->user_role == "Admin"){
                 return redirect()->route('admin.dashboard');
             }
-            elseif(Auth::guard($guard)->check() && Auth::user()->role == "Auditor"){
+            elseif(Auth::guard($guard)->check() && Auth::user()->user_role == "Auditor"){
                 return redirect()->route('auditor.dashboard');
             }
-            elseif(Auth::guard($guard)->check() && Auth::user()->role == "Customer relation officer"){
+            elseif(Auth::guard($guard)->check() && Auth::user()->user_role == "Customer relation officer"){
                 return redirect()->route('customerRelationOfficer.dashboard');
             }
-            elseif(Auth::guard($guard)->check() && Auth::user()->role == "Customer service officer"){
+            elseif(Auth::guard($guard)->check() && Auth::user()->user_role == "Customer service officer"){
                 return redirect()->route('customerServiceOfficer.dashboard');
             }
         }

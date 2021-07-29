@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Employee;
+use Illuminate\Support\Str;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class EmployeeFactory extends Factory
@@ -22,7 +24,15 @@ class EmployeeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'first_name' =>$this->faker->firstName(),
+            'middle_name' =>$this->faker->lastName(),
+            'last_name' =>$this->faker->lastName(),
+            'employee_address' =>$this->faker->address(),
+            'job_position' =>'Admin',
+            'birth_date' =>$this->faker->date(),
+            'employee_salary' =>$this->faker->randomFloat(2,2500,15000),
+            'phone_number' =>$this->faker->phoneNumber(),
+            'employee_photo' =>$this->faker->image(),
         ];
     }
 }

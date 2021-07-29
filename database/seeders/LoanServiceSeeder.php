@@ -3,10 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use App\Models\Account;
 
-class AccountTableSeeder extends Seeder
+class LoanServiceSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +13,6 @@ class AccountTableSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Account::factory(10)->create();
+        //
     }
 }
