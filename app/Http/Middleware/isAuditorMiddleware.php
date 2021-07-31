@@ -18,7 +18,7 @@ class isAuditorMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check() && Auth::user()->user_role == "Auditor"){
+        if(Auth::check() && Auth::user()->role_id == 2){
             return $next($request);
         }else{
             return redirect()->route('login');

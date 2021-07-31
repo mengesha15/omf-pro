@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use App\Models\Employee;
+use App\Models\Role;
 use App\Models\Borrower;
 use App\Models\ApprovedLoan;
 use App\Models\LoanDisburseRecord;
@@ -24,7 +25,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'username',
-        'user_role',
+        'role_id',
         'employee_id',
         'password',
     ];
@@ -51,16 +52,19 @@ class User extends Authenticatable
     public function employee(){
         return $this->belongsTo(Employee::class);
     }
-    public function borrower(){
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
+    public function borrowers(){
         return $this->hasMony(Borrower::class);
     }
-    public function approvedLoan(){
+    public function approved_loans(){
         return $this->hasMony(ApprovedLoan::class);
     }
-    public function disbursedLoan(){
+    public function disbursed_loans(){
         return $this->hasMony(LoanDisburseRecord::class);
     }
-    public function savingTransaction(){
+    public function saving_transactions(){
         return $this->hasMony(SavingTransaction::class);
     }
 }

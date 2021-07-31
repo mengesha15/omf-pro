@@ -25,6 +25,7 @@ class CustomerFactory extends Factory
             'first_name' =>$this->faker->firstName(),
             'middle_name' =>$this->faker->lastName(),
             'last_name' =>$this->faker->lastName(),
+            'customer_gender'=>$this->faker->word(),
             'customer_address' =>$this->faker->address(),
             'birth_date' =>$this->faker->date(),
             'account_balance' =>$this->faker->randomFloat(2,25,100),

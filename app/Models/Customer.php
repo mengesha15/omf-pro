@@ -22,6 +22,7 @@ class Customer extends Model
         'first_name',
         'middle_name',
         'last_name',
+        'customer_gender',
         'customer_address',
         'birth_date',
         'account_balance',
@@ -41,7 +42,7 @@ class Customer extends Model
     public function branch(){
         return $this->belongsTo(Branch::class);
     }
-    public function savingService(){
+    public function saving_services(){
         return $this->hasMany(SavingService::class);
     }
     public function saving_transactions(){

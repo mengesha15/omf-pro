@@ -1,10 +1,10 @@
 <?php
 
 namespace Database\Seeders;
-use App\Models\Branch;
+use App\Models\SavingService;
 use Illuminate\Database\Seeder;
 
-class BranchSeeder extends Seeder
+class SavingServiceSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +13,6 @@ class BranchSeeder extends Seeder
      */
     public function run()
     {
-        
-        Branch::factory(10)->create();
+        SavingService::factory(10)->create();
     }
-} 
+}

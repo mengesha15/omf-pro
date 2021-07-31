@@ -4,11 +4,11 @@ namespace App\Models;
 use App\Models\Branch;
 use App\Models\LoanService;
 use App\Models\ApprovedLoan;
-use App\Models\LoanDisburseRecord;
 use App\Models\RequestedLoan;
+use App\Models\LoanDisburseRecord;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Borrower extends Model
 {
@@ -23,6 +23,7 @@ class Borrower extends Model
         'first_name',
         'middle_name',
         'last_name',
+        'borrower_gender',
         'borrower_address',
         'birth_date',
         'phone_number',

@@ -18,6 +18,7 @@ class CreateCustomersTable extends Migration
             $table->string('first_name');
             $table->string('middle_name');
             $table->string('lastName');
+            $table->string('customer_gender');
             $table->string('customer_address');
             $table->string('customer_status'); //has job or not if has what job
             $table->date('birth_date');
@@ -33,8 +34,7 @@ class CreateCustomersTable extends Migration
             ->onDelete('cascade');
             $table->foreign('account_id')->references('id')->on('account_numbers')->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->foreign('saving_service_id')->references('id')->on('saving_services')->onUpdate('cascade')
-            ->onDelete('cascade');
+            $table->foreign('saving_service_id')->references('id')->on('saving_services')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

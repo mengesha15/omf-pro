@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Models;
-use App\Models\LoanService;
-use App\Models\Borrower;
 use App\Models\User;
+use App\Models\Borrower;
+use App\Models\LoanService;
 
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class RequestedLoan extends Model
 {

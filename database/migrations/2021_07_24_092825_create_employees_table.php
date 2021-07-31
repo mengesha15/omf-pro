@@ -18,16 +18,21 @@ class CreateEmployeesTable extends Migration
             $table->string('first_name');
             $table->string('middle_name');
             $table->string('last_name');
+            $table->string('employee_gender');
             $table->string('employee_address');
-            $table->string('job_position');
             $table->date('birth_date');
             $table->double('employee_salary');
             $table->string('phone_number');
             $table->binary('employee_photo');
+
+            $table->unsignedBigInteger('role_id');
             $table->unsignedBigInteger('branch_id');
+
             $table->timestamps();
 
             $table->foreign('branch_id')->references('id')->on('branches')->onUpdate('cascade')
+            ->onDelete('cascade');
+            $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade')
             ->onDelete('cascade');
         });
     }

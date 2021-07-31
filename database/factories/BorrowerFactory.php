@@ -26,6 +26,7 @@ class BorrowerFactory extends Factory
             'first_name' =>$this->faker->firstName(),
             'middle_name' =>$this->faker->lastName(),
             'last_name' =>$this->faker->lastName(),
+            'borrower_gender'=>$this->faker->word(),
             'employee_address' =>$this->faker->address(),
             'birth_date' =>$this->faker->date(),
             'phone_number' =>$this->faker->phoneNumber(),

@@ -18,6 +18,7 @@ class CreateBorrowersTable extends Migration
             $table->string('first_name');
             $table->string('middle_name');
             $table->string('last_name');
+            $table->string('borrower_gender');
             $table->string('borrower_address');
             $table->date('birth_date');
             $table->string('phone_number');

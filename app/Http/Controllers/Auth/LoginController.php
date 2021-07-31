@@ -29,17 +29,15 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
-    protected function redirectTo(){
-        if(Auth()->user()->user_role = "Admin"){
+    protected function redirectTo()
+    {
+        if (Auth()->user()->role_id = "1") {
             return route('admin.dashboard');
-        }
-        elseif(Auth()->user()->user_role = "Auditor"){
+        } elseif (Auth()->user()->role_id = "2") {
             return route('auditor.dashboard');
-        }
-        elseif(Auth()->user()->user_role = "Customer relation officer"){
+        } elseif (Auth()->user()->role_id = "3") {
             return route('customerRelationOfficer.dashboard');
-        }
-        elseif(Auth()->user()->user_role = "Customer service officer"){
+        } elseif (Auth()->user()->role_id = "4") {
             return route('customerServiceOfficer.dashboard');
         }
     }
@@ -54,37 +52,32 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $input = $request->all();
-        $this->validate($request,[
-            'username'=>'required',
-            'password'=>'required'
+        $this->validate($request, [
+            'username' => 'required',
+            'password' => 'required'
         ]);
-        
-        if(auth()->attempt(array('username'=>$input['username'],'password'=>$input['password']))){
 
-            if(auth()->user()->user_role = "Admin"){
+        if (auth()->attempt(array('username' => $input['username'], 'password' => $input['password']))) {
+
+            if (auth()->user()->role_id = 1) {
                 return redirect()->route('admin.dashboard');
-            }
-
-            elseif(auth()->user()->user_role = "Auditor"){
+            } elseif (auth()->user()->role_id = 2) {
                 return redirect()->route('auditor.dashboard');
-            }
-
-            elseif(auth()->user()->user_role = "Customer relation officer"){
+            } elseif (auth()->user()->role_id = 3) {
                 return redirect()->route('customerRelationOfficer.dashboard');
-            }
-
-            elseif(auth()->user()->user_role = "Customer service officer"){
+            } elseif (auth()->user()->role_id = 4) {
                 return redirect()->route('customerServiceOfficer.dashboard');
             }
-         }
-        else{
-            return redirect()->route('login')->with('error','Email and passworsd are wrong');
+        } else {
+            return redirect()->route('login')->with('error', 'Email and passworsd are wrong');
         }
     }
 
-    public function username(){
+    public function username()
+    {
         return 'username';
     }
 }

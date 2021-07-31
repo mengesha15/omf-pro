@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Auth;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
+| Here is where  web routes are registered for application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| contains the "web" middleware group.
 |
 */
 
@@ -30,11 +30,85 @@ Route::middleware(['middleware'=>'PreventBackHistory'])->group(function () {
 });
 
 
-Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHistory']], function( $name = null){
-    Route::get('dashboard/{name?}',[AdminController::class,'index'])->name('admin.dashboard');
+Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHistory']], function(){
+    Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
+    Route::get('employee_registration',[AdminController::class,'employee_registration_form'])->name('admin.employee_registration');
+    Route::post('employee_registration',[AdminController::class,'add_new_employee'])->name('admin.add_new_employee');
+
+
     Route::get('profile',[AdminController::class,'profile'])->name('admin.profile');
     Route::get('settings',[AdminController::class,'settings'])->name('admin.settings');
+    
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Route::group(['prefix'=>'auditor', 'middleware'=>['isAuditor','auth','PreventBackHistory']], function(){
     Route::get('dashboard',[AuditorController::class,'index'])->name('auditor.dashboard');

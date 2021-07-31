@@ -3,8 +3,8 @@
 namespace App\Models;
  use App\Models\Branch;
  use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Employee extends Model
 {
@@ -19,13 +19,14 @@ class Employee extends Model
         'first_name',
         'middle_name',
         'last_name',
+        'employee_gender',
         'employee_address',
-        'job_position',
         'birth_date',
         'employee_salary',
         'phone_number',
         'employee_photo',
         'branch_id',
+        'role_id',
     ];
 
 
@@ -34,5 +35,8 @@ class Employee extends Model
     }
     public function user(){
         return $this->hasOne(User::class);
+    }
+    public function role(){
+        return $this->belongsTo(Role::class);
     }
 }

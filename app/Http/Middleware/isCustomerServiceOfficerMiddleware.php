@@ -18,7 +18,7 @@ class isCustomerServiceOfficerMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check() && Auth::user()->user_role == "Customer service officer"){
+        if(Auth::check() && Auth::user()->role_id == 4){
             return $next($request);
         }else{
             return redirect()->route('login');

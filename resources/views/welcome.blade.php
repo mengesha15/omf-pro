@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.welcome_sider_nav')
 @section('blogger_content')
     <!-- Content Header (Page header) -->
     <section class="content-header">

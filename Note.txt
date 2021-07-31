@@ -4,3 +4,28 @@ Seedign multiple models with foreign key constraint
 /*$loanService = LoanService::factory()->create();
         Branch::factory(4)->has(Employee::factory()->count(2)->has(User::Factory()->count(1)->has(Borrower::factory()->count(1)->for($loanService))))->create();
 */
+
+
+
+// $roles = Role::all();
+
+        // $posts = Post::factory()
+        //     ->count(3)
+        //     ->for(User::factory()->state([
+        //         'name' => 'Jessica Archer',
+        //     ]))
+        //     ->create();
+
+        // $user = User::factory()->create();
+
+        // $posts = Post::factory()
+        //             ->count(3)
+        //             ->for($user)
+        //             ->create();
+
+
+
+        /* $employees = Employee::all();
+        return view('dashboards/admins/index', ['employees'=>$employees])
+        return dd($employee);
+        ;*/

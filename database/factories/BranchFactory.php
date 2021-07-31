@@ -22,7 +22,7 @@ class BranchFactory extends Factory
     public function definition()
     {
         return [
-            'branch_name' => $this->faker->firstName(),
+            'branch_name' => $this->faker->company(),
             'branch_location' => $this->faker->city(),
             
         ];

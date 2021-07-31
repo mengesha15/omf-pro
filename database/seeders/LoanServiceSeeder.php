@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
+use App\Models\LoanService;
 class LoanServiceSeeder extends Seeder
 {
     /**
@@ -13,6 +13,6 @@ class LoanServiceSeeder extends Seeder
      */
     public function run()
     {
-        //
+        LoanService::factory(8)->create();
     }
 }

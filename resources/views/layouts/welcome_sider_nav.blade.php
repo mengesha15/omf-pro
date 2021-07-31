@@ -48,10 +48,6 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <!-- Notifications Dropdown Menu -->
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ url('register') }}" class="nav-link">SIGN UP</a>
-                </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{ url('login') }}" class="nav-link">SIGN IN</a>
                 </li>

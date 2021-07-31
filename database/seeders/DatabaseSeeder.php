@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\RoleSeeder;
+use Database\Seeders\AccountNumberSeeder;
+use Database\Seeders\SavingServiceSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([BranchSeeder::class,AccountNumberSeeder::class,]);
+        $this->call([
+            BranchSeeder::class,
+            AccountNumberSeeder::class,
+            SavingServiceSeeder::class,
+            LoanserviceSeeder::class,
+            RoleSeeder::class,
+        ]);
     }
 }
