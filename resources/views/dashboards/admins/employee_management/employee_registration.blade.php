@@ -32,7 +32,12 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form method="POST" action="{{ route('admin.employee_registration') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.employee_registration') }}" enctype="multipart/form-data" id="main_form">
+                                @if (Session::has('success'))
+                                <div class="alert alert-success" >
+                                    {{ Session::get('success') }}
+                                </div>
+                            @endif
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
@@ -122,13 +127,13 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-12 mb-3">
-                                        <label for="branch_id">Employee role</label><br>
+                                        <label for="branch_id">Branch</label><br>
                                         <input list="branch_id" name="branch_id"
                                             class="col-sm-6 custom-select custom-select-sm" required=""
                                             placeholder="Choose role...">
                                         <datalist id="branch_id">
                                             @foreach ($branches as $branch)
-                                                <option value="{{ $branch->id }}">
+                                                <option value="{{ $branch->id}}">
                                                     {{ $branch->branch_name }}</option>
                                             @endforeach
                                         </datalist>
@@ -171,7 +176,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="employee_photo">Choose photo</label>
-                                        <input type="file" class="form-control" name="employee_photo" id="employee_photo" style="width: 90%;" >
+                                        <input type="file" class="form-control" name="employee_photo" id="employee_photo" style="width: 90%;" required>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -188,4 +193,29 @@
         </section>
         <!-- /.content -->
     </div>
+ @include('includes.footer')
 @endsection
+
+
+{{-- <script>
+    $(function () {
+        $(#main_form).on('submit',function (e) {
+            e.preventDefault();
+            $.ajax({
+                url:$(this).attr('action'),
+                method:$(this).attr('method'),
+                data:new FormData(this);
+                processData:false,
+                dataType:'json',
+                contentType:false,
+                beforeSend:function(){
+
+                },
+                success:function(data){
+
+                }
+            });
+         });
+
+    });
+</script> --}}

@@ -29,3 +29,17 @@ Seedign multiple models with foreign key constraint
         return view('dashboards/admins/index', ['employees'=>$employees])
         return dd($employee);
         ;*/
+
+
+
+Input validation
+        return [
+                    'fname' => 'required|max:255|regex:/^[a-zA-ZÑñ\s]+$/',
+                    'lname' => 'required|max:255|regex:/^[a-zA-ZÑñ\s]+$/',
+                    'mname' => 'max:255|alpha',
+                     'file' => 'image|mimes:jpg,jpeg,png',
+               'contact_no' => 'regex:/^[-0-9\+]+$/',
+            'date_of_birth' => 'required|date_format:Y-m-d',
+                'school_id' => 'required|exists:schools,id',
+                'degree_id' => 'required|exists:degrees,id',
+        ];

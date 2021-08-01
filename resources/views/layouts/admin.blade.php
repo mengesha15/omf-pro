@@ -51,7 +51,12 @@
                         <i class="fas fa-user-circle fa-fw"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">{{ Auth::user()->username}}</span>
+                        <span class="dropdown-item dropdown-header">
+                        <div >
+                    <div class="image">
+                        <img src="{{ asset('uploads/employee_photo/'.Auth::user()->user_photo) }}" alt="User photo" width="60" height="65">
+                    </div>
+                </div></span>
                         <div class="dropdown-divider"></div>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">
@@ -91,7 +96,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('dist/img/user.png') }}" class="img-circle elevation-2" alt="User Image">
+                        <img src="{{ asset('uploads/employee_photo/'.Auth::user()->user_photo) }}" alt="User photo">
                     </div>
                     <div class="info">
                         <a class="d-block">{{ Auth::user()->username}}</a>
@@ -187,7 +192,7 @@
                                         </li>
 
                                     </ul>
-                                    <li class="nav-item">
+                                     <li class="nav-item">
                                         <a href="#" class="nav-link">
                                             <i class="far fa-plus nav-icon"></i>
                                             <i class="nav-icon fas fa-edit"></i>
@@ -220,9 +225,11 @@
                                             </li>
 
                                         </ul>
-                                </li>
+                                
+                                   </li>
                             </ul>
                         </li>
+
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
@@ -383,4 +390,5 @@
         <div class="content-wrapper">
             @yield('admin_content')
         </div>
-    @include('includes.footer')
+
+

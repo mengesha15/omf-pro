@@ -4,6 +4,7 @@ use App\http\Controllers\AdminController;
 use App\http\Controllers\AuditorController;
 use App\http\Controllers\CustomerRelationOfficer;
 use App\http\Controllers\CustomerServiceOfficer;
+use App\Http\Controllers\TestController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('test',[TestController::class,'test']);
 
 
 //To protect back history after logout
@@ -34,6 +36,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHis
     Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
     Route::get('employee_registration',[AdminController::class,'employee_registration_form'])->name('admin.employee_registration');
     Route::post('employee_registration',[AdminController::class,'add_new_employee'])->name('admin.add_new_employee');
+
+    Route::delete('delete_employee/{id}',[AdminController::class,'delete_employee'])->name('admin.delete_employee');
 
 
     Route::get('profile',[AdminController::class,'profile'])->name('admin.profile');

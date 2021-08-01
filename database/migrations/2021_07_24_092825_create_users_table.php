@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->unsignedBigInteger('role_id');
             $table->unsignedBigInteger('employee_id');
+            $table->string('user_photo')->default('default.jpg');
             $table->timestamp('username_verified_at')->nullable();
             $table->string('password');
             $table->timestamps();
