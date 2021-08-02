@@ -43,3 +43,59 @@ Input validation
                 'school_id' => 'required|exists:schools,id',
                 'degree_id' => 'required|exists:degrees,id',
         ];
+
+
+
+
+
+</script>
+
+
+
+
+ $('#enquiry_form').validate({
+  rules:{
+  name:"required",
+  email:{
+  required:true,
+  email:true
+  },
+  mobile:{
+      required:true,
+  minlength:9,
+  maxlength:10,
+  number: true
+  },
+  messages:{
+  name:"Please enter your username..!",
+  email:"Please enter your email..!",
+      mobile:"Enter your mobile no"
+  },
+  submitHandler: function(form) {alert("working");
+  //write your success code here
+  }
+  });
+
+
+
+
+  var phoneNumber = 8882070980;
+            var filter = /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
+
+            if (filter.test(phoneNumber)) {
+              if(phoneNumber.length==10){
+                   var validate = true;
+              } else {
+                  alert('Please put 10  digit mobile number');
+                  var validate = false;
+              }
+            }
+            else {
+              alert('Not a valid number');
+              var validate = false;
+            }
+
+         if(validate){
+          //number is equal to 10 digit or number is not string
+          enter code here...
+        }
