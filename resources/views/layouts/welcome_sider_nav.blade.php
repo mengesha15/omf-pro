@@ -77,7 +77,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="{{ url('admin/dashboard') }}" class="nav-link">
+                            <a href="/" class="nav-link">
                                 <i class="fa fa-home"></i>
                                 <p>Home</p>
                             </a>
@@ -87,31 +87,31 @@
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Saving services
-                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
+                            <ul class="nav">
                                 <li class="nav-item">
-                                    <a href="./services/savingService/female_saving_service.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Female saving service</p>
+                                    <a href="{{ route('services/savingService/regular_saving') }}" class="nav-link">
+
+                                        <i class="far fa-plus nav-icon"></i>
+                                        <p>Regular saving</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="far fa-plus nav-icon"></i>
                                         <p>Adult saving service</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/layout/boxed.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="far fa-plus nav-icon"></i>
                                         <p>Handura saving service</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/layout/fixed-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="far fa-plus nav-icon"></i>
                                         <p>Group saving</p>
                                     </a>
                                 </li>
@@ -123,31 +123,30 @@
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Loan services
-                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
+                            <ul class="nav">
                                 <li class="nav-item">
                                     <a href="./services/savingService/female_saving_service.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="far fa-plus nav-icon"></i>
                                         <p>Female loan service</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="far fa-plus nav-icon"></i>
                                         <p>Adult loan service</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/layout/boxed.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="far fa-plus nav-icon"></i>
                                         <p>Handura loan service</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/layout/fixed-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="far fa-plus nav-icon"></i>
                                         <p>Group loan</p>
                                     </a>
                                 </li>
@@ -160,7 +159,7 @@
             <!-- /.sidebar -->
         </aside>
         <div class="content-wrapper">
-            @yield('blogger_content')
+            @yield('welcome_sidebar_content')
         </div>
         <!-- Main Footer -->
         <footer class="main-footer">

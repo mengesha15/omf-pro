@@ -23,7 +23,7 @@ class AdminController extends Controller
          $total_service = DB::table('saving_services')->get()->count() + DB::table('loan_services')->get()->count();;
         $employees = DB::table('employees')->select('id','first_name','middle_name','last_name','employee_salary','employee_photo','employee_gender')->get();
 
-        return view('dashboards/admins/index', compact(['employees','total_employees',       'total_borrowers','total_customers','total_service']));
+        return view('dashboards/admins/index', compact(['employees','total_employees', 'total_borrowers','total_customers','total_service']));
 
 
     }
@@ -36,10 +36,11 @@ class AdminController extends Controller
     }
     public function add_new_employee(Request $request){
         $request->validate([
-            'first_name'=> 'required|regex:/^[a-zA-Z]+$/u|max:255',
+            'first_name'=> 'required|regex:/^[a-zA-Z]+$/u|min:2|max:15',
             // 'first_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255|unique:users,name,' . $user->id,
-            'middle_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
-            'last_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
+            'middle_name' => 'required|regex:/^[a-zA-Z]+$/u|min:2|min:2|max:15',
+            'last_name' => 'required|regex:/^[a-zA-Z]+$/u|min:2|max:15',
+
             'birth_date' => 'required|date',
             // 'phone' => 'required|min:11|numeric',
             'phone_number' => 'required|min:10|max:13|numeric',
@@ -47,7 +48,10 @@ class AdminController extends Controller
             // 'product_price' => 'required|numeric|gt:0',
             'employee_salary' => 'required|numeric|min:2000|max:20000',
             'employee_address' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
-            'employee_photo' => 'image|mimes:jpg,jpeg,png',
+            'employee_photo' => 'required|image|mimes:jpg,jpeg,png',
+            'branch_id'=> 'required',
+            'role_id'=> 'required',
+
 
         ]);
             $last_employee = DB::table('employees')->select('id')->orderBy('id')->first();
@@ -72,8 +76,7 @@ class AdminController extends Controller
                 $profile_photo->move('uploads/employee_photo', $photo_nmae);
                 $new_employee->employee_photo = $photo_nmae;
             } else {
-                return $request;
-                $new_employee->employee_photo = '';
+                return redirect()->route('admin.employee_registration');
             }
             $new_user = new User();
             $new_user->username = $request->first_name . random_int(1000, 9999) . "/" . date('Y');
@@ -86,6 +89,84 @@ class AdminController extends Controller
             $new_user->save();
             return redirect('admin/employee_registration')->with('message', 'Employee registered successfully!');
 
+    }
+
+    public function edit_employee_form($id){
+        $employee = Employee::find($id);
+        $roles = Role::all();
+        $branches = Branch::all();
+
+        return view('dashboards/admins/employee_management/edit_employee',compact(['employee','roles','branches']));
+    }
+    public function update_employee(Request $request,$id){
+        $new_employee = Employee::find($id);
+        $request->validate([
+        'first_name'=> 'required|regex:/^[a-zA-Z]+$/u|min:2|max:15',
+        // 'first_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255|unique:users,name,' . $user->id,
+        'middle_name' => 'required|regex:/^[a-zA-Z]+$/u|min:2|min:2|max:15',
+        'last_name' => 'required|regex:/^[a-zA-Z]+$/u|min:2|max:15',
+
+        'birth_date' => 'required|date',
+        // 'phone' => 'required|min:11|numeric',
+        'phone_number' => 'required|regex:/^[0-9]+$/u|min:10|max:13',
+        // 'amount' => 'required|digits_between:3,5',
+        // 'product_price' => 'required|numeric|gt:0',
+        'employee_salary' => 'required|numeric|min:2000|max:20000',
+        'employee_address' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
+        'employee_photo' => 'required|image|mimes:jpg,jpeg,png',
+        'branch_id'=> 'required',
+        'role_id'=> 'required',
+        ]);
+
+        $new_employee = new Employee([
+        'first_name' => $request->get('first_name'),
+        'middle_name' => $request->get('middle_name'),
+        'last_name' => $request->get('last_name'),
+        'birth_date' => $request->get('birth_date'),
+        'phone_number' => $request->get('phone_number'),
+        'employee_salary' => $request->get('employee_salary'),
+        'employee_address' => $request->get('employee_address'),
+        'employee_gender' => $request->get('employee_gender'),
+        'branch_id' => $request->get('branch_id'),
+        'role_id' => $request->get('role_id'),
+        ]);
+
+        if ($request->hasFile('employee_photo')) {
+        $profile_photo = $request->file('employee_photo');
+        $extension = $profile_photo->getClientOriginalExtension();
+        // $photo_nmae = $request->file('employee_photo')->getClientOriginalName();
+        $photo_nmae = time() . "." . $extension;
+        $profile_photo->move('uploads/employee_photo', $photo_nmae);
+        $new_employee->employee_photo = $photo_nmae;
+        } else {
+        return redirect()->route('admin.employee_registration');
+        }
+
+        $new_user = new User();
+
+        $new_user->username = $request->first_name . random_int(1000, 9999) . "/" . date('Y');
+        $new_user->employee_id = $id;
+        $new_user->role_id = $request->role_id;
+        $new_user->password = Hash::make('password');
+        $new_user->user_photo = $photo_nmae;
+
+        $new_employee->save();
+        $new_user->save();
+        return redirect('admin/view_employee')->with('message', 'Employee registered successfully!');
+
+
+    }
+    public function view_employee(){
+    $employees = DB::table('employees')
+                       ->join('users', 'employees.id', '=', 'users.employee_id')
+                      ->select('employees.id','first_name','middle_name','last_name','employee_salary','employee_photo','employee_gender','username')->orderBy('employees.updated_at','DESC')->get();
+
+        return view('dashboards.admins.employee_management.view_employee',compact('employees'));
+    }
+
+    public function employee_detail($id){
+        
+        return view('dashboards.admins.employee_management.employee_detail');
     }
 
     public function delete_employee($id){
@@ -102,4 +183,3 @@ class AdminController extends Controller
         return view('dashboards/admins/settings');
     }
 }
-

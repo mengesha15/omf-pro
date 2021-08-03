@@ -141,7 +141,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
-                                    Manage employee
+                                    Transaction management
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>

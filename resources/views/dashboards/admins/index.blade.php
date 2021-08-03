@@ -12,7 +12,7 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Admin home</li>
+                                <li class="breadcrumb-item active">OMF</li>
                             </ol>
                         </div>
                         <!-- /.col -->
@@ -95,8 +95,12 @@
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
+
                         <div class="col-sm-6">
-                            {{-- to move to most left --}}
+                            <ol class="breadcrumb float-sm-left">
+                                <p class=""> Brach employee
+                                </p>
+                            </ol>
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-6">
@@ -145,11 +149,13 @@
                             <td>{{ $employee->employee_salary }}</td>
                             <td>
                                 <ol>
-                                    <li class="breadcrumb-item li-none"><a href="#"><i class="fa fa-indent"></i>Detail</a>
+                                    <li class="breadcrumb-item li-none"><a href="{{ url('admin/employee_detail/'. $employee->id) }}"><i class="fa fa-indent"></i>Detail</a>
+
                                 </ol>
                             </td>
+
                             <td class="text-center">
-                                <a href="{{ url('admin/edit_employee/') . $employee->id }}"
+                                <a href="{{ url('admin/edit_employee/' . $employee->id) }}"
                                     class=" breadcrumb-item li-none btn btn-primary btn-sm">
                                     <p class="fa fa-edit"></p>
                                 </a>

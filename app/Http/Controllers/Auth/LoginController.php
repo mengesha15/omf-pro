@@ -72,7 +72,7 @@ class LoginController extends Controller
                 return redirect()->route('customerServiceOfficer.dashboard');
             }
         } else {
-            return redirect()->route('login')->with('message', 'Email and passworsd are wrong');
+            return redirect()->route('login')->with('message', 'Wrong username and password combination. Please try again.');
         }
     }
 

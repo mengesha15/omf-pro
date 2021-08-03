@@ -1,5 +1,5 @@
 @extends('layouts.welcome_sider_nav')
-@section('blogger_content')
+@section('welcome_sidebar_content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
@@ -19,7 +19,7 @@
             </div>
         </div><!-- /.container-fluid -->
     </section>
-    
+
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">

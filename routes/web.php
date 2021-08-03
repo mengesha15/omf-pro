@@ -28,91 +28,34 @@ Route::get('test',[TestController::class,'test']);
 
 //To protect back history after logout
 Route::middleware(['middleware'=>'PreventBackHistory'])->group(function () {
-    Auth::routes(); 
+    Auth::routes();
 });
 
 
 Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHistory']], function(){
     Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
+
+    //Employee registeration
     Route::get('employee_registration',[AdminController::class,'employee_registration_form'])->name('admin.employee_registration');
     Route::post('employee_registration',[AdminController::class,'add_new_employee'])->name('admin.add_new_employee');
+
+    //Employee updation
+    Route::get('edit_employee/{id}',[AdminController::class,'edit_employee_form'])->name('admin.edit_employee');
+    Route::post('edit_employee/{id}',[AdminController::class,'update_employee'])->name('admin.edit_employee');
+
+    //viewing employee
+    Route::get('view_employee/',[AdminController::class,'view_employee'])->name('admin.view_employee');
+
+    //Employee details
+    Route::get('employee_detail/{id}',[AdminController::class, 'employee_detail'])->name('admin.employee_detail');
 
     Route::delete('delete_employee/{id}',[AdminController::class,'delete_employee'])->name('admin.delete_employee');
 
 
     Route::get('profile',[AdminController::class,'profile'])->name('admin.profile');
     Route::get('settings',[AdminController::class,'settings'])->name('admin.settings');
-    
+
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Route::group(['prefix'=>'auditor', 'middleware'=>['isAuditor','auth','PreventBackHistory']], function(){
     Route::get('dashboard',[AuditorController::class,'index'])->name('auditor.dashboard');

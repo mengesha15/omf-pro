@@ -1,6 +1,7 @@
-@extends('layouts.admin')
+@extends('layouts.customer_relation_officer')
 
-@section('admin_content')
+
+@section('customer_relation_officer_content')
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
