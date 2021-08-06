@@ -6,6 +6,8 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Branch;
 use App\Models\Employee;
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
@@ -17,10 +19,11 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
     public function index(){
+        $user = Auth::user();
         $total_employees = DB::table('employees')->get()->count();
         $total_borrowers = DB::table('borrowers')->get()->count();
          $total_customers = DB::table('customers')->get()->count();
-         $total_service = DB::table('saving_services')->get()->count() + DB::table('loan_services')->get()->count();;
+         $total_service = DB::table('saving_services')->get()->count() + DB::table('loan_services')->get()->count();
         $employees = DB::table('employees')->select('id','first_name','middle_name','last_name','employee_salary','employee_photo','employee_gender')->get();
 
         return view('dashboards/admins/index', compact(['employees','total_employees', 'total_borrowers','total_customers','total_service']));
@@ -43,7 +46,7 @@ class AdminController extends Controller
 
             'birth_date' => 'required|date',
             // 'phone' => 'required|min:11|numeric',
-            'phone_number' => 'required|min:10|max:13|numeric',
+            'phone_number' => 'required|regex:/^[0-9]+$/u|min:10|max:13',
             // 'amount' => 'required|digits_between:3,5',
             // 'product_price' => 'required|numeric|gt:0',
             'employee_salary' => 'required|numeric|min:2000|max:20000',
@@ -152,21 +155,18 @@ class AdminController extends Controller
 
         $new_employee->save();
         $new_user->save();
-        return redirect('admin/view_employee')->with('message', 'Employee registered successfully!');
+        return redirect('admin/view_employee')->with('message', 'Employee data updated successfully!');
 
 
     }
     public function view_employee(){
-    $employees = DB::table('employees')
-                       ->join('users', 'employees.id', '=', 'users.employee_id')
-                      ->select('employees.id','first_name','middle_name','last_name','employee_salary','employee_photo','employee_gender','username')->orderBy('employees.updated_at','DESC')->get();
-
+    $employees = Employee::all();
         return view('dashboards.admins.employee_management.view_employee',compact('employees'));
     }
 
     public function employee_detail($id){
-        
-        return view('dashboards.admins.employee_management.employee_detail');
+        $employee = Employee::find($id);
+        return view('dashboards.admins.employee_management.employee_detail',compact('employee'));
     }
 
     public function delete_employee($id){

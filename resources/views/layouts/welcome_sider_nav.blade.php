@@ -56,7 +56,7 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-">
             <!-- Brand Logo -->
             <a href="{{ url('/') }}" class="brand-link">
                 <img src="{{ asset('dist/img/omf_logo.jpg') }}" alt="OMF Logo"
@@ -71,11 +71,9 @@
                 </div>
 
                 <!-- Sidebar Menu -->
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
+                <nav class="mt-2" data-widget="treeview">
+
+                    <ul class="nav nav-pills nav-sidebar flex-column" role="menu" data-accordion="false">
                         <li class="nav-item">
                             <a href="/" class="nav-link">
                                 <i class="fa fa-home"></i>
@@ -91,7 +89,7 @@
                             </a>
                             <ul class="nav">
                                 <li class="nav-item">
-                                    <a href="{{ route('services/savingService/regular_saving') }}" class="nav-link">
+                                    <a href="{{ url('regular_saving') }}" class="nav-link">
 
                                         <i class="far fa-plus nav-icon"></i>
                                         <p>Regular saving</p>
@@ -100,21 +98,28 @@
                                 <li class="nav-item">
                                     <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
-                                        <p>Adult saving service</p>
+                                        <p>Handhura saving</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/layout/boxed.html" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
-                                        <p>Handura saving service</p>
+                                        <p>Women saving</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/layout/fixed-sidebar.html" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
-                                        <p>Group saving</p>
+                                        <p>Sorema saving</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                                        <i class="far fa-plus nav-icon"></i>
+                                        <p>Noninterest saving</p>
+                                    </a>
+                                </li>
+
                             </ul>
                         </li>
 
@@ -129,27 +134,42 @@
                                 <li class="nav-item">
                                     <a href="./services/savingService/female_saving_service.php" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
-                                        <p>Female loan service</p>
+                                        <p>Solidarity group loan</p>
+
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
-                                        <p>Adult loan service</p>
+                                        <p>Bussiness loan</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/layout/boxed.html" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
-                                        <p>Handura loan service</p>
+                                        <p>MSEL</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/layout/fixed-sidebar.html" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
-                                        <p>Group loan</p>
+                                        <p>WEDPL</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                                        <i class="far fa-plus nav-icon"></i>
+                                        <p>General purpose loan</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                                        <i class="far fa-plus nav-icon"></i>
+                                        <p>Housing loan</p>
+                                    </a>
+                                </li>
+
+
                             </ul>
                         </li>
                     </ul>

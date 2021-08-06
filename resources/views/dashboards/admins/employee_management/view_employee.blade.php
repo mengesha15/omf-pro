@@ -41,8 +41,7 @@
                         <!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <a href="{{ route('admin.employee_registration') }}" class="btn btn-success"> Add
-                                    new employee
+                                <a href="{{ route('admin.employee_registration') }}" class="btn btn-success"><i class="fas fa-plus"></i> Add new employee
                                 </a>
                             </ol>
                         </div>
@@ -56,6 +55,11 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+            @if (Session::has('message'))
+            <div class="alert alert-success">
+                {{ Session::get('message') }}
+            </div>
+            @endif
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
@@ -63,10 +67,8 @@
                         {{-- <th>Photo</th> --}}
                         <th>First name</th>
                         <th>middle name</th>
-                        <th>last name</th>
                         <th>Gender</th>
                         <th>Salary</th>
-                        <th>Username</th>
                         <td>Detail</td>
                         <td>Edit</td>
                         <td>Delete</td>
@@ -81,10 +83,8 @@
                         </td> --}}
                         <td>{{ $employee->first_name }}</td>
                         <td>{{ $employee->middle_name }}</td>
-                        <td>{{ $employee->last_name }}</td>
                         <td>{{ $employee->employee_gender }}</td>
                         <td>{{ $employee->employee_salary }}</td>
-                        <td>{{ $employee->username }}</td>
                         <td>
                             <ol>
                                 <li class="breadcrumb-item li-none"><a href="{{ url('admin/employee_detail/' . $employee->id) }}"><i class="fa fa-indent"></i>Detail</a>

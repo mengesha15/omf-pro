@@ -20,7 +20,7 @@ class ApprovedLoan extends Model
     protected $fillable = [
         'approved_amount',
         'approved_loan_id',
-        'ruquested_by',
+        'requested_by',
         'approved_by',
         'loan_service_id',
         'status'
@@ -32,7 +32,7 @@ class ApprovedLoan extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     public function loanService(){

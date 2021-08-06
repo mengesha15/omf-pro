@@ -105,8 +105,8 @@
                         <!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <a href="{{ route('admin.employee_registration') }}" class="btn btn-success"> Add
-                                    new employee
+                                <a href="{{ route('admin.employee_registration') }}" class="btn btn-success"><i class="fas fa-plus"></i>
+                                     Add new employee
                                 </a>
                             </ol>
                         </div>
@@ -176,6 +176,4 @@
     </div>
     <!-- /.card -->
     <!-- /.content -->
-
-
 @endsection

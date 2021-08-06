@@ -218,14 +218,14 @@
                                                 <a href="pages/charts/chartjs.html" class="nav-link">
                                                     <i class="far fa-plus nav-icon"></i>
                                                     <i class="far fa-plus nav-icon"></i>
-                                                    <p>Approve requests</p>
+                                                    <p>Approved requests</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="pages/charts/flot.html" class="nav-link">
                                                     <i class="far fa-plus nav-icon"></i>
                                                     <i class="far fa-plus nav-icon"></i>
-                                                    <p>Reques loan detail</p>
+                                                    <p>Requested detail</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
@@ -279,18 +279,6 @@
                                     <a href="pages/UI/modals.html" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
                                         <p>View user detail</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/UI/modals.html" class="nav-link">
-                                        <i class="far fa-plus nav-icon"></i>
-                                        <p>Deactivate user</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/UI/modals.html" class="nav-link">
-                                        <i class="far fa-plus nav-icon"></i>
-                                        <p>Reactivate user</p>
                                     </a>
                                 </li>
                             </ul>
@@ -404,6 +392,7 @@
         <div class="content-wrapper">
             @yield('admin_content')
         </div>
+        <div id="sidebar-overlay"></div>
     <footer class="main-footer">
 
         <div class="container my-auto">
@@ -435,7 +424,7 @@
     <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 
     <script src="{{ asset('dist/js/demo.js') }}"></script>
-
+    </body>
     <script>
         $(function() {
             $("#example1").DataTable({
@@ -444,18 +433,8 @@
                 "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
         });
     </script>
-    </body>
     </html>
 
 

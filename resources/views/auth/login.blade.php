@@ -4,7 +4,7 @@
 </head>
 @extends('layouts.welcome_sider_nav')
 
-@section('blogger_content')
+@section('welcome_sidebar_content')
 <br /><br />
 <div class="container">
     <div class="row justify-content-center">
