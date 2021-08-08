@@ -22,6 +22,7 @@ class ApprovedLoan extends Model
         'approved_loan_id',
         'requested_by',
         'approved_by',
+        'borrower_id',
         'loan_service_id',
         'status'
     ];

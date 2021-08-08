@@ -18,16 +18,16 @@ class CreateSavingTransactionsTable extends Migration
             $table->string('transaction_type'); // withdrawal or deposit
             $table->double('transaction_amount');
             $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('branch_id');
+            $table->unsignedBigInteger('branch_id')->nullable();
             $table->unsignedBigInteger('user_id');  // which user  does  the transaction?
             $table->timestamps();
 
             $table->foreign('branch_id')->references('id')->on('branches')->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('set null');
             $table->foreign('customer_id')->references('id')->on('customers')->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('no action');
         });
     }
 

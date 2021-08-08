@@ -24,19 +24,19 @@ class CreateBorrowersTable extends Migration
             $table->string('phone_number');
             $table->string('borrower_status'); //job status of the borrower
             $table->double('borrowed_amount');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('branch_id');
-            $table->unsignedBigInteger('loan_service_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->unsignedBigInteger('loan_service_id')->nullable();
             $table->binary('borrower_photo');
             $table->timestamps();
             $table->string('status'); // approved or pending
 
             $table->foreign('branch_id')->references('id')->on('branches')->onUpdate('cascade')
-            ->onDelete('cascade');
+            ->onDelete('set null');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')
-            ->onDelete('cascade');
+            ->onDelete('set null');
             $table->foreign('loan_service_id')->references('id')->on('loan_services')->onUpdate('cascade')
-            ->onDelete('cascade');
+            ->onDelete('set null');
         });
     }
 

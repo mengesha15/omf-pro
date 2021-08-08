@@ -33,7 +33,8 @@ class Borrower extends Model
         'loan_service_id',
         'borrower_photo',
         'borrower_status',
-        
+        'status',   // approved or not e.t paid or not
+
     ];
 
     /**
@@ -42,7 +43,7 @@ class Borrower extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
 

@@ -24,17 +24,17 @@ class CreateCustomersTable extends Migration
             $table->date('birth_date');
             $table->double('account_balance');
             $table->string('phone_number');
-            $table->unsignedBigInteger('branch_id');
-            $table->unsignedBigInteger('account_id');
-            $table->unsignedBigInteger('saving_service_id');
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->unsignedBigInteger('account_id')->unique();
+            $table->unsignedBigInteger('saving_service_id')->nullable();
             $table->binary('customer_photo');
             $table->timestamps();
 
             $table->foreign('branch_id')->references('id')->on('branches')->onUpdate('cascade')
-            ->onDelete('cascade');
+            ->onDelete('set null');
             $table->foreign('account_id')->references('id')->on('account_numbers')->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->foreign('saving_service_id')->references('id')->on('saving_services')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('saving_service_id')->references('id')->on('saving_services')->onUpdate('cascade')->onDelete('set null');
         });
     }
 

@@ -53,6 +53,10 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHis
     //Employee details
     Route::get('employee_detail/{id}',[AdminController::class, 'employee_detail'])->name('admin.employee_detail');
 
+    Route::get('requested_list', [AdminController::class, 'requested_list'])->name('admin.requested_list');
+
+    Route::get('loan_request_approvement/{id}', [AdminController::class, 'approve_request'])->name('admin.approve_requested_loan');
+
     Route::delete('delete_employee/{id}',[AdminController::class,'delete_employee'])->name('admin.delete_employee');
 
 
@@ -88,7 +92,14 @@ Route::group(['prefix'=>'customerServiceOfficer', 'middleware'=>['isCustomerServ
     Route::get('dashboard',[CustomerServiceOfficer::class,'index'])->name('customerServiceOfficer.dashboard');
 
     Route::get('add_new_request',[CustomerServiceOfficer::class,'add_new_request_form'])->name('customerServiceOfficer.add_new_request_form');
+
    Route::post('add_new_request',[CustomerServiceOfficer::class,'add_new_request'])->name('customerServiceOfficer.add_new_request');
+
+   Route::get('borrowers_list',[CustomerServiceOfficer::class,'view_borrowers'])->name('customerServiceOfficer.borrowers_list');
+
+   Route::get('loan_payment/{id}', [CustomerServiceOfficer::class,'loan_payment_form'])->name('customerServiceOfficer.loan_payment_form');
+
+   Route::post('loan_payment/{id}', [CustomerServiceOfficer::class,'apply_loan_payment'])->name('customerServiceOfficer.loan_payment');
 
     Route::get('profile',[CustomerServiceOfficer::class,'profile'])->name('customerServiceOfficer.profile');
     Route::get('settings',[CustomerServiceOfficer::class,'settings'])->name('customerServiceOfficer.settings');

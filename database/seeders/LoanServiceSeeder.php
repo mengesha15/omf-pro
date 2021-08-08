@@ -13,6 +13,6 @@ class LoanServiceSeeder extends Seeder
      */
     public function run()
     {
-        LoanService::factory(8)->create();
+        LoanService::factory(6)->create();
     }
 }

@@ -56,7 +56,7 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-">
+        <aside class="main-sidebar sidebar-dark-primary elevation-3">
             <!-- Brand Logo -->
             <a href="{{ url('/') }}" class="brand-link">
                 <img src="{{ asset('dist/img/omf_logo.jpg') }}" alt="OMF Logo"

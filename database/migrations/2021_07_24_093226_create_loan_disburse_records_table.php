@@ -17,17 +17,17 @@ class CreateLoanDisburseRecordsTable extends Migration
             $table->id();
             $table->double('remaining_amount');
             $table->double('disburse_amount');
-            $table->unsignedBigInteger('branch_id');
+            $table->unsignedBigInteger('branch_id')->nullable();
             $table->unsignedBigInteger('borrower_id');
             $table->unsignedBigInteger('disbursed_by');
             $table->timestamps();
 
             $table->foreign('branch_id')->references('id')->on('branches')->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('set null');
             $table->foreign('borrower_id')->references('id')->on('borrowers')->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->foreign('disbursed_by')->references('id')->on('users')->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('no action');
         });
     }
 

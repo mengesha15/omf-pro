@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 class AuditorController extends Controller
 {
     public function index(){
+        $user = User::all();
         return view('dashboards/auditors/index');
     }
 

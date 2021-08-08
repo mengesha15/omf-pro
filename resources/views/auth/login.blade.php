@@ -10,7 +10,9 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header">
+                    <div class="login-logo"><a href="/"><img src="/dist/img/omf_logo.jpg"  class="img-circle" width="35%"></a></div>
+                </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate>
                         @if (Session::has('message'))

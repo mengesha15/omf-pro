@@ -16,6 +16,6 @@ class AccountNumberSeeder extends Seeder
     {
         // To create seed with foreign key
         // User::factory(8)->has( Post::factory()->count(5))->create();
-        AccountNumber::factory(20)->create();
+        AccountNumber::factory(100)->create();
     }
 }

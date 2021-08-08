@@ -19,11 +19,11 @@ class RequestedLoan extends Model
      * @var array
      */
     protected $fillable = [
-        'requesed_amount',
+        'requested_amount',
         'borrower_id',
         'requested_by',
-        'approved_by',
         'loan_service_id',
+        'status'
     ];
 
     protected $hidden = [

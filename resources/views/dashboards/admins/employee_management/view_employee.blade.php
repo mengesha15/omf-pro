@@ -12,7 +12,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">OMF</li>
+                            <li class="breadcrumb-item active">Employees list</li>
                         </ol>
                     </div>
                     <!-- /.col -->
@@ -63,36 +63,34 @@
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        {{-- <th>Photo</th> --}}
+                        <th>Username</th>
                         <th>First name</th>
                         <th>middle name</th>
                         <th>Gender</th>
                         <th>Salary</th>
-                        <td>Detail</td>
-                        <td>Edit</td>
-                        <td>Delete</td>
+                        <th>Employee role</th>
+                        <th>Detail</th>
+                        <th>Edit</th>
+                        <th style="color: red">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($employees as $employee)
                     <tr>
-                        <td>{{ $employee->id }}</td>
-                        {{-- <td>
-                                        <img src="{{ asset('uploads/employee_photo/'.$employee->employee_photo) }}" alt="Employee photo">
-                        </td> --}}
+                        <td>{{ $employee->username }}</td>
                         <td>{{ $employee->first_name }}</td>
                         <td>{{ $employee->middle_name }}</td>
                         <td>{{ $employee->employee_gender }}</td>
                         <td>{{ $employee->employee_salary }}</td>
+                        <td>{{ $employee->role_name }}</td>
                         <td>
                             <ol>
-                                <li class="breadcrumb-item li-none"><a href="{{ url('admin/employee_detail/' . $employee->id) }}"><i class="fa fa-indent"></i>Detail</a>
+                                <li class="breadcrumb-item li-none"><a href="{{ url('admin/employee_detail/' . $employee->id) }}"><i class="fa fa-indent"></i></a>
 
                             </ol>
                         </td>
                         <td class="text-center">
-                            <a href="{{ url('admin/edit_employee/' . $employee->id) }}" class=" breadcrumb-item li-none btn btn-primary btn-sm">
+                            <a href="{{ url('admin/edit_employee/' . $employee->id) }}">
                                 <p class="fa fa-edit"></p>
                             </a>
                         </td>
@@ -100,18 +98,13 @@
                             <form action="{{ url('admin/delete_employee/' . $employee->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure to delete?')">
                                 @method('delete')
                                 @csrf
-                                <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                <button><i class="far fa-trash-alt" style="color: red;"></i></button>
                             </form>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-        <!-- /.card-body -->
     </div>
-    <!-- /.card -->
-    <!-- /.content -->
-
-
-    @endsection
+ @endsection
 
