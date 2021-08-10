@@ -21,12 +21,22 @@
     </section>
     <section class="content">
         <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                @if (Session::has('message'))
+                    <div class="alert alert-success">
+                        {{ Session::get('message') }}
+                    </div>
+                @endif
+            </div>
+        </div>
+        <div class="row">
             <div class="col-sm-2 col-md-2 col-xs-2">
             </div>
             <div class="col-sm-5 col-md-5 col-xs-5">
                 <div class="thumbnail">
                     <div class="col-sm-6 col-md-6 col-xs-12 image-container">
-                        <img  src="{{ asset('uploads/borrower_photo/'.$borrower->borrower_photo) }}" class="mx-auto d-block" />
+                        <img  src="{{ asset('uploads/borrower_photo/'.$borrower->borrower_photo) }}" class="mx-auto d-block" style="height: 215px; width: 215px;"/>
                     </div>
                     <br>
                     <div class="col-sm-6 col-md-6 col-xs-12">
@@ -54,6 +64,25 @@
                 <br>
             </div>
             <div class="col-md-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form action="{{ route('costomerServiceOfficer.search_borrower') }}">
+                            <div class="input-group input-group-sm">
+                                <input name="id" type="text" class="form-control @error('id') is-invalid @enderror" placeholder="Enter borrower id">
+                                <span class="input-group-append">
+                                  <button type="submit" class="btn btn-info btn-flat">Search</button>
+                                </span>
+                                @error('id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                              </div>
+                        </form>
+                    </div>
+
+                </div>
+                <hr>
                 <div class="col-sm-6 col-md-6 col-xs-12">
                     <label>Loan type</label>{{": ". $borrower->loan_service_name }}
                 </div>

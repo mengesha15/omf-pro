@@ -99,8 +99,7 @@
 
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-left">
-                            <p class=""> Requested loans
-                            </p>
+                            <h4><b>Requested loans</b></h4>
                         </ol>
                     </div>
                     <!-- /.col -->
@@ -117,7 +116,7 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            
+
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
@@ -132,7 +131,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($requsted_loans as $requsted_loan) 
+                    @foreach ($requsted_loans as $requsted_loan)
                     <tr>
                         <td>{{ $requsted_loan->id }}</td>
                         <td>{{ $requsted_loan->first_name }}</td>
@@ -145,7 +144,7 @@
                             <ol>
                                 @if ($requsted_loan->status == "Approved")
                                 <li class="breadcrumb-item li-none"><a class="btn btn-lg btn-success"
-                                    href="{{ url('customerServiceOfficer/loan_payment/' . $requsted_loan->id) }}">Pay</a>
+                                    href="{{ url('customerServiceOfficer/loan_payment/' .$requsted_loan->id) }}">Pay</a>
                                 @else
                                 <button class="btn btn-success" disabled> Pay</button>
                                 @endif

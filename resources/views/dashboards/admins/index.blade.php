@@ -106,7 +106,7 @@
                     <!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <a href="{{ route('admin.employee_registration') }}" class="btn btn-success"><i
+                            <a href="{{ route('admin.employee_registration') }}" class="btn btn-success" target=""><i
                                     class="fas fa-plus"></i>
                                 Add new employee
                             </a>
@@ -147,21 +147,19 @@
                         <td>{{ $employee->employee_salary }}</td>
                         <td>
                             <ol>
-                                <li class="breadcrumb-item li-none"><a href="{{ url('admin/employee_detail/'. $employee->id) }}"><i class="fa fa-indent"></i>Detail</a>
+                                <li class="breadcrumb-item li-none"><a href="{{ url('admin/employee_detail/'. $employee->id) }}"><i class="fa fa-indent"></i></a>
                             </ol>
                         </td>
                         <td class="text-center">
-                            <a href="{{ url('admin/edit_employee/' . $employee->id) }}"
-                                class=" breadcrumb-item li-none btn btn-primary btn-sm">
+                            <a href="{{ url('admin/edit_employee/' . $employee->id) }}">
                                 <p class="fa fa-edit"></p>
                             </a>
                         </td>
                         <td class="text-center">
-                            <form action="{{ url('admin/delete_employee/' . $employee->id) }}" method="POST"
-                                class="d-inline" onsubmit="return confirm('Are you sure to delete?')">
+                            <form action="{{ url('admin/delete_employee/' . $employee->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure to delete?')">
                                 @method('delete')
                                 @csrf
-                                <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                <button><i class="far fa-trash-alt" style="color: red;"></i></button>
                             </form>
                     </tr>
                     @endforeach

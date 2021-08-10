@@ -22,25 +22,32 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
     public function index(){
+
         $user = Auth::user();
+        $total_request = RequestedLoan::get()->count();
+        $requested_loans = Borrower::join('requested_loans','borrowers.id','=','requested_loans.borrower_id')->paginate(5);
         $total_employees = DB::table('employees')->get()->count();
         $total_borrowers = DB::table('borrowers')->get()->count();
          $total_customers = DB::table('customers')->get()->count();
          $total_service = DB::table('saving_services')->get()->count() + DB::table('loan_services')->get()->count();
         $employees = DB::table('employees')->select('id','first_name','middle_name','last_name','employee_salary','employee_photo','employee_gender')->get();
-        
-        return view('dashboards/admins/index', compact(['employees','total_employees', 'total_borrowers','total_customers','total_service']));
+
+        return view('dashboards/admins/index', compact(['requested_loans','employees','total_employees', 'total_borrowers','total_customers','total_service','total_request']));
 
 
     }
 
     public function employee_registration_form(){
+        $total_request = RequestedLoan::get()->count();
         $roles = Role::all();
         $branches = Branch::all();
+        $requested_loans = Borrower::join('requested_loans','borrowers.id','=','requested_loans.borrower_id')->paginate(5);
 
-        return view('dashboards/admins/employee_management/employee_registration',compact(['branches','roles']));
+        return view('dashboards/admins/employee_management/employee_registration',compact(['branches','roles','requested_loans','total_request']));
     }
     public function add_new_employee(Request $request){
+        $total_request = RequestedLoan::get()->count();
+        $requested_loans = Borrower::join('requested_loans','borrowers.id','=','requested_loans.borrower_id')->paginate(5);
         $request->validate([
             'first_name'=> 'required|regex:/^[a-zA-Z]+$/u|min:2|max:15',
             // 'first_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255|unique:users,name,' . $user->id,
@@ -93,18 +100,27 @@ class AdminController extends Controller
 
         $new_user->save();
 
-        return redirect('admin/view_employee')->with('message', 'Employee registered successfully!');
+        return redirect('admin/view_employee',compact('requested_loans','total_request'))->with('message', 'Employee registered successfully!');
 
     }
 
     public function edit_employee_form($id){
-        $employee = Employee::find($id);
+        $total_request = RequestedLoan::get()->count();
+        $requested_loans = Borrower::join('requested_loans','borrowers.id','=','requested_loans.borrower_id')->paginate(5);
+        $employee = Employee::where('id',$id)->firstOrFail();
+        // if(!$employee){
+        //     abort(404);
+        // }
         $roles = Role::all();
         $branches = Branch::all();
 
-        return view('dashboards/admins/employee_management/edit_employee',compact(['employee','roles','branches']));
+        return view('dashboards/admins/employee_management/edit_employee',compact(['employee','roles','branches','requested_loans','total_request']));
     }
     public function update_employee(Request $request,$id){
+        $total_request = RequestedLoan::get()->count();
+
+        $requested_loans = Borrower::join('requested_loans','borrowers.id','=','requested_loans.borrower_id')->paginate(5);
+
         $request->validate([
         'first_name'=> 'required|regex:/^[a-zA-Z]+$/u|min:2|max:15',
         'middle_name' => 'required|regex:/^[a-zA-Z]+$/u|min:2|min:2|max:15',
@@ -124,7 +140,7 @@ class AdminController extends Controller
         $photo_name = time() . "." . $extension;
         $profile_photo->move('uploads/employee_photo', $photo_name);
         } else {
-        return redirect()->route('admin.employee_registration');
+        return redirect()->route('admin.view_employee',compact('requested_loans','total_request'));
         }
 
         $employee_updated = Employee::where('id',$id)->update([
@@ -142,6 +158,8 @@ class AdminController extends Controller
         ]);
 
         if($employee_updated){
+            $total_request = RequestedLoan::get()->count();
+
             $updated_user =  User::where('employee_id',$id)->update([
                 "username" => Employee::find($id)->first_name . random_int(1000, 9999) . "/" . date('Y'),
                 'role_id' => $request->get('role_id'),
@@ -150,54 +168,62 @@ class AdminController extends Controller
             ]);
 
         }
-        return redirect('admin/view_employee')->with('message', 'Employee data updated successfully!');
+        return redirect()->route('admin.view_employee',compact('requested_loans','total_request'))->with('message', 'Employee data updated successfully!');
     }
 
     public function view_employee(){
-    $employees = Employee::join('roles','roles.id','=','employees.role_id')
-                        ->join('users','users.employee_id','=','employees.id')
-                        ->join('branches','employees.branch_id','=','branches.id')
-                        ->select('employees.id', 'first_name', 'middle_name', 'last_name', 'employee_gender', 'employee_address', 'birth_date', 'employee_salary', 'phone_number', 'employee_photo', 'branch_id', 'employees.created_at', 'employees.updated_at','role_name','username')->get();
-    
-    return view('dashboards.admins.employee_management.view_employee',compact('employees'));
+        $total_request = RequestedLoan::get()->count();
+
+        $requested_loans = Borrower::join('requested_loans','borrowers.id','=','requested_loans.borrower_id')->paginate(5);
+        $employees = Employee::join('roles','roles.id','=','employees.role_id')
+                            ->join('users','users.employee_id','=','employees.id')
+                            ->join('branches','employees.branch_id','=','branches.id')
+                            ->select('employees.id', 'first_name', 'middle_name', 'last_name', 'employee_gender', 'employee_address', 'birth_date', 'employee_salary', 'phone_number', 'employee_photo', 'branch_id', 'employees.created_at', 'employees.updated_at','role_name','username')->get();
+
+        return view('dashboards.admins.employee_management.view_employee',compact('employees','requested_loans','total_request'));
     }
 
     public function employee_detail($id){
+        $total_request = RequestedLoan::get()->count();
+
+        $requested_loans = Borrower::join('requested_loans','borrowers.id','=','requested_loans.borrower_id')->paginate(5);
         $employee = Employee::find($id);
-        return view('dashboards.admins.employee_management.employee_detail',compact('employee'));
+        return view('dashboards.admins.employee_management.employee_detail',compact('employee','requested_loans','total_request'));
     }
 
     public function requested_list(){
+        $total_request = RequestedLoan::get()->count();
+
         $requested_loans = RequestedLoan::join('borrowers','borrowers.id','=','requested_loans.borrower_id')->get();
 
-        return view('dashboards.admins.loan_management.requested_loan.view_requested_loan',compact('requested_loans'));
+        return view('dashboards.admins.loan_management.requested_loan.view_requested_loan',compact('requested_loans','total_request'));
     }
 
     public function approve_request($id){
 
-        $approver_id = Auth::user()->id;   //who does appreve the requested loan
+         $approver_id = Auth::user()->id;   //who does approve the requested loan
 
-        $new_approve = Borrower::join('requested_loans','borrowers.id','=','requested_loans.borrower_id')
-                                 ->find($id);
+        DB::transaction(function () use($id,$approver_id){
+            $borrower_status_updated = Borrower::where('id',$id)->update([
+                'status' => 'Approved',
+            ]);
+            if($borrower_status_updated){
+                $new_approve = Borrower::join('requested_loans','borrowers.id','=','requested_loans.borrower_id')->select('borrowers.id','requested_amount','requested_by','requested_loans.loan_service_id')->where('borrowers.id',$id)->firstOrFail();
 
-        $borrower_status_updated = Borrower::where('id',$id)->update([
-        'status' => 'Approved',
-        ]);
-
-        if($borrower_status_updated){
             $approved_loans = new ApprovedLoan([
-            'approved_amount' => $new_approve->requested_amount,
-            'borrower_id' => $new_approve->borrower_id,
-            'requested_by' => $new_approve->requested_by,
-            'approved_by' => $approver_id,
-            'loan_service_id' => $new_approve->loan_service_id,
-            'status' => 'Approved',
-        ]);
-        }
+                'approved_amount' => $new_approve->requested_amount,
+                'borrower_id' => $new_approve->id,
+                'requested_by' => $new_approve->requested_by,
+                'approved_by' => $approver_id,
+                'loan_service_id' => $new_approve->loan_service_id,
+                'status' => 'Approved',
+            ]);
+            }
+            RequestedLoan::where('borrower_id',$id)->delete();
+            $approved_loans->save();
+            return view;
 
-         $approved_loans->save();
-         RequestedLoan::where('borrower_id',$id)->delete();
-         return redirect('admin/requested_list')->with('message', 'Request approved successfully!');
+        });
 
     }
 

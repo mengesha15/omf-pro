@@ -25,7 +25,13 @@
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
+                            <ol class="breadcrumb">
+                             <h4><b>Borrowers list</b></h4>
+                            </ol>
+                        </div>
+                        <div class="col-sm-7"></div>
+                        <div class="col-sm-2">
                             <ol class="breadcrumb">
                                 <a href="{{ route('customerServiceOfficer.add_new_request') }}" class="btn btn-success"><i class="fas fa-plus"></i> Add new request</a>
                             </ol>

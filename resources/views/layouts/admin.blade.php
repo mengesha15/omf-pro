@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>OMF-Admin</title>
+        <title>OMF-Admin Home</title>
 
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet"
@@ -48,25 +49,17 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <i class="far fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge">15</span>
+                            <span class="badge badge-warning navbar-badge">{{ $total_request }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <span class="dropdown-item dropdown-header">15 Requested loans</span>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-envelope mr-2"></i> ayana
-                                <span class="float-right text-muted text-sm">3 mins</span>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-envelope mr-2"></i> Mamo
-                                <span class="float-right text-muted text-sm">12 hours</span>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-envelope mr-2"></i> bekalu
-                                <span class="float-right text-muted text-sm">2 days</span>
-                            </a>
+                            <span class="dropdown-item dropdown-header">{{ $total_request }}  Loan requests</span>
+                            @foreach ($requested_loans as $requested_loan)
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item">
+                                    <i class="fas fa-envelope mr-2"></i> {{ $requested_loan->first_name.' '.$requested_loan->middle_name }}
+                                    <span class="float-right text-muted text-sm">{{ date('H:i',strtotime($requested_loan->created_at)) }}</span>
+                                </a>
+                            @endforeach
                             <div class="dropdown-divider"></div>
                             <a href="#" class="dropdown-item dropdown-footer">See All</a>
                         </div>
@@ -88,14 +81,11 @@
                             <div class="dropdown-divider"></div>
                             <div class="dropdown-divider"></div>
                             <a href="#" class="dropdown-item">
-                                <i class="fas fa-users mr-2"></i> Settings
-                            </a>
-                            <a href="#" class="dropdown-item">
                                 <i class="fas fa-users mr-2"></i> Change profile
                             </a>
                             <div class="dropdown-divider"></div>
                             <a href="#" class="dropdown-item">
-                                <i class="fas fa-file mr-2"></i> Change password
+                                <i class="fas fa-users mr-2"></i> Change password
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item dropdown-footer btn-danger" href="{{ route('login') }}"
@@ -159,7 +149,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ url('admin/view_employee') }}" class="nav-link">
+                                        <a href="{{ url('admin/view_employee') }}" class="nav-link" target="">
                                             <i class="far fa-plus nav-icon"></i>
                                             <p>View employees</p>
                                         </a>

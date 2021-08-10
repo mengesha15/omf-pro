@@ -14,6 +14,9 @@ use App\Models\ApprovedLoan;
 use App\Models\RequestedLoan;
 use App\Models\LoanDisburseRecord;
 
+use Gate;
+use Symfony\Component\HttpFoundation\Response;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,7 +42,6 @@ class CustomerServiceOfficer extends Controller
     }
 
     public function add_new_request(Request $request){
-
         $user_id = Auth::user()->id;
         $request->validate([
             'first_name'=> 'required|regex:/^[a-zA-Z]+$/u|min:2|max:15',
@@ -91,13 +93,31 @@ class CustomerServiceOfficer extends Controller
         return redirect('customerServiceOfficer/borrowers_list')->with('message', 'Request sent successfully!');
     }
 
-
     public function view_borrowers(){
         $borrowers = DB::table('borrowers')->select('id','first_name', 'middle_name', 'borrower_gender', 'phone_number', 'borrowed_amount', 'borrower_photo', 'created_at','status')->get();
         return view('dashboards.customerServiceOfficers.manage_loan.view_borrower',compact('borrowers'));
     }
 
+    public function view_approved_loans(){
+        $borrowers = DB::table('borrowers')->select('id','first_name', 'middle_name', 'borrower_gender', 'phone_number', 'borrowed_amount', 'borrower_photo', 'created_at','status')->get();
+        return view('dashboards.customerServiceOfficers.manage_loan.approved_loan.view_approved_loan',compact('borrowers'));
+    }
+
+    public function search_borrower(Request $request){
+        $request->validate([
+            'id' => 'required|regex:/[0-9]/|max:5',
+        ]);
+        $id = $request->id;
+        $borrower = Borrower::join('loan_services','borrowers.loan_service_id','=','loan_services.id')->select('borrowers.id','borrowers.first_name','borrowers.middle_name','borrowers.last_name','borrowers.borrower_gender','borrowers.borrower_address','borrowers.birth_date','borrowers.phone_number','borrowers.borrower_status','borrowers.borrowed_amount','borrowers.borrower_photo','borrowers.birth_date','borrowers.created_at','borrowers.status','loan_services.loan_service_name','loan_services.loan_service_interest_rate')->find($id);
+        if (!$borrower) {
+            // $borrower =new Borrower();
+            return redirect('customerServiceOfficer/search_borrower')->with('message_not_much','Borrower id not exist.');
+        }
+        return view('dashboards.customerserviceofficers.manage_loan.loan_payment_form',compact('borrower'));
+    }
+
     public function loan_payment_form($id){
+        Borrower::where('id',$id)->firstOrFail();
         $borrower = Borrower::join('loan_services','borrowers.loan_service_id','=','loan_services.id')->select('borrowers.id','borrowers.first_name','borrowers.middle_name','borrowers.last_name','borrowers.borrower_gender','borrowers.borrower_address','borrowers.birth_date','borrowers.phone_number','borrowers.borrower_status','borrowers.borrowed_amount','borrowers.borrower_photo','borrowers.birth_date','borrowers.created_at','borrowers.status','loan_services.loan_service_name','loan_services.loan_service_interest_rate')->find($id);
         return view('dashboards.customerserviceofficers.manage_loan.loan_payment_form',compact('borrower'));
     }
@@ -110,9 +130,11 @@ class CustomerServiceOfficer extends Controller
         'user_id' => $user_id,
         ]);
         if ($loan_paid) {
-            dd('Successfully paid');
+            return redirect('customerServiceOfficer/search_borrower')->with('message','Payment successfull.');
         }
-        return view('dashboards.customerserviceofficers.manage_loan.loan_payment_form',compact('borrower'));
+        else {
+            return redirect('customerServiceOfficer/search_borrower')->with('message','Payment not successfull.');
+        }
     }
     public function profile(){
         return view('dashboards/customerServiceOfficers/profile');

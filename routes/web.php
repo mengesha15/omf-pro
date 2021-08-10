@@ -96,9 +96,11 @@ Route::group(['prefix'=>'customerServiceOfficer', 'middleware'=>['isCustomerServ
    Route::post('add_new_request',[CustomerServiceOfficer::class,'add_new_request'])->name('customerServiceOfficer.add_new_request');
 
    Route::get('borrowers_list',[CustomerServiceOfficer::class,'view_borrowers'])->name('customerServiceOfficer.borrowers_list');
+   Route::get('approved_loans_list',[CustomerServiceOfficer::class,'view_approved_loans'])->name('customerServiceOfficer.approved_loans_list');
 
    Route::get('loan_payment/{id}', [CustomerServiceOfficer::class,'loan_payment_form'])->name('customerServiceOfficer.loan_payment_form');
 
+   Route::get('search_borrower', [CustomerServiceOfficer::class, 'search_borrower'])->name('costomerServiceOfficer.search_borrower');
    Route::post('loan_payment/{id}', [CustomerServiceOfficer::class,'apply_loan_payment'])->name('customerServiceOfficer.loan_payment');
 
     Route::get('profile',[CustomerServiceOfficer::class,'profile'])->name('customerServiceOfficer.profile');

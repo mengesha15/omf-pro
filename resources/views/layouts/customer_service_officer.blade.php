@@ -156,7 +156,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ url('admin/view_employee') }}" class="nav-link">
+                                        <a href="{{ url('customerServiceOfficer/approved_loans_list') }}" class="nav-link">
                                             <i class="far fa-plus nav-icon"></i>
                                             <p>View approved loans</p>
                                         </a>
