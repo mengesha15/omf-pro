@@ -25,26 +25,18 @@
     </div>
 </section>
 <section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Employee updation</h3>
-                    </div>
-                <div class="card-body">
-                <div id="" class=" dt-bootstrap4">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6"></div>
-                    <div class="col-sm-12 col-md-6"></div>
-                </div>
-    <div class="row">
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Employee updation</h3>
+            </div>
+        <div class="card-body">
+        <div id="" class=" dt-bootstrap4">
         <div class="col-sm-12">
-            <table id="" class="table table-bordered table-hover dtr-inline collapsed" role="grid">
                 <div class="row">
             <div class="col-12">
-                <div class="cotainer">
-                    <div class="row justify-content-center">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">Fill employee data</div>
@@ -52,7 +44,10 @@
                                     <form method="POST" action="{{ url('admin/edit_employee/'.$employee->id) }}" enctype="multipart/form-data" class="needs-validation" novalidate>
                                         @csrf
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-5">
+                                                <img src="{{ asset('uploads/employee_photo/'.$employee->employee_photo) }}" alt="" height="150px" width="140">
+                                                <br><br>
                                                 <div class="form-group">
                                                     <label for="first_name">First
                                                         name</label>
@@ -101,18 +96,7 @@
                                                 <div class="form-group">
                                                     <label for="employee_address">Address</label>
                                                     <input value="{{ $employee->employee_address }}" id="employee_address" type="text" class="form-control @error('employee_address') is-invalid @enderror" name="employee_address" required autocomplete="employee_address" style="width: 90%;">
-
-
                                                     @error('employee_address')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="phone_number">Phone number</label>
-                                                    <input value="{{ $employee->phone_number }}" id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" required autocomplete="phone_number" style="width: 90%;">
-                                                    @error('phone_number')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -120,8 +104,17 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col-md-2"></div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <label for="phone_number">Phone number</label>
+                                                    <input value="{{ $employee->phone_number }}" id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" required autocomplete="phone_number" style="width: 70%;">
+                                                    @error('phone_number')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
                                                 <div class="col-md-12 mb-3">
                                                     <label for="birth_date">Birth date</label>
                                                     <input value="{{ $employee->birth_date }}" id="birth_date" type="date" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" required autocomplete="birth_date" style="width: 60%;">  @error('birth_date')
@@ -211,31 +204,25 @@
                                                     </span>
                                                     @enderror
                                                 </div>
+                                                <div class="card-footer">
+                                                    <button type="submit" class="btn btn-success">Update</button>
+                                                </div>
 
                                             </div>
                                         </div>
                                 </div>
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-success">Update</button>
-                                </div>
+
                                 </form>
                             </div>
 
                         </div>
-                        </div>
-                        </div>
                     </div>
                 </div>
                 </div>
-
-            </table>
-        </div>
             </div>
         </div>
         </div>
         </div>
-    </div>
-    </div>
     </div>
 </section>
 @endsection

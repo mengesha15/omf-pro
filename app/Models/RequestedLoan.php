@@ -20,9 +20,8 @@ class RequestedLoan extends Model
      */
     protected $fillable = [
         'requested_amount',
-        'borrower_id',
+        'borrower_roll_number',
         'requested_by',
-        'loan_service_id',
         'status'
     ];
 

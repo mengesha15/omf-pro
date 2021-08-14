@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>OMF-Admin</title>
+    <title>OMF-Customer relation officer</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dist/img/omf_logo.jpg') }}" />
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -33,42 +34,15 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{url('admin/dashboard')}}" class="nav-link">Home</a>
+                    <a href="{{url('admin/dashboard')}}" class="nav-link">Contacts</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
+                    <a href="#" class="nav-link">Help</a>
                 </li>
             </ul>
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">15</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">15 Requested loans</span>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> ayana
-                            <span class="float-right text-muted text-sm">3 mins</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> Mamo
-                            <span class="float-right text-muted text-sm">12 hours</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> bekalu
-                            <span class="float-right text-muted text-sm">2 days</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All</a>
-                    </div>
-                </li>
                 <!-- Profile Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
@@ -85,7 +59,6 @@
                         <div class="dropdown-divider"></div>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> Settings
                         </a>
                         <a href="#" class="dropdown-item">
                             <i class="fas fa-users mr-2"></i> Change profile
@@ -130,8 +103,6 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2" data-widget="treeview">
                     <ul class="nav nav-pills nav-sidebar flex-column" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a href="{{ url('admin/dashboard') }}" class="nav-link">
                                 <i class="fa fa-home"></i>
@@ -148,21 +119,30 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{  route('admin.employee_registration') }}" class="nav-link">
-                                        <i class="far fa-plus nav-icon"></i>
-                                        <p>Withdraw Money</p>
-                                    </a>
+                                    <a href="#" type="button" class="nav-link" data-toggle="modal"
+                                            data-target="#withdraw-money">
+                                            <i class="far fa-plus nav-icon"></i>
+                                            <p>Withdraw Money</p>
+                                        </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ url('admin/view_employee') }}" class="nav-link">
-                                        <i class="far fa-plus nav-icon"></i>
-                                        <p>Deposit money</p>
-                                    </a>
+                                    <a href="#" type="button" class="nav-link" data-toggle="modal"
+                                            data-target="#deposit-money" target="">
+                                            <i class="far fa-plus nav-icon"></i>
+                                            <p>Deposit money</p>
+                                        </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ url('admin/view_employee') }}" class="nav-link">
+                                    <a href="#" type="button" class="nav-link" data-toggle="modal"
+                                            data-target="#transfer-money">
+                                            <i class="far fa-plus nav-icon"></i>
+                                            <p>Transfer money</p>
+                                        </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('customerRelationOfficer.saving_transactions_list') }}" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
-                                        <p>Transfer money</p>
+                                        <p>View transactions</p>
                                     </a>
                                 </li>
 
@@ -173,21 +153,21 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
-                                    Manage account
+                                    Manage customers
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/UI/general.html" class="nav-link">
+                                    <a href="{{ route('customerRelationOfficer.customer_registration') }}" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
-                                        <p>Create account</p>
+                                        <p>Add new customer</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/UI/general.html" class="nav-link">
+                                    <a href="{{ route('customerRelationOfficer.customers_list') }}" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
-                                        <p>View account info</p>
+                                        <p>View customers</p>
                                     </a>
                                 </li>
                             </ul>
@@ -202,15 +182,9 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/forms/validation.html" class="nav-link">
+                                    <a href="{{ route('customerRelationOfficer.saving_services_list') }}" class="nav-link" target="_blank">
                                         <i class="far fa-plus nav-icon"></i>
                                         <p>View saving service</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/forms/validation.html" class="nav-link">
-                                        <i class="far fa-plus nav-icon"></i>
-                                        <p>Saving service detail</p>
                                     </a>
                                 </li>
                             </ul>
@@ -218,14 +192,18 @@
 
                     </ul>
                 </nav>
-                <!-- /.sidebar-menu -->
             </div>
-            <!-- /.sidebar -->
         </aside>
         <div class="content-wrapper">
             @yield('customer_relation_officer_content')
 
         </div>
+        @include('dashboards.customerRelationOfficers.transaction_management.deposit_money')
+
+        @include('dashboards.customerRelationOfficers.transaction_management.transfer_money')
+
+        @include('dashboards.customerRelationOfficers.transaction_management.withdraw_money')
+
         <footer class="main-footer">
 
             <div class="container my-auto">

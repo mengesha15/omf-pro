@@ -25,11 +25,10 @@
 </section>
 <section class="content">
     <div class="container-fluid">
-
-        <div class="row">
+        <div class="row" style=" padding-top: 7%">
+            <div class="col-md-2"></div>
             <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-info">
+                <div class="small-box bg-teal">
                     <div class="inner">
                         <h3>{{ $total_employees }}</h3>
 
@@ -38,12 +37,11 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="#" class="small-box-footer">View employees<i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ url('admin/view_employee') }}" class="small-box-footer">View employees<i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
-            <!-- ./col -->
+            <div class="col-1"></div>
             <div class="col-lg-3 col-6">
-                <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $total_customers }}</h3>
@@ -56,9 +54,10 @@
                     <a href="#" class="small-box-footer">View customers <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
-            <!-- ./col -->
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
             <div class="col-lg-3 col-6">
-                <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
                         <h3>{{ $total_borrowers }}</h3>
@@ -71,9 +70,8 @@
                     <a href="#" class="small-box-footer">View borrowers <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
-            <!-- ./col -->
+            <div class="col-md-1"></div>
             <div class="col-lg-3 col-6">
-                <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
                         <h3>{{ $total_service }}</h3>
@@ -86,87 +84,7 @@
                     <a href="#" class="small-box-footer">View services <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
-            <!-- ./col -->
         </div>
     </div>
 </section>
-
-<div class="card">
-    <div class="card-header">
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-left">
-                            <p class=""> Brach employee
-                            </p>
-                        </ol>
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <a href="{{ route('admin.employee_registration') }}" class="btn btn-success" target=""><i
-                                    class="fas fa-plus"></i>
-                                Add new employee
-                            </a>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>First name</th>
-                        <th>middle name</th>
-                        <th>last name</th>
-                        <th>Gender</th>
-                        <th>Salary</th>
-                        <td>Detail</td>
-                        <td>Edit</td>
-                        <td>Delete</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($employees as $employee)
-                    <tr>
-                        <td>{{ $employee->id }}</td>
-                        {{-- <td>
-                                            <img src="{{ asset('uploads/employee_photo/'.$employee->employee_photo) }}"
-                        alt="Employee photo">
-                        </td> --}}
-                        <td>{{ $employee->first_name }}</td>
-                        <td>{{ $employee->middle_name }}</td>
-                        <td>{{ $employee->last_name }}</td>
-                        <td>{{ $employee->employee_gender }}</td>
-                        <td>{{ $employee->employee_salary }}</td>
-                        <td>
-                            <ol>
-                                <li class="breadcrumb-item li-none"><a href="{{ url('admin/employee_detail/'. $employee->id) }}"><i class="fa fa-indent"></i></a>
-                            </ol>
-                        </td>
-                        <td class="text-center">
-                            <a href="{{ url('admin/edit_employee/' . $employee->id) }}">
-                                <p class="fa fa-edit"></p>
-                            </a>
-                        </td>
-                        <td class="text-center">
-                            <form action="{{ url('admin/delete_employee/' . $employee->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure to delete?')">
-                                @method('delete')
-                                @csrf
-                                <button><i class="far fa-trash-alt" style="color: red;"></i></button>
-                            </form>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <!-- /.card-body -->
-</div>
 @endsection

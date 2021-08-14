@@ -15,18 +15,18 @@ class CreateLoanDisburseRecordsTable extends Migration
     {
         Schema::create('loan_disburse_records', function (Blueprint $table) {
             $table->id();
-            $table->double('remaining_amount');
-            $table->double('disburse_amount');
+            $table->float('remaining_amount',10,2);
+            $table->float('disburse_amount',10,2);
             $table->unsignedBigInteger('branch_id')->nullable();
-            $table->unsignedBigInteger('borrower_id');
-            $table->unsignedBigInteger('disbursed_by');
+            $table->unsignedBigInteger('borrower_roll_number');
+            $table->string('disbursed_by');
             $table->timestamps();
 
             $table->foreign('branch_id')->references('id')->on('branches')->onUpdate('cascade')
                 ->onDelete('set null');
-            $table->foreign('borrower_id')->references('id')->on('borrowers')->onUpdate('cascade')
+            $table->foreign('borrower_roll_number')->references('roll_number')->on('borrowers')->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreign('disbursed_by')->references('id')->on('users')->onUpdate('cascade')
+            $table->foreign('disbursed_by')->references('username')->on('users')->onUpdate('cascade')
                 ->onDelete('no action');
         });
     }

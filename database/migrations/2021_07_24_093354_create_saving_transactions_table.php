@@ -16,17 +16,17 @@ class CreateSavingTransactionsTable extends Migration
         Schema::create('saving_transactions', function (Blueprint $table) {
             $table->id();
             $table->string('transaction_type'); // withdrawal or deposit
-            $table->double('transaction_amount');
-            $table->unsignedBigInteger('customer_id');
+            $table->float('transaction_amount',10,2);
+            $table->unsignedBigInteger('customer_account_number');
             $table->unsignedBigInteger('branch_id')->nullable();
-            $table->unsignedBigInteger('user_id');  // which user  does  the transaction?
+            $table->string('user_username');  // which user  does  the transaction?
             $table->timestamps();
 
             $table->foreign('branch_id')->references('id')->on('branches')->onUpdate('cascade')
                 ->onDelete('set null');
-            $table->foreign('customer_id')->references('id')->on('customers')->onUpdate('cascade')
+            $table->foreign('customer_account_number')->references('account_number')->on('customers')->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')
+            $table->foreign('user_username')->references('username')->on('users')->onUpdate('cascade')
                 ->onDelete('no action');
         });
     }

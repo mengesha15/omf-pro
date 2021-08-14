@@ -21,10 +21,10 @@ class LoanDisburseRecord extends Model
         'remaining_amount',
         'disburse_amount',
         'branch_id',
-        'borrower_id',
+        'borrower_roll_number',
         'disbursed_by',
     ];
-    
+
     public function branch(){
         return $this->belongsTo(Branch::class);
     }

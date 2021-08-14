@@ -30,8 +30,8 @@
                              <h4><b>Borrowers list</b></h4>
                             </ol>
                         </div>
-                        <div class="col-sm-7"></div>
-                        <div class="col-sm-2">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-3">
                             <ol class="breadcrumb">
                                 <a href="{{ route('customerServiceOfficer.add_new_request') }}" class="btn btn-success"><i class="fas fa-plus"></i> Add new request</a>
                             </ol>
@@ -49,7 +49,7 @@
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Roll number</th>
                         {{-- <th>Photo</th> --}}
                         <th>First name</th>
                         <th>middle name</th>
@@ -63,7 +63,7 @@
                 <tbody>
                     @foreach ($borrowers as $borrower)
                     <tr>
-                        <td>{{ $borrower->id }}</td>
+                        <td>{{ $borrower->roll_number }}</td>
                         <td>{{ $borrower->first_name }}</td>
                         <td>{{ $borrower->middle_name }}</td>
                         <td>{{ $borrower->borrower_gender }}</td>
@@ -74,7 +74,7 @@
                             <ol>
                                 @if ($borrower->status == "Approved")
                                 <li class="breadcrumb-item li-none"><a class="btn btn-lg btn-success"
-                                    href="{{ url('customerServiceOfficer/loan_payment/' . $borrower->id) }}">Pay</a>
+                                    href="{{ url('customerServiceOfficer/loan_payment/' . $borrower->roll_number) }}">Pay</a>
                                 @else
                                 <button class="btn btn-success" disabled> Pay</button>
                                 @endif

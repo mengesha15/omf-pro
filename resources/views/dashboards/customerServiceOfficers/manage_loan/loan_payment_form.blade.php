@@ -31,9 +31,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-2 col-md-2 col-xs-2">
+            <div class="col-sm-1 col-md-1 col-xs-1">
             </div>
-            <div class="col-sm-5 col-md-5 col-xs-5">
+            <div class="col-sm-6 col-md-6 col-xs-6">
                 <div class="thumbnail">
                     <div class="col-sm-6 col-md-6 col-xs-12 image-container">
                         <img  src="{{ asset('uploads/borrower_photo/'.$borrower->borrower_photo) }}" class="mx-auto d-block" style="height: 215px; width: 215px;"/>
@@ -58,21 +58,21 @@
                         <label>Loan Status</label>{{": ". $borrower->status }}
                     </div>
                     <div class="col-sm-6 col-md-6 col-xs-12">
-                        <label>Request date</label>{{": ". $borrower->created_at }}
+                        <label>Request date</label><td>{{date('d/m/Y',strtotime($borrower->created_at))}}</td>
                     </div>
                 </div>
                 <br>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-5 col-md-5 col-xs-12">
                 <div class="row">
                     <div class="col-md-6">
-                        <form action="{{ route('costomerServiceOfficer.search_borrower') }}">
+                        <form action="{{ route('customerServiceOfficer.search_borrower') }}">
                             <div class="input-group input-group-sm">
-                                <input name="id" type="text" class="form-control @error('id') is-invalid @enderror" placeholder="Enter borrower id">
+                                <input name="roll_number" type="text" class="form-control @error('roll_number') is-invalid @enderror" placeholder="Enter roll number" required value="{{ $borrower->roll_number }}">
                                 <span class="input-group-append">
                                   <button type="submit" class="btn btn-info btn-flat">Search</button>
                                 </span>
-                                @error('id')
+                                @error('roll_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -89,7 +89,7 @@
                 <div class="col-sm-6 col-md-6 col-xs-12">
                     <label>Interest rate</label>{{": ". $borrower->loan_service_interest_rate }}
                 </div>
-                <form method="POST" action="{{ url('customerServiceOfficer/loan_payment/'.$borrower->id) }}" class="needs-validation" id="main_form">
+                <form method="POST" action="{{ url('customerServiceOfficer/loan_payment/'.$borrower->roll_number) }}" class="needs-validation" id="main_form">
                     @csrf
                     <div class="card-body">
                       <div class="form-group">
@@ -99,9 +99,9 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="borrower_id">Borrower ID</label>
+                        <label for="roll_number">Roll Number</label>
                         <div class="col-md-4">
-                            <input type="text" name="borrower_id" class="form-control" id="borrower_id" value="{{ $borrower->id }}" readonly>
+                            <input type="text" name="roll_number" class="form-control" id="roll_number" value="{{ $borrower->roll_number }}" readonly>
                         </div>
                       </div>
                     </div>
@@ -121,5 +121,5 @@
 
         </div>
     </section>
-
+    <br><br><br>
 @endsection

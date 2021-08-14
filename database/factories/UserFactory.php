@@ -24,8 +24,8 @@ class UserFactory extends Factory
     {
         return [
             'username' => $this->faker->unique()->userName(),
-            // 'user_role'=>Str::random(['Admin','Auditor','Relation officer','Service officer']),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'user_photo' =>$this->faker->image(),
         ];
     }
 }

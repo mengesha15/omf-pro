@@ -1,5 +1,5 @@
-@extends('layouts.customer_service_officer')
-@section('service_officer_content')
+@extends('layouts.customer_relation_officer')
+@section('customer_relation_officer_content')
 <section class="content">
     <div class="container-fluid">
         <div class="content-header">
@@ -11,7 +11,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Apprroved loans</li>
+                            <li class="breadcrumb-item active">OMFsaving customers</li>
                         </ol>
                     </div>
                 </div>
@@ -27,13 +27,14 @@
                     <div class="row mb-2">
                         <div class="col-sm-3">
                             <ol class="breadcrumb">
-                             <h4><b>Approved loans list</b></h4>
+                                <h4><b>Saving customers</b></h4>
                             </ol>
                         </div>
-                        <div class="col-sm-6"></div>
-                        <div class="col-sm-3">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-3">
                             <ol class="breadcrumb">
-                                <a href="{{ route('customerServiceOfficer.add_new_request') }}" class="btn btn-success"><i class="fas fa-plus"></i> Add new request</a>
+                                <a href="{{ route('customerRelationOfficer.customer_registration') }}"
+                                    class="btn btn-success"><i class="fas fa-plus"></i> Add new Customer</a>
                             </ol>
                         </div>
                     </div>
@@ -49,33 +50,25 @@
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Roll number</th>
-                        {{-- <th>Photo</th> --}}
-                        <th>First name</th>
-                        <th>middle name</th>
-                        <th>Gender</th>
+                        <th>Account number</th>
+                        <th>Full name</th>
                         <th>Phone no</th>
-                        <th>Amount</th>
-                        <th>Statu</th>
-                        <th>Payment</th>
+                        <th>Balance</th>
+                        <th>Gender</th>
+                        <th>Details</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($borrowers as $borrower)
+                    @foreach ($customers as $customer)
                     <tr>
-                        <td>{{ $borrower->roll_number }}</td>
-                        <td>{{ $borrower->first_name }}</td>
-                        <td>{{ $borrower->middle_name }}</td>
-                        <td>{{ $borrower->borrower_gender }}</td>
-                        <td>{{ $borrower->phone_number }}</td>
-                        <td>{{ $borrower->borrowed_amount }}</td>
-                        <td>{{ $borrower->status }}</td>
+                        <td>{{ $customer->account_number }}</td>
+                        <td>{{ $customer->first_name." ". $customer->middle_name." ".$customer->last_name }}</td>
+                        <td>{{ $customer->phone_number }}</td>
+                        <td>{{ $customer->account_balance }}</td>
+                        <td>{{ $customer->customer_gender }}</td>
                         <td class="text-center">
-                            <ol>
-                                <li class="breadcrumb-item li-none"><a class="btn btn-lg btn-success"
-                                    href="{{ url('customerServiceOfficer/loan_payment/' . $borrower->roll_number) }}">Detail</a>
-
-                            </ol>
+                            <li class="breadcrumb-item li-none"><a class="btn btn-lg btn-success"
+                                    href="{{ url('customerRelationOfficer/customer_detail/' . $customer->account_number) }}">Details</a>
                         </td>
                     </tr>
                     @endforeach
@@ -83,5 +76,4 @@
             </table>
         </div>
     </div>
-@endsection
-
+    @endsection

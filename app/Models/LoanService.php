@@ -22,6 +22,7 @@ class LoanService extends Model
         'loan_service_name',
         'loan_service_description',
         'loan_service_interest_rate',
+        'loan_term'
     ];
 
     public function borrower(){

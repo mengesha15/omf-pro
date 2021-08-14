@@ -23,6 +23,7 @@ class BorrowerFactory extends Factory
     public function definition()
     {
         return [
+            'roll_number' =>$this->faker->randomNumber(8),
             'first_name' =>$this->faker->firstName(),
             'middle_name' =>$this->faker->lastName(),
             'last_name' =>$this->faker->lastName(),

@@ -4,7 +4,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>OMF- Customer relation officers</title>
+        <title>OMF-Customer service officer</title>
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dist/img/omf_logo.jpg') }}" />
 
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet"
@@ -35,7 +36,7 @@
                                 class="fas fa-bars"></i></a>
                     </li>
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="{{url('admin/dashboard')}}" class="nav-link">Home</a>
+                        <a href="{{url('admin/dashboard')}}" class="nav-link">Contacts</a>
                     </li>
                     <li class="nav-item d-none d-sm-inline-block">
                         <a href="#" class="nav-link">Help</a>
@@ -156,7 +157,8 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ url('customerServiceOfficer/approved_loans_list') }}" class="nav-link">
+                                        <a href="{{ url('customerServiceOfficer/approved_loans_list') }}"
+                                            class="nav-link">
                                             <i class="far fa-plus nav-icon"></i>
                                             <p>View approved loans</p>
                                         </a>
@@ -174,13 +176,15 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="pages/UI/general.html" class="nav-link">
+                                        <a href="#" type="button" class="nav-link" data-toggle="modal"
+                                            data-target="#modal-default">
                                             <i class="far fa-plus nav-icon"></i>
                                             <p>New disbursement</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="pages/UI/general.html" class="nav-link">
+                                        <a href="{{ route('customerServiceOfficer.loan_disbursemet_lists') }}"
+                                            class="nav-link">
                                             <i class="far fa-plus nav-icon"></i>
                                             <p>View disburses</p>
                                         </a>
@@ -197,7 +201,8 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="pages/forms/validation.html" class="nav-link">
+                                        <a href="{{ route('customerServiceOfficer.view_loan_services') }}"
+                                            class="nav-link" target="_blank">
                                             <i class="far fa-plus nav-icon"></i>
                                             <p>View loan service</p>
                                         </a>
@@ -207,13 +212,13 @@
 
                         </ul>
                     </nav>
-                    <!-- /.sidebar-menu -->
                 </div>
-                <!-- /.sidebar -->
             </aside>
             <div class="content-wrapper">
                 @yield('service_officer_content')
             </div>
+            @include('dashboards.customerServiceOfficers.loan_disbursement.loan_disbursement_form')
+
             <div id="sidebar-overlay"></div>
             <footer class="main-footer">
                 <div class="copyright text-center my-auto">
@@ -253,7 +258,7 @@
                 "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        });
+            });
     </script>
 
 </html>

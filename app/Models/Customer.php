@@ -18,7 +18,13 @@ class Customer extends Model
      *
      * @var array
      */
+     protected $primaryKey = 'account_number';
+
+    public $incrementing = false;
+
     protected $fillable = [
+
+        'account_number',
         'first_name',
         'middle_name',
         'last_name',
@@ -28,17 +34,12 @@ class Customer extends Model
         'account_balance',
         'phone_number',
         'branch_id',
-        'account_number',
         'saving_service_id',
         'customer_photo',
         'customer_status', // what is the job of this customer
 
     ];
 
-
-    public function account_numbers(){
-        return $this->hasMany(Account::class);
-    }
     public function branch(){
         return $this->belongsTo(Branch::class);
     }

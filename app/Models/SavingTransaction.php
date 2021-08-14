@@ -22,7 +22,7 @@ class SavingTransaction extends Model
         'deposits',
         'customer_id',
         'branch_id',
-        'user_id',
+        'user_username',
     ];
 
     public function branch(){

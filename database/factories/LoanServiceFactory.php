@@ -26,6 +26,7 @@ class LoanServiceFactory extends Factory
             'loan_service_name'=>$this->faker->sentence(3),
             'loan_service_description'=>$this->faker->sentence(9),
             'loan_service_interest_rate'=>$this->faker->randomFloat(2,8,17),
+            'loan_term'=>$this->faker->numberBetween(1,10),
         ];
     }
 }

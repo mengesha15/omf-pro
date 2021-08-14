@@ -15,22 +15,19 @@ class CreateApprovedLoansTable extends Migration
     {
         Schema::create('approved_loans', function (Blueprint $table) {
             $table->id();
-            $table->double('approved_amount');
-            $table->unsignedBigInteger('borrower_id')->nullable();
-            $table->unsignedBigInteger('requested_by');
-            $table->unsignedBigInteger('approved_by');
-            $table->unsignedBigInteger('loan_service_id');
+            $table->float('approved_amount',10,2);
+            $table->unsignedBigInteger('borrower_roll_number')->unique();
+            $table->string('requested_by')->nullable();
+            $table->string('approved_by')->nullable();
             $table->timestamps();
             $table->string('status');
 
-            $table->foreign('borrower_id')->references('id')->on('borrowers')->onUpdate('cascade')
+            $table->foreign('borrower_roll_number')->references('roll_number')->on('borrowers')->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreign('requested_by')->references('id')->on('users')->onUpdate('cascade')
-                ->onDelete('no action');
-            $table->foreign('approved_by')->references('id')->on('users')->onUpdate('cascade')
-                ->onDelete('no action');
-            $table->foreign('loan_service_id')->references('id')->on('loan_services')->onUpdate('cascade')
-                ->onDelete('no action');
+            $table->foreign('requested_by')->references('username')->on('users')->onUpdate('cascade')
+                ->onDelete('set null');
+            $table->foreign('approved_by')->references('username')->on('users')->onUpdate('cascade')
+                ->onDelete('set null');
         });
     }
 

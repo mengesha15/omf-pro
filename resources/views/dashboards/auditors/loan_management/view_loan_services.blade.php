@@ -1,5 +1,5 @@
-@extends('layouts.customer_service_officer')
-@section('service_officer_content')
+@extends('layouts.auditor')
+@section('auditor_content')
 <section class="content">
     <div class="container-fluid">
         <div class="content-header">

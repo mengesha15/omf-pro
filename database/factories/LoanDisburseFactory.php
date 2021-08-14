@@ -22,8 +22,8 @@ class LoanDisburseFactory extends Factory
     public function definition()
     {
         return [
-            'remaining_amount' =>$this->faker->randomFloat(2,0,15000),
-            'disburse_amount' =>$this->faker->randomFloat(2,50,15000),
+            'remaining_amount' =>$this->faker->randomFloat(2,0,10000000),
+            'disburse_amount' =>$this->faker->randomFloat(2,50,100000),
         ];
     }
 }

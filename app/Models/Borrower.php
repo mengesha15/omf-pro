@@ -9,6 +9,7 @@ use App\Models\LoanDisburseRecord;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Helpers\Helper;
 
 class Borrower extends Model
 {
@@ -19,7 +20,12 @@ class Borrower extends Model
      *
      * @var array
      */
+     protected $primaryKey = 'roll_number';
+
+    public $incrementing = false;
+
     protected $fillable = [
+        'roll_number',
         'first_name',
         'middle_name',
         'last_name',
@@ -28,7 +34,7 @@ class Borrower extends Model
         'birth_date',
         'phone_number',
         'borrowed_amount',
-        'user_id',
+        'user_username',
         'branch_id',
         'loan_service_id',
         'borrower_photo',

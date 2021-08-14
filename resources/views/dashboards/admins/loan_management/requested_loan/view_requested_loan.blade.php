@@ -34,8 +34,8 @@
 
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-left">
-                                <p class="">Requested loans
-                                </p>
+                                <p class=""><h4><b>Requested loans</b></h4>
+                                </p><hr>
                             </ol>
                         </div>
                     </div>
@@ -51,21 +51,21 @@
             <table id="example1" class="table table-bordered table-striped" width="100%">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Roll Number</th>
                         {{-- <th>Photo</th> --}}
                         <th>Borrower name</th>
                         <th>Requested Amount</th>
                         <th>Gender</th>
                         <th>Requested date</th>
-                        <td>Detail</td>
-                        <td>Approve</td>
-                        <td>Reject</td>
+                        <th>Detail</th>
+                        <th>Approve</th>
+                        <th style="color: red">Reject</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($requested_loans as $requested_loan)
                     <tr>
-                        <td>{{ $requested_loan->id }}</td>
+                        <td>{{ $requested_loan->roll_number }}</td>
                         {{-- <td>
                                         <img src="{{ asset('uploads/employee_photo/'.$employee->employee_photo) }}" alt="Employee photo">
                         </td> --}}
@@ -80,11 +80,11 @@
                             </ol>
                         </td>
                         <td class="text-center">
-                            <a href="{{ url('admin/loan_request_approvement/' . $requested_loan->id) }}" class=" breadcrumb-item li-none btn btn-success btn-sm">Approve
+                            <a href="{{ url('admin/loan_request_approvement/' . $requested_loan->roll_number) }}" class=" breadcrumb-item li-none btn btn-success btn-sm">Approve
                             </a>
                         </td>
                         <td class="text-center">
-                            <form action="{{ url('admin/delete_employee/' . $requested_loan->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure to reject request?')">
+                            <form action="{{ url('admin/reject_loan_request/' .$requested_loan->roll_number) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure to reject request?')">
                                 @method('delete')
                                 @csrf
                                 <button class="btn btn-danger btn-sm">Reject</button>

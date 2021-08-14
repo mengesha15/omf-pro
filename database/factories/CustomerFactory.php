@@ -28,11 +28,11 @@ class CustomerFactory extends Factory
             'customer_gender'=>$this->faker->word(),
             'customer_address' =>$this->faker->address(),
             'birth_date' =>$this->faker->date(),
-            'account_balance' =>$this->faker->randomFloat(2,25,100),
+            'account_balance' =>$this->faker->randomFloat(2,25,10000000),
             'phone_number' =>$this->faker->phoneNumber(),
             'account_number' =>$this->faker->randomNumber(8),
-            'customer_photo' =>$this->faker->image(), 
-            'customer_status'=>$this->faker->sentence(4,true),  
+            'customer_photo' =>$this->faker->image(),
+            'customer_status'=>$this->faker->sentence(4,true),
         ];
     }
 }

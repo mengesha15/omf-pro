@@ -15,13 +15,12 @@
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate>
+                        @csrf
                         @if (Session::has('message'))
                         <div class="alert alert-danger">
                             {{ Session::get('message') }}
                         </div>
                         @endif
-
-                        @csrf
                         <div class="col-md-11 mb-4">
                             <label for="username">Username</label>
                             <input type="text" name="username" class="form-control" id="username" placeholder="Enter username" autofocus="autofocus" value="{{old('username')}}" required>

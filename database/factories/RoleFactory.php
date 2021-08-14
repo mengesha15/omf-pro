@@ -22,7 +22,7 @@ class RoleFactory extends Factory
     public function definition()
     {
         return [
-            // 'role_name'=>'Admin',
+            'role_name'=>'Admin',
         ];
     }
 }

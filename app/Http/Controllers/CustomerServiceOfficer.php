@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Controller;
+use App\Helpers\Helper;
 
 use App\Models\User;
 use App\Models\Borrower;
@@ -29,8 +30,7 @@ class CustomerServiceOfficer extends Controller
           $total_approved_loan = DB::table('approved_loans')->get()->count();
           $total_loan_service = DB::table('loan_services')->get()->count();
 
-          $requsted_loans = RequestedLoan::join('borrowers','requested_loans.borrower_id','=','borrowers.id')->select('requested_loans.id','first_name', 'middle_name', 'borrower_gender', 'phone_number', 'borrowed_amount', 'borrower_photo', 'requested_loans.created_at','borrowers.status')->get();
-          return view('dashboards/customerServiceOfficers/index', compact(['requsted_loans','total_borrowers','total_loan_service', 'total_approved_loan','total_requested_loans']));
+          return view('dashboards/customerServiceOfficers/index', compact(['total_borrowers','total_loan_service', 'total_approved_loan','total_requested_loans']));
     }
 
     public function add_new_request_form(){
@@ -42,7 +42,7 @@ class CustomerServiceOfficer extends Controller
     }
 
     public function add_new_request(Request $request){
-        $user_id = Auth::user()->id;
+        $user_username = Auth::user()->username;
         $request->validate([
             'first_name'=> 'required|regex:/^[a-zA-Z]+$/u|min:2|max:15',
             'middle_name' => 'required|regex:/^[a-zA-Z]+$/u|min:2|min:2|max:15',
@@ -53,9 +53,13 @@ class CustomerServiceOfficer extends Controller
             'borrowed_amount' => 'required|numeric|min:10000|max:200000',
             'borrower_address' => 'required|regex:/[a-zA-Z\s]+/|max:50',
             'borrower_photo' => 'required|image|mimes:jpg,jpeg,png',
-            'branch_id'=> 'required',
-            'loan_service_id'=> 'required',
-        ]);
+            'branch_id'=> 'required|exists:branches,id',
+            'loan_service_id' => 'required|exists:loan_services,id',
+            ],
+            [
+                'branch_id.exists' => 'Branch not found',
+                'loan_service_id.exists' => 'Loan service not found',
+            ]);
 
         $profile_photo = $request->file('borrower_photo');
         $extension = $profile_photo->getClientOriginalExtension();
@@ -63,6 +67,8 @@ class CustomerServiceOfficer extends Controller
         $profile_photo->move('uploads/borrower_photo', $photo_name);
 
         $new_borrower = new Borrower([
+            /** Generate id */
+            'roll_number' => Helper::roll_number_generator(new Borrower, 'roll_number', 8, 10),
             'first_name' => $request->get('first_name'),
             'middle_name' => $request->get('middle_name'),
             'last_name' => $request->get('last_name'),
@@ -74,41 +80,45 @@ class CustomerServiceOfficer extends Controller
             'borrower_status' => $request->get('borrower_status'),
             'branch_id' => $request->get('branch_id'),
             'loan_service_id' =>$request->get('loan_service_id') ,
-            'user_id' => $user_id,
+            'user_username' => $user_username,
             'borrower_photo' => $photo_name,
             'status' => "Pending",
         ]);
-
-        $new_borrower->save();
-
         $new_request = new RequestedLoan([
             'requested_amount' => $request->get('borrowed_amount'),
-            'borrower_id' => $new_borrower->id,
-            'requested_by' => $user_id,
-            'loan_service_id' => $request->get('loan_service_id') ,
+            'borrower_roll_number' => $new_borrower->roll_number,
+            'requested_by' => $user_username,
             'status' => "Pending",
         ]);
+        // dd($new_request->requested_by);
+        $new_borrower->save();
         $new_request->save();
 
         return redirect('customerServiceOfficer/borrowers_list')->with('message', 'Request sent successfully!');
     }
 
     public function view_borrowers(){
-        $borrowers = DB::table('borrowers')->select('id','first_name', 'middle_name', 'borrower_gender', 'phone_number', 'borrowed_amount', 'borrower_photo', 'created_at','status')->get();
+        $borrowers = DB::table('borrowers')->select('roll_number','first_name', 'middle_name', 'borrower_gender', 'phone_number', 'borrowed_amount', 'borrower_photo', 'created_at','status')->get();
         return view('dashboards.customerServiceOfficers.manage_loan.view_borrower',compact('borrowers'));
     }
 
     public function view_approved_loans(){
-        $borrowers = DB::table('borrowers')->select('id','first_name', 'middle_name', 'borrower_gender', 'phone_number', 'borrowed_amount', 'borrower_photo', 'created_at','status')->get();
+        $borrowers = Borrower::join('approved_loans','approved_loans.borrower_roll_number','=','borrowers.roll_number')->get();
         return view('dashboards.customerServiceOfficers.manage_loan.approved_loan.view_approved_loan',compact('borrowers'));
     }
 
     public function search_borrower(Request $request){
         $request->validate([
-            'id' => 'required|regex:/[0-9]/|max:5',
-        ]);
-        $id = $request->id;
-        $borrower = Borrower::join('loan_services','borrowers.loan_service_id','=','loan_services.id')->select('borrowers.id','borrowers.first_name','borrowers.middle_name','borrowers.last_name','borrowers.borrower_gender','borrowers.borrower_address','borrowers.birth_date','borrowers.phone_number','borrowers.borrower_status','borrowers.borrowed_amount','borrowers.borrower_photo','borrowers.birth_date','borrowers.created_at','borrowers.status','loan_services.loan_service_name','loan_services.loan_service_interest_rate')->find($id);
+            'roll_number' => 'required|regex:/[0-9]/|max:10',
+        ],
+        [
+            'roll_number.required' => 'Roll number not matched. Please try again.',
+            'roll_number.regex' => 'Roll number must be number only. Please try again.',
+            'roll_number.max' => 'Roll number must be 10 character. Please try again.',
+        ]
+    );
+        $roll_number = $request->roll_number;
+        $borrower = Borrower::join('loan_services','borrowers.loan_service_id','=','loan_services.id')->select('borrowers.roll_number','borrowers.first_name','borrowers.middle_name','borrowers.last_name','borrowers.borrower_gender','borrowers.borrower_address','borrowers.birth_date','borrowers.phone_number','borrowers.borrower_status','borrowers.borrowed_amount','borrowers.borrower_photo','borrowers.birth_date','borrowers.created_at','borrowers.status','loan_services.loan_service_name','loan_services.loan_service_interest_rate')->find($roll_number);
         if (!$borrower) {
             // $borrower =new Borrower();
             return redirect('customerServiceOfficer/search_borrower')->with('message_not_much','Borrower id not exist.');
@@ -116,18 +126,18 @@ class CustomerServiceOfficer extends Controller
         return view('dashboards.customerserviceofficers.manage_loan.loan_payment_form',compact('borrower'));
     }
 
-    public function loan_payment_form($id){
-        Borrower::where('id',$id)->firstOrFail();
-        $borrower = Borrower::join('loan_services','borrowers.loan_service_id','=','loan_services.id')->select('borrowers.id','borrowers.first_name','borrowers.middle_name','borrowers.last_name','borrowers.borrower_gender','borrowers.borrower_address','borrowers.birth_date','borrowers.phone_number','borrowers.borrower_status','borrowers.borrowed_amount','borrowers.borrower_photo','borrowers.birth_date','borrowers.created_at','borrowers.status','loan_services.loan_service_name','loan_services.loan_service_interest_rate')->find($id);
+    public function loan_payment_form($roll_number){
+        Borrower::where('roll_number',$roll_number)->firstOrFail();
+        $borrower = Borrower::join('loan_services','borrowers.loan_service_id','=','loan_services.id')->select('borrowers.roll_number','borrowers.first_name','borrowers.middle_name','borrowers.last_name','borrowers.borrower_gender','borrowers.borrower_address','borrowers.birth_date','borrowers.phone_number','borrowers.borrower_status','borrowers.borrowed_amount','borrowers.borrower_photo','borrowers.birth_date','borrowers.created_at','borrowers.status','loan_services.loan_service_name','loan_services.loan_service_interest_rate')->find($roll_number);
         return view('dashboards.customerserviceofficers.manage_loan.loan_payment_form',compact('borrower'));
     }
 
-    public function apply_loan_payment($id){
+    public function apply_loan_payment($roll_number){
         // loan_paid returns 1 if true 0 if false
-        $user_id = Auth::user()->id;
-        $loan_paid = Borrower::where('id',$id)->update([
+        $username = Auth::user()->username;
+        $loan_paid = Borrower::where('roll_number',$roll_number)->update([
         'status' => "Paid",
-        'user_id' => $user_id,
+        'user_username' => $username,
         ]);
         if ($loan_paid) {
             return redirect('customerServiceOfficer/search_borrower')->with('message','Payment successfull.');
@@ -135,6 +145,70 @@ class CustomerServiceOfficer extends Controller
         else {
             return redirect('customerServiceOfficer/search_borrower')->with('message','Payment not successfull.');
         }
+    }
+
+    public function view_loan_disbursemet(){
+        $disbursement_records = LoanDisburseRecord::join('borrowers','loan_disburse_records.borrower_roll_number','=','borrowers.roll_number')->join('branches','branches.id','=','borrowers.branch_id')->select('remaining_amount','disburse_amount','disbursed_by','first_name','middle_name','roll_number','loan_disburse_records.created_at')->orderBy('loan_disburse_records.created_at','DESC')->get();
+        return view('dashboards.customerServiceOfficers.loan_disbursement.view_disbursed_loan',compact('disbursement_records'));
+    }
+
+    public function view_loan_disbursemet_detail($roll_number){
+        $borrower = Borrower::find($roll_number);
+        $disbursement_records = LoanDisburseRecord::join('borrowers','loan_disburse_records.borrower_roll_number','=','borrowers.roll_number')->join('branches','branches.id','=','borrowers.branch_id')->select('remaining_amount','disburse_amount','disbursed_by','first_name','middle_name','roll_number','loan_disburse_records.created_at')->orderBy('loan_disburse_records.created_at','DESC')->where('roll_number',$roll_number)->get();
+        return view('dashboards.customerServiceOfficers.loan_disbursement.view_disbursed_loan_detail',compact('disbursement_records','borrower'));
+    }
+
+
+    public function new_loan_disbursement(Request $request){
+
+        $request->validate([
+            'roll_number' => 'required|regex:/[0-9]/|max:10|exists:borrowers,roll_number',
+            'disburse_amount' => 'required|numeric|min:0|max:500000',
+        ],
+        [
+            'roll_number.required' => 'Roll number not matched. Please try again.',
+            'roll_number.regex' => 'Roll number must be number only. Please try again.',
+            'roll_number.exists' => 'Wrong roll number. Please try again.',
+
+        ]);
+
+        DB::transaction(function () use($request){
+            $disbursed_by = Auth::user()->username;
+            $user = User::join('employees','employees.id','=','users.employee_id')->find($disbursed_by);
+            // dd($user->branch_id);
+            $disburse_amount = $request->get('disburse_amount');
+            $roll_number = $request->get('roll_number');
+            $borrower = Borrower::where('roll_number',$roll_number)->firstOrFail();
+            $current_balance = $borrower->borrowed_amount;
+            if ($current_balance >= $disburse_amount) {
+                $remaining_amount = $current_balance - $disburse_amount;
+                Borrower::where('roll_number',$roll_number)->update([
+                    'borrowed_amount' => $remaining_amount,
+              ]);
+              $new_disbursement = new LoanDisburseRecord([
+                'remaining_amount' => $remaining_amount,
+                'disburse_amount' => $disburse_amount,
+                'branch_id' => $user->branch_id,
+                'borrower_roll_number' => $roll_number,
+                'disbursed_by' =>$disbursed_by,
+            ]);
+            $new_disbursement->save();
+            }
+            elseif ($current_balance < $disburse_amount) {
+                return redirect()->route('customerServiceOfficer.loan_disbursemet_lists')->with('message','Insufficient balance. Enter correct disburse amount');
+            }
+            else {
+                return redirect()->route('customerServiceOfficer.loan_disbursemet_lists')->with('message','Insufficient balance. Enter correct disburse amount');
+            }
+
+        });
+        return redirect()->route('customerServiceOfficer.loan_disbursemet_lists')->with('message','Loan disbursement completed successfully!');
+    }
+
+
+    public function view_loan_services(){
+        $loan_services = LoanService::all();
+        return view('dashboards.customerServiceOfficers.loan_services.view_loan_service',compact('loan_services'));
     }
     public function profile(){
         return view('dashboards/customerServiceOfficers/profile');

@@ -21,7 +21,7 @@ class CreateEmployeesTable extends Migration
             $table->string('employee_gender');
             $table->string('employee_address');
             $table->date('birth_date');
-            $table->double('employee_salary');
+            $table->float('employee_salary',10,2);
             $table->string('phone_number');
             $table->binary('employee_photo');
 

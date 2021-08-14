@@ -18,6 +18,7 @@ class CreateLoanServicesTable extends Migration
             $table->string('loan_service_name');
             $table->string('loan_service_description');
             $table->double('loan_service_interest_rate');
+            $table->integer('loan_term')->unsigned();
             $table->timestamps();
         });
     }

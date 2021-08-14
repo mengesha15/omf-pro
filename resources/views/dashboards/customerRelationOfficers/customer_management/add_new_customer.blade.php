@@ -1,6 +1,6 @@
-<title>OMF- Add new loan request</title>
-@extends('layouts.customer_service_officer')
-@section('service_officer_content')
+<title>OMF- Add new customer</title>
+@extends('layouts.customer_relation_officer')
+@section('customer_relation_officer_content')
 <section class="content">
     <div class="container-fluid">
         <div class="content-header">
@@ -12,7 +12,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">New loan request</li>
+                            <li class="breadcrumb-item active">Customer registration</li>
                         </ol>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
     <div class="col-12">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Loan request form</h3>
+            <h3 class="card-title">Customer registration form</h3>
         </div>
         <!-- /.card-header -->
     <div class="card-body">
@@ -45,7 +45,7 @@
                         <div class="row justify-content-center">
                             <div class="col-md-12">
                                 <div class="card">
-                                    <div class="card-header">Fill required borrwoer data
+                                    <div class="card-header">Fill required customer data
                                         bellow</div>
                                     @if (Session::has('message'))
                                     <div class="alert alert-success">
@@ -54,7 +54,7 @@
                                     @endif
 
                                     <div class="card-body">
-                                        <form method="POST" action="{{ route('customerServiceOfficer.add_new_request') }}" enctype="multipart/form-data"
+                                        <form method="POST" action="{{ route('customerRelationOfficer.customer_registration') }}" enctype="multipart/form-data"
                                             class="needs-validation" id="main_form">
                                             @csrf
                                             <div class="row">
@@ -92,36 +92,36 @@
                                                         @enderror
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="borrowed_amount">Request amount</label>
-                                                        <input id="borrowed_amount" type="text"
-                                                            class="form-control @error('borrowed_amount') is-invalid @enderror" name="borrowed_amount"
-                                                            value="{{ old('borrowed_amount') }}" required autocomplete="borrowed_amount"
+                                                        <label for="account_balance">Initial deposit</label>
+                                                        <input id="account_balance" type="text"
+                                                            class="form-control @error('account_balance') is-invalid @enderror" name="account_balance"
+                                                            value="{{ old('account_balance') }}" required autocomplete="account_balance"
                                                             style="width: 90%;">
-                                                        @error('borrowed_amount')
+                                                        @error('account_balance')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                         @enderror
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="borrower_status">Borrower status</label>
-                                                        <input id="borrower_status	" type="text"
-                                                            class="form-control @error('borrower_status') is-invalid @enderror" name="borrower_status"
-                                                            value="{{ old('borrower_status') }}" autocomplete="borrower_status"
+                                                        <label for="customer_status">Customer status</label>
+                                                        <input id="customer_status	" type="text"
+                                                            class="form-control @error('customer_status') is-invalid @enderror" name="customer_status"
+                                                            value="{{ old('customer_status') }}" autocomplete="customer_status"
                                                             style="width: 90%;" required>
-                                                        @error('borrower_status')
+                                                        @error('customer_status')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                         @enderror
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="borrower_address">Address</label>
-                                                        <input id="borrower_address" type="text"
-                                                            class="form-control @error('borrower_address') is-invalid @enderror" name="borrower_address"
-                                                            value="{{ old('borrower_address') }}" required autocomplete="borrower_address"
+                                                        <label for="customer_address">Address</label>
+                                                        <input id="customer_address" type="text"
+                                                            class="form-control @error('customer_address') is-invalid @enderror" name="customer_address"
+                                                            value="{{ old('customer_address') }}" required autocomplete="customer_address"
                                                             style="width: 90%;">
-                                                        @error('borrower_address')
+                                                        @error('customer_address')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -173,18 +173,18 @@
                                                      </div>
 
                                                     <div class="col-md-12 mb-3">
-                                                        <label for="loan_service_id">Loan service type</label><br>
-                                                        <input list="loan_service_id" name="loan_service_id"
-                                                            class="col-sm-6 custom-select custom-select-sml @error('loan_service_id') is-invalid @enderror"
-                                                            required value="{{ old('loan_service_id') }}" placeholder="Choose service...">
-                                                             <datalist id="loan_service_id">
-                                                            @foreach ($loan_services as $loan_service)
-                                                            <option value="{{ $loan_service->id }}">
-                                                                {{ $loan_service->loan_service_name }}
+                                                        <label for="saving_service_id">Saving service type</label><br>
+                                                        <input list="saving_service_id" name="saving_service_id"
+                                                            class="col-sm-6 custom-select custom-select-sml @error('saving_service_id') is-invalid @enderror"
+                                                            required value="{{ old('saving_service_id') }}" placeholder="Choose service...">
+                                                             <datalist id="saving_service_id">
+                                                            @foreach ($saving_services as $saving_service)
+                                                            <option value="{{ $saving_service->id }}">
+                                                                {{ $saving_service->saving_service_name }}
                                                             </option>
                                                             @endforeach
                                                         </datalist>
-                                                        @error('loan_service_id')
+                                                        @error('saving_service_id')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -193,25 +193,25 @@
 
                                                     <div class="form-group">
                                                         <div class="form-check">
-                                                            <input class="form-check-input" value="Female" type="radio" name="borrower_gender" checked
+                                                            <input class="form-check-input" value="Female" type="radio" name="customer_gender" checked
                                                                 id="female">
                                                             <label class="form-check-label" for="female">Female</label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="borrower_gender" value="Male" id="male">
+                                                            <input class="form-check-input" type="radio" name="customer_gender" value="Male" id="male">
                                                             <label class="form-check-label" for="male">Male</label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="borrower_gender" value="Other" id="other">
+                                                            <input class="form-check-input" type="radio" name="customer_gender" value="Other" id="other">
                                                             <label class="form-check-label" for="other">Other</label>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="borrower_photo">Choose photo</label>
-                                                        <input type="file" class="form-control @error('borrower_photo') is-invalid @enderror"
-                                                            name="borrower_photo" id="borrower_photo" value="{{ old('borrower_photo') }}"
+                                                        <label for="customer_photo">Choose photo</label>
+                                                        <input type="file" class="form-control @error('customer_photo') is-invalid @enderror"
+                                                            name="customer_photo" id="customer_photo" value="{{ old('customer_photo') }}"
                                                             style="width: 80%; height: 8.5%;" required>
-                                                       @error('borrower_photo')
+                                                       @error('customer_photo')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -220,7 +220,7 @@
                                                     <div class="position-relative"><br><br></div>
                                                     <div class="col-sm-10">
                                                         <ol class="float-sm-right">
-                                                            <button type="submit" class="btn btn-success">Send request</button>
+                                                            <button type="submit" class="btn btn-success">Register</button>
                                                         </ol>
                                                     </div>
 
@@ -234,9 +234,6 @@
                         </div>
                     </div>
                     </div>
-
-
-
                 </div>
             </div>
 

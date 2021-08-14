@@ -198,13 +198,11 @@
                                                 </span>
                                                 @enderror
                                             </div>
-
+                                            <div class="card-footer">
+                                                <button type="submit" class="btn btn-success">Register</button>
+                                            </div>
                                         </div>
                                     </div>
-                            </div>
-
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-success">Register</button>
                             </div>
                             </form>
                             </div>

@@ -1,5 +1,5 @@
-@extends('layouts.customer_service_officer')
-@section('service_officer_content')
+@extends('layouts.customer_relation_officer')
+@section('customer_relation_officer_content')
 <section class="content">
     <div class="container-fluid">
         <div class="content-header">
@@ -11,7 +11,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">OMF loan services</li>
+                            <li class="breadcrumb-item active">OMF saving services</li>
                         </ol>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                     <div class="row mb-2">
                         <div class="col-sm-3">
                             <ol class="breadcrumb">
-                             <h4><b>Loan services</b></h4>
+                             <h4><b>Saving services</b></h4>
                             </ol>
                         </div>
                         <div class="col-md-6"></div>
@@ -43,17 +43,15 @@
                         <th>Service name</th>
                         <th>Service description</th>
                         <th>Interest rate</th>
-                        <th>Loan term</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($loan_services as $loan_service)
+                    @foreach ($saving_services as $saving_service)
                     <tr>
-                        <td>{{ $loan_service->id }}</td>
-                        <td>{{ $loan_service->loan_service_name }}</td>
-                        <td>{{ $loan_service->loan_service_description }}</td>
-                        <td>{{ $loan_service->loan_service_interest_rate }}</td>
-                        <td>{{ $loan_service->loan_term }}</td>
+                        <td>{{ $saving_service->id }}</td>
+                        <td>{{ $saving_service->saving_service_name }}</td>
+                        <td>{{ $saving_service->saving_service_description }}</td>
+                        <td>{{ $saving_service->saving_service_interest_rate }}</td>
                     </tr>
                     @endforeach
                 </tbody>

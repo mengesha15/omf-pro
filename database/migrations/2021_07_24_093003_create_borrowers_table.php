@@ -14,7 +14,7 @@ class CreateBorrowersTable extends Migration
     public function up()
     {
         Schema::create('borrowers', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('roll_number')->primary();
             $table->string('first_name');
             $table->string('middle_name');
             $table->string('last_name');
@@ -23,8 +23,8 @@ class CreateBorrowersTable extends Migration
             $table->date('birth_date');
             $table->string('phone_number');
             $table->string('borrower_status'); //job status of the borrower
-            $table->double('borrowed_amount');
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->float('borrowed_amount',10,2);
+            $table->string('user_username')->nullable();
             $table->unsignedBigInteger('branch_id')->nullable();
             $table->unsignedBigInteger('loan_service_id')->nullable();
             $table->binary('borrower_photo');
@@ -33,7 +33,7 @@ class CreateBorrowersTable extends Migration
 
             $table->foreign('branch_id')->references('id')->on('branches')->onUpdate('cascade')
             ->onDelete('set null');
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')
+            $table->foreign('user_username')->references('username')->on('users')->onUpdate('cascade')
             ->onDelete('set null');
             $table->foreign('loan_service_id')->references('id')->on('loan_services')->onUpdate('cascade')
             ->onDelete('set null');

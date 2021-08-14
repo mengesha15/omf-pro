@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>OMF-Admin Home</title>
-
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dist/img/omf_logo.jpg') }}" />
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -24,7 +23,6 @@
         <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
 
     </head>
-
     <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
         <div class="wrapper">
             <!-- Navbar -->
@@ -36,7 +34,7 @@
                                 class="fas fa-bars"></i></a>
                     </li>
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="{{url('admin/dashboard')}}" class="nav-link">Home</a>
+                        <a href="{{url('admin/dashboard')}}" class="nav-link">Contacts</a>
                     </li>
                     <li class="nav-item d-none d-sm-inline-block">
                         <a href="#" class="nav-link">Help</a>
@@ -257,18 +255,6 @@
                                             <p>View users</p>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="pages/UI/sliders.html" class="nav-link">
-                                            <i class="far fa-plus nav-icon"></i>
-                                            <p>Delete user</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="pages/UI/modals.html" class="nav-link">
-                                            <i class="far fa-plus nav-icon"></i>
-                                            <p>View user detail</p>
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item">
@@ -298,27 +284,9 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="pages/forms/editors.html" class="nav-link">
-                                                    <i class="far fa-plus nav-icon"></i>
-                                                    <p>Edit loan service</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
                                                 <a href="pages/forms/validation.html" class="nav-link">
                                                     <i class="far fa-plus nav-icon"></i>
                                                     <p>View loan service</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/forms/validation.html" class="nav-link">
-                                                    <i class="far fa-plus nav-icon"></i>
-                                                    <p>Loan service detail</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/forms/validation.html" class="nav-link">
-                                                    <i class="far fa-plus nav-icon"></i>
-                                                    <p>Delete loan service</p>
                                                 </a>
                                             </li>
                                         </ul>
@@ -342,27 +310,9 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="pages/forms/editors.html" class="nav-link">
-                                            <i class="far fa-plus nav-icon"></i>
-                                            <p>Edit saving service</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
                                         <a href="pages/forms/validation.html" class="nav-link">
                                             <i class="far fa-plus nav-icon"></i>
                                             <p>View saving service</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="pages/forms/validation.html" class="nav-link">
-                                            <i class="far fa-plus nav-icon"></i>
-                                            <p>Saving service detail</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="pages/forms/validation.html" class="nav-link">
-                                            <i class="far fa-plus nav-icon"></i>
-                                            <p>Delete saving service</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -370,7 +320,29 @@
                             </li>
                         </ul>
                         </li>
-
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Branch
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="pages/UI/icons.html" class="nav-link">
+                                        <i class="far fa-plus nav-icon"></i>
+                                        <p>Add new branch</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/UI/buttons.html" class="nav-link">
+                                        <i class="far fa-plus nav-icon"></i>
+                                        <p>View branches</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
@@ -380,46 +352,46 @@
             <div class="content-wrapper">
                 @yield('admin_content')
             </div>
-            <div id="sidebar-overlay"></div>
-            <footer class="main-footer">
-                <div class="copyright text-center my-auto">
-                    <span> copy right
-                        © 2019–2021</span>
-                </div>
-            </footer>
-            <!-- jQuery -->
-            <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-            <!-- Bootstrap 4 -->
-            <!-- AdminLTE for demo purposes -->
-            <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-            <!-- DataTables  & Plugins -->
-            <!-- AdminLTE App -->
-            <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-            <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-            <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-            <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-            <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-            <script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-            <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
-            <script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
-            <script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
-            <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-            <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-            <script src="{{ 'plugins/datatables-buttons/js/buttons.colVis.min.js' }}"></script>
-            <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+        <div id="sidebar-overlay"></div>
+        <footer class="main-footer">
+            <div class="copyright text-center my-auto">
+                <span> copy right
+                    © 2019–2021</span>
+            </div>
+        </footer>
+        <!-- jQuery -->
+        <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+        <!-- Bootstrap 4 -->
+        <!-- AdminLTE for demo purposes -->
+        <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <!-- DataTables  & Plugins -->
+        <!-- AdminLTE App -->
+        <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+        <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+        <script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
+        <script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
+        <script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
+        <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+        <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+        <script src="{{ 'plugins/datatables-buttons/js/buttons.colVis.min.js' }}"></script>
+        <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 
-            <script src="{{ asset('dist/js/demo.js') }}"></script>
+        <script src="{{ asset('dist/js/demo.js') }}"></script>
         </div>
-    </body>
-    <script>
+        </body>
+        <script>
         $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
-    </script>
+        </script>
 
 </html>

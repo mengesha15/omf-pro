@@ -22,7 +22,7 @@ class SavingTransactionFactory extends Factory
     public function definition()
     {
         return [
-            'transaction_amount' =>$this->faker->word(),
+            'transaction_type' =>$this->faker->word(),
             'transaction_amount' =>$this->faker->randomFloat(2,0,15000),
             'deposits',
         ];
