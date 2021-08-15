@@ -9,6 +9,9 @@ use App\Models\Employee;
 use App\Models\Borrower;
 use App\Models\RequestedLoan;
 use App\Models\ApprovedLoan;
+use App\Models\LoanService;
+use App\Models\SavingService;
+
 use App\Helpers\Helper;
 
 use Illuminate\Support\Facades\Auth;
@@ -71,38 +74,41 @@ class AdminController extends Controller
                 'role_id.exists' => 'Role not found',
             ]
     );
-        $profile_photo = $request->file('employee_photo');
-        $extension = $profile_photo->getClientOriginalExtension();
-        // $photo_nmae = $request->file('employee_photo')->getClientOriginalName();
-        $photo_name = time() . "." . $extension;
-        $profile_photo->move('uploads/employee_photo', $photo_name);
+        DB::transaction(function () use($request){
+            $profile_photo = $request->file('employee_photo');
+            $extension = $profile_photo->getClientOriginalExtension();
+            // $photo_nmae = $request->file('employee_photo')->getClientOriginalName();
+            $photo_name = time() . "." . $extension;
+            $profile_photo->move('uploads/employee_photo', $photo_name);
 
-        $new_employee = new Employee([
-            'first_name' => $request->get('first_name'),
-            'middle_name' => $request->get('middle_name'),
-            'last_name' => $request->get('last_name'),
-            'birth_date' => $request->get('birth_date'),
-            'phone_number' => $request->get('phone_number'),
-            'employee_salary' => $request->get('employee_salary'),
-            'employee_address' => $request->get('employee_address'),
-            'employee_gender' => $request->get('employee_gender'),
-            'branch_id' => $request->get('branch_id'),
-            'role_id' => $request->get('role_id'),
-            'employee_photo' => $photo_name,
-        ]);
-        $new_employee->save();
+            $new_employee = new Employee([
+                'first_name' => $request->get('first_name'),
+                'middle_name' => $request->get('middle_name'),
+                'last_name' => $request->get('last_name'),
+                'birth_date' => $request->get('birth_date'),
+                'phone_number' => $request->get('phone_number'),
+                'employee_salary' => $request->get('employee_salary'),
+                'employee_address' => $request->get('employee_address'),
+                'employee_gender' => $request->get('employee_gender'),
+                'branch_id' => $request->get('branch_id'),
+                'role_id' => $request->get('role_id'),
+                'employee_photo' => $photo_name,
+            ]);
+            $new_employee->save();
 
-        $new_employee_id = $new_employee->id;
+            $new_employee_id = $new_employee->id;
 
-        $new_user = new User();
-//$new_user->username = Helper::IDGenerator(new User, 'username', 4, 'EP','R');
-        $new_user->username = $request->first_name . random_int(1000, 9999) . "/" . date('Y');
-        $new_user->employee_id = $new_employee_id;
-        $new_user->role_id = $request->role_id;
-        $new_user->password = Hash::make('password');
-        $new_user->user_photo = $photo_name;
+            $new_user = new User([
+                'username' => $request->first_name . random_int(10000, 99999) . "/" . date('y'),
+                'employee_id' => $new_employee_id,
+                'role_id' => $request->role_id,
+                'password' => Hash::make('password'),
+                'user_photo' => $photo_name,
+            ]);
 
-        $new_user->save();
+
+            $new_user->save();
+        });
 
         return redirect()->route('admin.view_employee',compact('requested_loans','total_request'))->with('message', 'Employee registered successfully!');
 
@@ -142,7 +148,7 @@ class AdminController extends Controller
     );
 
         DB::transaction(function () use($request,$id){
-            $employee = Employee::find($id);
+            $employee = Employee::find($id)->sharedLock();
             $employee_photo = $employee->employee_photo;
 
             if ($request->hasFile('employee_photo')) {
@@ -212,10 +218,10 @@ class AdminController extends Controller
 
     public function approve_request($roll_number){
 
-         $approver_username = Auth::user()->username;   //who does approve the requested loan
+         $approved_by = Auth::user()->username;   //who does approve the requested loan
 
-        DB::transaction(function () use($roll_number,$approver_username){
-            $borrower_status_updated = Borrower::where('roll_number',$roll_number)->update([
+        DB::transaction(function () use($roll_number,$approved_by){
+            $borrower_status_updated = Borrower::where('roll_number',$roll_number)->sharedLock()->update([
                 'status' => 'Approved',
             ]);
             if($borrower_status_updated){
@@ -224,7 +230,7 @@ class AdminController extends Controller
                 'approved_amount' => $new_approve->requested_amount,
                 'borrower_roll_number' => $new_approve->roll_number,
                 'requested_by' => $new_approve->requested_by,
-                'approved_by' => $approver_username,
+                'approved_by' => $approved_by,
                 'status' => 'Approved',
             ]);
             }
@@ -236,22 +242,36 @@ class AdminController extends Controller
 
     }
 
-
-
     public function delete_employee($id){
         $employee = Employee::find($id);
         $employee->delete();
         return redirect('admin/view_employee');
 
     }
+
     public function reject_loan_request($roll_number){
         $rejected_by = Auth::user()->username;
-        dd($rejected_by);
-        $requested_loan = RequestedLoan::find($roll_number);
-        $requested_loan->delete();
-        return redirect('admin/requested_list');
+        DB::transaction(function () use($roll_number,$rejected_by){
+            $borrower_status_updated = Borrower::where('roll_number',$roll_number)->update([
+                'status' => 'Rejected',
+            ]);
+            if($borrower_status_updated){
+                $new_approve = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->select('borrowers.roll_number','requested_amount','requested_by','borrowers.loan_service_id')->where('requested_loans.borrower_roll_number',$roll_number)->firstOrFail();
+            $approved_loans = new ApprovedLoan([
+                'approved_amount' => $new_approve->requested_amount,
+                'borrower_roll_number' => $new_approve->roll_number,
+                'requested_by' => $new_approve->requested_by,
+                'approved_by' => $rejected_by,
+                'status' => 'Rejected',
+            ]);
+            }
+            RequestedLoan::where('borrower_roll_number',$roll_number)->delete();
+            $approved_loans->save();
+        });
+        return redirect()->route('admin.requested_list')->with('message', 'request rejected successfully!');
 
     }
+
 
     public function profile(){
         return view('dashboards/admins/profile');
@@ -259,4 +279,17 @@ class AdminController extends Controller
     public function settings(){
         return view('dashboards/admins/settings');
     }
+
+
+
+    public function guest_page(){
+        $sliders = Employee::select('employee_photo')->get();
+        $loan_services = LoanService::all();
+        $saving_services = SavingService::all();
+        return view('welcome',compact('saving_services','loan_services','sliders'));
+    }
 }
+
+
+
+

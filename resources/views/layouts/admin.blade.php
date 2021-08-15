@@ -55,11 +55,11 @@
                                 <div class="dropdown-divider"></div>
                                 <a href="#" class="dropdown-item">
                                     <i class="fas fa-envelope mr-2"></i> {{ $requested_loan->first_name.' '.$requested_loan->middle_name }}
-                                    <span class="float-right text-muted text-sm">{{ date('H:i',strtotime($requested_loan->created_at)) }}</span>
+                                    <span class="float-right text-muted text-sm">{{ $requested_loan->created_at->diffForHumans() }}</span>
                                 </a>
                             @endforeach
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item dropdown-footer">See All</a>
+                            <a href="{{ url('admin/requested_list') }}" class="dropdown-item dropdown-footer">See All</a>
                         </div>
                     </li>
                     <!-- Profile Dropdown Menu -->

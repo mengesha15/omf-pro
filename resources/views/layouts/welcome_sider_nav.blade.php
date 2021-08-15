@@ -5,8 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Oromia microfinance</title>
-
-    <!-- Google Font: Source Sans Pro -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dist/img/omf_logo.jpg') }}" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
@@ -20,10 +19,11 @@
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('css/all.css') }}">
 
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -33,16 +33,16 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">HOMME</a>
+                    <a href="#" class="nav-link">JOB VACANCIES</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">BACKGROUND</a>
+                    <a href="#omf-background" class="nav-link">BACKGROUND</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">ABOUT</a>
+                    <a href="#omf-about" class="nav-link">ABOUT</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">CONTACTS</a>
+                    <a href="#omf-contacts" class="nav-link">CONTACTS</a>
                 </li>
             </ul>
 
@@ -77,11 +77,11 @@
                         <li class="nav-item">
                             <a href="/" class="nav-link">
                                 <i class="fa fa-home"></i>
-                                <p>Home</p>
+                                <p >Home</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="#saving-services" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Saving services
@@ -89,34 +89,33 @@
                             </a>
                             <ul class="nav">
                                 <li class="nav-item">
-                                    <a href="{{ url('regular_saving') }}" class="nav-link">
-
+                                    <a href="#regular-saving" class="nav-link" id="">
                                         <i class="far fa-plus nav-icon"></i>
                                         <p>Regular saving</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                                    <a href="#handhura-saving" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
                                         <p>Handhura saving</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/boxed.html" class="nav-link">
+                                    <a href="#women-saving" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
                                         <p>Women saving</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                                    <a href="#sorema-saving" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
                                         <p>Sorema saving</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                                    <a href="#noninterest-saving" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
-                                        <p>Noninterest saving</p>
+                                        <p>Non-interest saving</p>
                                     </a>
                                 </li>
 
@@ -124,7 +123,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="#loan-services" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Loan services
@@ -132,38 +131,38 @@
                             </a>
                             <ul class="nav">
                                 <li class="nav-item">
-                                    <a href="./services/savingService/female_saving_service.php" class="nav-link">
+                                    <a href="#solidarity-group-loan" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
                                         <p>Solidarity group loan</p>
 
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                                    <a href="#bussiness-loan" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
                                         <p>Bussiness loan</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/boxed.html" class="nav-link">
+                                    <a href="#msel" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
-                                        <p>MSEL</p>
+                                        <p><abbr title="Micro and Small Enterprise loan">MSEL</abbr></p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                                    <a href="#wedpl" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
-                                        <p>WEDPL</p>
+                                        <p><abbr title="Women entrepreneur's development program loan">WEDPL</abbr></p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                                    <a href="#general-purpose-loan" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
                                         <p>General purpose loan</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                                    <a href="#housing-loan" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
                                         <p>Housing loan</p>
                                     </a>
@@ -174,18 +173,16 @@
                         </li>
                     </ul>
                 </nav>
-                <!-- /.sidebar-menu -->
             </div>
-            <!-- /.sidebar -->
         </aside>
         <div class="content-wrapper">
             @yield('welcome_sidebar_content')
         </div>
-        <!-- Main Footer -->
+        <div id="sidebar-overlay"></div>
         <footer class="main-footer">
-            <strong>Copyright &copy; <a href="#">Oromia microfinance</a>.</strong> All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
-                <b>OMF,</b> Ethiopia
+            <div class="copyright text-center my-auto">
+                <span> copy right
+                    © 2019–2021</span>
             </div>
         </footer>
 
@@ -219,7 +216,7 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('dist/js/demo.js') }}"></script>
     <!-- Page specific script -->
+    <script src="{{ asset('js/map-script.js') }}"></script>
 
 </body>
-
 </html>

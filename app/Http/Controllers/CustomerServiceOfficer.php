@@ -148,7 +148,7 @@ class CustomerServiceOfficer extends Controller
     }
 
     public function view_loan_disbursemet(){
-        $disbursement_records = LoanDisburseRecord::join('borrowers','loan_disburse_records.borrower_roll_number','=','borrowers.roll_number')->join('branches','branches.id','=','borrowers.branch_id')->select('remaining_amount','disburse_amount','disbursed_by','first_name','middle_name','roll_number','loan_disburse_records.created_at')->orderBy('loan_disburse_records.created_at','DESC')->get();
+        $disbursement_records = LoanDisburseRecord::join('borrowers','loan_disburse_records.borrower_roll_number','=','borrowers.roll_number')->join('branches','branches.id','=','borrowers.branch_id')->select('remaining_amount','disburse_amount','disbursed_by','first_name','middle_name','roll_number','loan_disburse_records.created_at')->orderBy('created_at', "desc")->get();
         return view('dashboards.customerServiceOfficers.loan_disbursement.view_disbursed_loan',compact('disbursement_records'));
     }
 
@@ -178,7 +178,7 @@ class CustomerServiceOfficer extends Controller
             // dd($user->branch_id);
             $disburse_amount = $request->get('disburse_amount');
             $roll_number = $request->get('roll_number');
-            $borrower = Borrower::where('roll_number',$roll_number)->firstOrFail();
+            $borrower = Borrower::where('roll_number',$roll_number)->sharedLock()->firstOrFail();
             $current_balance = $borrower->borrowed_amount;
             if ($current_balance >= $disburse_amount) {
                 $remaining_amount = $current_balance - $disburse_amount;

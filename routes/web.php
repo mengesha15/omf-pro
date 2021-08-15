@@ -20,13 +20,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/regular_saving', function () {
-return view('services/savingServices/regular_saving');
-
-});
+Route::get('/',[AdminController::class,'guest_page'])->name('guest.dashboard');
 
 
 //To protect back history after logout

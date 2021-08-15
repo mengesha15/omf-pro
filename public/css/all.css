@@ -1,12 +1,37 @@
 
 .error {
-	width: 92%; 
-	color: #a94442; 
-	background: #f2dede; 
-	border-radius: 5px; 
+	width: 92%;
+	color: #a94442;
+	background: #f2dede;
+	border-radius: 5px;
 	text-align: left;
 }
 .success {
-	color: #3c763d; 
-	background: #dff0d8; 
+	color: #3c763d;
+	background: #dff0d8;
 }
+
+abbr[title] {
+    border-bottom: none !important;
+    cursor: inherit !important;
+    text-decoration: none !important;
+  }
+
+  div p {
+    text-align: justify;
+    text-justify: inter-word;
+    font-family: new time roman;
+  }
+
+div h2, h3, h5{
+    font-family: new time roman;
+}
+
+.img-animation {
+    border: 3px solid #555;
+    height: 400px;
+    width: 600px;
+    margin-left: 120px;
+  
+}
+

@@ -58,7 +58,7 @@
                         <label>Loan Status</label>{{": ". $borrower->status }}
                     </div>
                     <div class="col-sm-6 col-md-6 col-xs-12">
-                        <label>Request date</label><td>{{date('d/m/Y',strtotime($borrower->created_at))}}</td>
+                        <label>Request date: &nbsp;</label><td>{{date('d/m/Y',strtotime($borrower->created_at))}}</td>
                     </div>
                 </div>
                 <br>
