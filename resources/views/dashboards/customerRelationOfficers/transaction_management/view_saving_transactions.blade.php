@@ -30,16 +30,23 @@
                              <h4><b>Transactions</b></h4>
                             </ol>
                         </div>
+                        <div class="col-md-6">
+                            @if (Session::has('message'))
+                            <div class="alert alert-success">
+                                {{ Session::get('message') }}
+                            </div>
+                            @endif
+                            @if (Session::has('error'))
+                            <div class="alert alert-danger">
+                                {{ Session::get('error') }}
+                            </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="card-body">
-            @if (Session::has('message'))
-            <div class="alert alert-success" role="alert">
-                {{ Session::get('message') }}
-            </div>
-            @endif
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
@@ -53,7 +60,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($saving_transactions as $$saving_transaction)
+                    @foreach ($saving_transactions as $saving_transaction)
                     <tr>
                         <td>{{date('d/m/Y',strtotime($saving_transaction->created_at))}}</td>
                         <td>{{ $saving_transaction->transaction_type }}</td>
@@ -64,7 +71,7 @@
                         <td class="text-center">
                             <ol>
                                 <li class="breadcrumb-item li-none"><a class="btn btn-lg btn-success"
-                                    href="{{ url('customerServiceOfficer/loan_disbursemet_detail/' . $saving_transaction->customer_account_number) }}">Detail</a>
+                                    href="{{ url('customerRelationOfficer/customer_detail/'. $saving_transaction->account_number) }}">Detail</a>
 
                             </ol>
                         </td>

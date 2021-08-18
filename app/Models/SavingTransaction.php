@@ -18,9 +18,9 @@ class SavingTransaction extends Model
      * @var array
      */
     protected $fillable = [
-        'withdrawals',
-        'deposits',
-        'customer_id',
+        'transaction_type',
+        'transaction_amount',
+        'customer_account_number',
         'branch_id',
         'user_username',
     ];

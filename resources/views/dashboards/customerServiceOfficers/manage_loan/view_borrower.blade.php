@@ -55,7 +55,7 @@
                         <th>middle name</th>
                         <th>Gender</th>
                         <th>Phone no</th>
-                        <th>Salary</th>
+                        <th>Balance</th>
                         <th>Statu</th>
                         <th>Payment</th>
                     </tr>

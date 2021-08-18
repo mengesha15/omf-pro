@@ -141,7 +141,7 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="{{  route('admin.employee_registration') }}" class="nav-link">
+                                        <a href="{{  route('admin.employee_registration_form') }}" class="nav-link">
                                             <i class="far fa-plus nav-icon"></i>
                                             <p>Add new employee</p>
                                         </a>
@@ -164,72 +164,16 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{ route('admin.approved_loans_list') }}" class="nav-link">
                                             <i class="far fa-plus nav-icon"></i>
-                                            <i class="nav-icon fas fa-edit"></i>
-                                            <p>
-                                                Approved loan
-                                                <i class="right fas fa-angle-left"></i>
-                                            </p>
+                                            <p>View approved loans</p>
                                         </a>
-                                        <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="pages/charts/chartjs.html" class="nav-link">
-                                                    <i class="far fa-plus nav-icon"></i>
-                                                    <i class="far fa-plus nav-icon"></i>
-                                                    <p>View approved</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/charts/flot.html" class="nav-link">
-                                                    <i class="far fa-plus nav-icon"></i>
-                                                    <i class="far fa-plus nav-icon"></i>
-                                                    <p>Approved detail</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/charts/inline.html" class="nav-link">
-                                                    <i class="far fa-plus nav-icon"></i>
-                                                    <i class="far fa-plus nav-icon"></i>
-                                                    <p>Delete approved</p>
-                                                </a>
-                                            </li>
-
-                                        </ul>
+                                    </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{ url('admin/requested_list') }}" class="nav-link">
                                             <i class="far fa-plus nav-icon"></i>
-                                            <i class="nav-icon fas fa-edit"></i>
-                                            <p>
-                                                Requested loan
-                                                <i class="right fas fa-angle-left"></i>
-                                            </p>
+                                            <p>View requested loans</p>
                                         </a>
-                                        <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="pages/charts/chartjs.html" class="nav-link">
-                                                    <i class="far fa-plus nav-icon"></i>
-                                                    <i class="far fa-plus nav-icon"></i>
-                                                    <p>Approve requests</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/charts/flot.html" class="nav-link">
-                                                    <i class="far fa-plus nav-icon"></i>
-                                                    <i class="far fa-plus nav-icon"></i>
-                                                    <p>Requested detail</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="{{ url('admin/requested_list') }}" class="nav-link">
-                                                    <i class="far fa-plus nav-icon"></i>
-                                                    <i class="far fa-plus nav-icon"></i>
-                                                    <p>View requested</p>
-                                                </a>
-                                            </li>
-
-                                        </ul>
-
                                     </li>
                                 </ul>
                             </li>

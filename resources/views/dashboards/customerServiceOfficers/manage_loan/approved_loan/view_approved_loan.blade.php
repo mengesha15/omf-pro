@@ -51,8 +51,7 @@
                     <tr>
                         <th>Roll number</th>
                         {{-- <th>Photo</th> --}}
-                        <th>First name</th>
-                        <th>middle name</th>
+                        <th>Name</th>
                         <th>Gender</th>
                         <th>Phone no</th>
                         <th>Amount</th>
@@ -64,11 +63,10 @@
                     @foreach ($borrowers as $borrower)
                     <tr>
                         <td>{{ $borrower->roll_number }}</td>
-                        <td>{{ $borrower->first_name }}</td>
-                        <td>{{ $borrower->middle_name }}</td>
+                        <td>{{ $borrower->first_name.$borrower->middle_name  }}</td>
                         <td>{{ $borrower->borrower_gender }}</td>
                         <td>{{ $borrower->phone_number }}</td>
-                        <td>{{ $borrower->borrowed_amount }}</td>
+                        <td>{{ $borrower->approved_amount }}</td>
                         <td>{{ $borrower->status }}</td>
                         <td class="text-center">
                             <ol>

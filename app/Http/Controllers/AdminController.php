@@ -208,7 +208,14 @@ class AdminController extends Controller
         return view('dashboards.admins.employee_management.employee_detail',compact('employee','requested_loans','total_request'));
     }
 
-    public function requested_list(){
+    public function delete_employee($id){
+        $employee = Employee::find($id);
+        $employee->delete();
+        return redirect('admin/view_employee');
+
+    }
+
+    public function requested_loans_list(){
         $total_request = RequestedLoan::get()->count();
 
         $requested_loans = RequestedLoan::join('borrowers','borrowers.roll_number','=','requested_loans.borrower_roll_number')->get();
@@ -236,16 +243,9 @@ class AdminController extends Controller
             }
             RequestedLoan::where('borrower_roll_number',$roll_number)->delete();
             $approved_loans->save();
-            return redirect()->route('admin.requested_list');
-
         });
 
-    }
-
-    public function delete_employee($id){
-        $employee = Employee::find($id);
-        $employee->delete();
-        return redirect('admin/view_employee');
+        return redirect()->route('admin.requested_list');
 
     }
 
@@ -270,6 +270,16 @@ class AdminController extends Controller
         });
         return redirect()->route('admin.requested_list')->with('message', 'request rejected successfully!');
 
+    }
+
+    public function approved_loans_list(){
+        //begin
+        $total_request = RequestedLoan::get()->count();
+        $requested_loans = RequestedLoan::join('borrowers','borrowers.roll_number','=','requested_loans.borrower_roll_number')->get();//end these must for all admin tasks
+
+        $approved_loans = ApprovedLoan::join('borrowers','borrowers.roll_number','=','approved_loans.borrower_roll_number')->get();
+
+        return view('dashboards.admins.loan_management.approved_loan.view_approved_loan',compact('approved_loans','requested_loans','total_request'));
     }
 
 

@@ -195,7 +195,7 @@
                                                 <div class="form-group">
                                                     <label for="employee_photo">Choose
                                                         photo</label>
-                                                    <input value="{{ $employee->employee_photo }}" type="file" class="form-control @error('employee_photo') is-invalid @enderror" name="employee_photo" id="employee_photo" style="width: 90%; height: 10%;" required>
+                                                    <input value="{{ asset('uploads/employee-photo/'.$employee->employee_photo) }}" type="file" class="form-control @error('employee_photo') is-invalid @enderror" name="employee_photo" id="employee_photo" style="width: 90%; height: 10%;" required>
 
 
                                                     @error('employee_photo')

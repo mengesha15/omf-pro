@@ -151,7 +151,7 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="{{ url('admin/view_employee') }}" class="nav-link">
+                                        <a href="{{ url('customerServiceOfficer/requested_loan_list') }}" class="nav-link">
                                             <i class="far fa-plus nav-icon"></i>
                                             <p>View requsted loans</p>
                                         </a>

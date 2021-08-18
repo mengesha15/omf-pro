@@ -34,11 +34,11 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHis
     Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
 
     //Employee registeration
-    Route::get('employee_registration',[AdminController::class,'employee_registration_form'])->name('admin.employee_registration');
+    Route::get('employee_registration',[AdminController::class,'employee_registration_form'])->name('admin.employee_registration_form');
     Route::post('employee_registration',[AdminController::class,'add_new_employee'])->name('admin.add_new_employee');
 
     //Employee updation
-    Route::get('edit_employee/{id}',[AdminController::class,'edit_employee_form'])->name('admin.edit_employee');
+    Route::get('edit_employee/{id}',[AdminController::class,'edit_employee_form'])->name('admin.edit_employee_form');
     Route::post('edit_employee/{id}',[AdminController::class,'update_employee'])->name('admin.edit_employee');
 
     //viewing employee
@@ -47,13 +47,16 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHis
     //Employee details
     Route::get('employee_detail/{id}',[AdminController::class, 'employee_detail'])->name('admin.employee_detail');
 
-    Route::get('requested_list', [AdminController::class, 'requested_list'])->name('admin.requested_list');
+    //Delete employee
+    Route::delete('delete_employee/{id}',[AdminController::class,'delete_employee'])->name('admin.delete_employee');
+
+    Route::get('requested_list', [AdminController::class, 'requested_loans_list'])->name('admin.requested_list');
 
     Route::get('loan_request_approvement/{roll_number}', [AdminController::class, 'approve_request'])->name('admin.approve_requested_loan');
 
-    Route::delete('delete_employee/{id}',[AdminController::class,'delete_employee'])->name('admin.delete_employee');
-
     Route::delete('reject_loan_request/{roll_number}',[AdminController::class,'reject_loan_request'])->name('admin.reject_loan_request');
+
+    Route::get('approved_loans_list',[AdminController::class,'approved_loans_list'])->name('admin.approved_loans_list');
 
 
 
@@ -88,11 +91,17 @@ Route::group(['prefix'=>'customerRelationOfficer', 'middleware'=>['isCustomerRel
     //Customer management
     Route::get('customers_list', [CustomerRelationOfficer::class,'view_customers'])->name('customerRelationOfficer.customers_list');
 
-    Route::get('customer_registration',[CustomerRelationOfficer::class, 'add_new_customer_form'])->name('customerRelationOfficer.customer_registration');
+    Route::get('customer_registration',[CustomerRelationOfficer::class, 'add_new_customer_form'])->name('customerRelationOfficer.customer_registration_form');
     Route::post('customer_registration',[CustomerRelationOfficer::class, 'add_new_customer'])->name('customerRelationOfficer.customer_registration');
+   //Customer detail and searching
+    Route::get('search_customer', [CustomerRelationOfficer::class, 'search_customer'])->name('customerRelationOfficer.search_customer');
+    Route::get('customer_detail/{account_number}', [CustomerRelationOfficer::class, 'view_customer_detail'])->name('customerRelationOfficer.view_customer_detail');
 
     //Transaction management
     Route::get('saving_transactions_list', [CustomerRelationOfficer::class,'view_saving_transaction'])->name('customerRelationOfficer.saving_transactions_list');
+
+    Route::post('deposit_money', [CustomerRelationOfficer::class, 'deposit_money'])->name('customerRelationOfficer.deposit_money');
+    Route::post('withdraw_money', [CustomerRelationOfficer::class, 'withdraw_money'])->name('customerRelationOfficer.withdraw_money');
 
     //Saving service
     Route::get('saving_services_list', [CustomerRelationOfficer::class,'view_saving_servises'])->name('customerRelationOfficer.saving_services_list');
@@ -113,6 +122,8 @@ Route::group(['prefix'=>'customerServiceOfficer', 'middleware'=>['isCustomerServ
    Route::post('add_new_request',[CustomerServiceOfficer::class,'add_new_request'])->name('customerServiceOfficer.add_new_request');
 
    Route::get('borrowers_list',[CustomerServiceOfficer::class,'view_borrowers'])->name('customerServiceOfficer.borrowers_list');
+
+   Route::get('requested_loan_list', [CustomerServiceOfficer::class, 'view_requested_loans'])->name('customerServiceOfficer.requested_loan_list');
 
    Route::get('approved_loans_list',[CustomerServiceOfficer::class,'view_approved_loans'])->name('customerServiceOfficer.approved_loans_list');
 

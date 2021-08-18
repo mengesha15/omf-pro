@@ -1,3 +1,4 @@
+<title>OMF - Requested loans list</title>
 @extends('layouts.admin')
 @section('admin_content')
 <section class="content">
@@ -54,7 +55,7 @@
                         <th>Roll Number</th>
                         {{-- <th>Photo</th> --}}
                         <th>Borrower name</th>
-                        <th>Requested Amount</th>
+                        <th>Requested amount</th>
                         <th>Gender</th>
                         <th>Requested date</th>
                         <th>Detail</th>

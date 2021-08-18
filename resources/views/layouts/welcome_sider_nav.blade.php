@@ -33,13 +33,13 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">JOB VACANCIES</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
                     <a href="#omf-background" class="nav-link">BACKGROUND</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#omf-about" class="nav-link">ABOUT</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="#job-vacancy" class="nav-link">JOB VACANCIES</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#omf-contacts" class="nav-link">CONTACTS</a>

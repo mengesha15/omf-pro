@@ -8,7 +8,7 @@
           </button>
         </div>
 
-        <form action="{{ route('customerServiceOfficer.new_loan_disbursement') }}" method="post">
+        <form action="{{ route('customerRelationOfficer.withdraw_money') }}" method="post">
             @csrf
             <div class="modal-body">
                 <div class="card">

@@ -35,8 +35,11 @@
             </div>
             <div class="col-sm-6 col-md-6 col-xs-6">
                 <div class="thumbnail">
+                    <div>
+                        <h5>Loan payment</h5>
+                    </div>
                     <div class="col-sm-6 col-md-6 col-xs-12 image-container">
-                        <img  src="{{ asset('uploads/borrower_photo/'.$borrower->borrower_photo) }}" class="mx-auto d-block" style="height: 215px; width: 215px;"/>
+                        <img  src="{{ asset('uploads/borrower_photo/'.$borrower->borrower_photo) }}" class="mx-auto d-block" style="height: 215px; width: 215px;" alt="Borrower photo"/>
                     </div>
                     <br>
                     <div class="col-sm-6 col-md-6 col-xs-12">

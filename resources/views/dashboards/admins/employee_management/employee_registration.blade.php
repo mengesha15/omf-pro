@@ -56,7 +56,7 @@
                         @endif
 
                             <div class="card-body">
-                                <form method="POST" action="{{ route('admin.employee_registration') }}" enctype="multipart/form-data" class="needs-validation" id="main_form">
+                                <form method="POST" action="{{ route('admin.add_new_employee') }}" enctype="multipart/form-data" class="needs-validation" id="main_form">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6">

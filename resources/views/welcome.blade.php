@@ -1,13 +1,14 @@
 @extends('layouts.welcome_sider_nav')
 @section('welcome_sidebar_content')
     <!-- Main content -->
-    <section class="content"  id="top">
+    <section class="content">
         <div class="row" style="padding-left: 4%;">
-            <div class="col-md-10">
+            <div class="col-md-10" style="padding-top: 3%">
                 <div class="row">
                     <div class="row mb-2">
                         <div class="col-sm-12">
                             <h2>
+                                
                                 OROMIA MICROFINANCE
                             </h2>
                         </div>
@@ -194,6 +195,9 @@
                             </tbody>
                         </table>
                      </div>
+                    </div>
+                    <div class="col-md-12" id="job-vacancy">
+                        <h1><b>job-vacancy</b></h1>
                     </div>
                     <div class="col-md-12" id="omf-contacts">
                         <h5><b>Contacts</b></h5>

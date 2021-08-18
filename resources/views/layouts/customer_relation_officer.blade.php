@@ -159,7 +159,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('customerRelationOfficer.customer_registration') }}" class="nav-link">
+                                    <a href="{{ route('customerRelationOfficer.customer_registration_form') }}" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
                                         <p>Add new customer</p>
                                     </a>
