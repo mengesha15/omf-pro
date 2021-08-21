@@ -11,9 +11,11 @@ use App\Models\RequestedLoan;
 use App\Models\ApprovedLoan;
 use App\Models\LoanService;
 use App\Models\SavingService;
+use App\Models\EventPhoto;
 
 use App\Helpers\Helper;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -148,7 +150,7 @@ class AdminController extends Controller
     );
 
         DB::transaction(function () use($request,$id){
-            $employee = Employee::find($id)->sharedLock();
+            $employee = Employee::find($id);
             $employee_photo = $employee->employee_photo;
 
             if ($request->hasFile('employee_photo')) {
@@ -156,7 +158,7 @@ class AdminController extends Controller
             $extension = $profile_photo->getClientOriginalExtension();
             $photo_name = time() . "." . $extension;
             }
-            $employee_updated = Employee::where('id',$id)->update([
+            $employee_updated = Employee::where('id',$id)->lockForUpdate()->update([
             'first_name' => $request->get('first_name'),
             'middle_name' => $request->get('middle_name'),
             'last_name' => $request->get('last_name'),
@@ -204,8 +206,11 @@ class AdminController extends Controller
         $total_request = RequestedLoan::get()->count();
 
         $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->paginate(5);
-        $employee = Employee::find($id);
-        return view('dashboards.admins.employee_management.employee_detail',compact('employee','requested_loans','total_request'));
+        $employee = Employee::join('branches','branches.id','=','employees.branch_id')->join('roles','roles.id','=','employees.role_id')->join('users','users.employee_id','=','employees.id')->find($id);
+        $birth_year = date('Y',strtotime($employee->birth_date));
+        $current_year = date('Y',strtotime(now()));
+        $age = $current_year - $birth_year;
+        return view('dashboards.admins.employee_management.employee_detail',compact('employee','requested_loans','total_request','age'));
     }
 
     public function delete_employee($id){
@@ -282,18 +287,284 @@ class AdminController extends Controller
         return view('dashboards.admins.loan_management.approved_loan.view_approved_loan',compact('approved_loans','requested_loans','total_request'));
     }
 
+    public function add_new_saving_service(Request $request){
+        $request->validate([
+            'saving_service_name' => 'required|regex:/[a-zA-Z\s]+/|max:255|unique:saving_services,saving_service_name',
+            'saving_service_description' => 'required|regex:/[a-zA-Z\s]+/|max:255',
+            'saving_service_interest_rate' => 'required|regex:/^\d+(\.\d{1,2})?/|min:1|max:5',
+            ],
+        );
+            $new_saving_service = new SavingService([
+                'saving_service_name' => $request->get('saving_service_name'),
+                'saving_service_description' => $request->get('saving_service_description'),
+                'saving_service_interest_rate' => $request->get('saving_service_interest_rate'),
+            ]
+        );
+            $new_saving_service->save();
+            return redirect()->route('admin.view_saving_service')->with('message','saving service registered successfuly.');
+    }
+    public function branch_registration_form(){
+        $total_request = RequestedLoan::get()->count();
+        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->paginate(5);
+
+        return view('dashboards.admins.branch_management.add_new_branch', compact('total_request','requested_loans'));
+    }
+
+    public function branch_registration(Request $request){
+        $request->validate([
+            'branch_name' => 'required|regex:/[a-zA-Z\s]+/|max:50|unique:branches,branch_name',
+            'branch_location' => 'required|regex:/[a-zA-Z\s]+/|max:50',
+      ]);
+      $new_branch = new Branch([
+          'branch_name' => $request->get('branch_name'),
+          'branch_location' => $request->get('branch_location'),
+      ]);
+      $new_branch->save();
+      return redirect()->route('admin.view_branch')->with('message','Branch registered successfuly.');
+    }
+
+    public function loan_service_registration_form(){
+        $total_request = RequestedLoan::get()->count();
+        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->paginate(5);
+
+        return view('dashboards.admins.service_management.manage_saving_service.add_new_saving_service', compact('total_request','requested_loans'));
+    }
+
+    public function add_new_loan_service(Request $request){
+
+        $request->validate([
+            'loan_service_name' => 'required|regex:/[a-zA-Z\s]+/|max:255|unique:loan_services,loan_service_name',
+            'loan_service_description' => 'required|regex:/[a-zA-Z\s]+/|max:255',
+            'loan_service_interest_rate' => 'required|regex:/^\d+(\.\d{1,2})?/|min:1|max:5',
+            'loan_term' => 'required|regex:/^[0-9]+$/u|min:1|max:2',
+        ],
+    );
+        $new_loan_service = new LoanService([
+            'loan_service_name' => $request->get('loan_service_name'),
+            'loan_service_description' => $request->get('loan_service_description'),
+            'loan_service_interest_rate' => $request->get('loan_service_interest_rate'),
+            'loan_term' => $request->get('loan_term'),
+        ]
+    );
+         $new_loan_service->save();
+        return redirect()->route('admin.view_loan_service')->with('message','Loan service registered successfuly.');
+    }
+
+    public function view_loan_service(){
+        $total_request = RequestedLoan::get()->count();
+
+        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->paginate(5);
+        $loan_services = LoanService::all();
+
+        return view('dashboards.admins.service_management.manage_loan_service.view_loan_service',compact('total_request','requested_loans','loan_services'));
+
+    }
+    public function view_saving_service(){
+        $total_request = RequestedLoan::get()->count();
+
+        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->paginate(5);
+        $saving_services = SavingService::all();
+
+        return view('dashboards.admins.service_management.manage_saving_service.view_saving_service',compact('total_request','requested_loans','saving_services'));
+    }
+    public function view_branch(){
+        $total_request = RequestedLoan::get()->count();
+
+        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->paginate(5);
+        $branches = Branch::all();
+        return view('dashboards.admins.branch_management.view_branch',compact('branches','total_request','requested_loans'));
+    }
+
+    public function delete_loan_service($id){
+        LoanService::where('id',$id)->delete();
+        return redirect()->route('admin.view_loan_service')->with('message', 'loan service deleted successfully.');
+    }
+    public function delete_saving_service($id){
+        SavingService::where('id',$id)->delete();
+        return redirect()->route('admin.view_saving_service')->with('message', 'saving service deleted successfully.');
+    }
+    public function delete_branch($id){
+        Branch::where('id',$id)->delete();
+        return redirect()->route('admin.view_branch')->with('message', 'Branch deleted successfully.');
+    }
+
+    public function edit_branch_form($id){
+        $total_request = RequestedLoan::get()->count();
+        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->paginate(5);
+
+        $branch = Branch::find($id);
+        return view('dashboards.admins.branch_management.edit_branch', compact('branch','total_request','requested_loans'));
+    }
+
+    public function update_branch(Request $request,$id){
+        $request->validate([
+            'branch_name' => 'required|regex:/[a-zA-Z\s]+/|max:50',
+            'branch_location' => 'required|regex:/[a-zA-Z\s]+/|max:50',
+      ]);
+      Branch::where('id',$id)->update([
+          'branch_name' => $request->get('branch_name'),
+          'branch_location' => $request->get('branch_location'),
+      ]);
+      return redirect()->route('admin.view_branch')->with('message','Branch updated successfully.');
+
+    }
+
+    public function edit_loan_service_form($id){
+        $total_request = RequestedLoan::get()->count();
+        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->paginate(5);
+
+        $loan_service = LoanService::find($id);
+        return view('dashboards.admins.service_management.manage_loan_service.edit_loan_service', compact('loan_service','total_request','requested_loans'));
+    }
+
+    public function update_loan_service(Request $request,$id){
+        $request->validate([
+            'loan_service_name' => 'required|regex:/[a-zA-Z\s]+/|max:255',
+            'loan_service_description' => 'required|regex:/[a-zA-Z\s]+/|max:255',
+            'loan_service_interest_rate' => 'required|regex:/^\d+(\.\d{1,2})?/|min:1|max:5',
+            'loan_term' => 'required|regex:/^[0-9]+$/u|min:1|max:2',
+            ],
+        );
+            LoanService::where('id',$id)->update([
+                'loan_service_name' => $request->get('loan_service_name'),
+                'loan_service_description' => $request->get('loan_service_description'),
+                'loan_service_interest_rate' => $request->get('loan_service_interest_rate'),
+                'loan_term' => $request->get('loan_term'),
+            ]
+        );
+            return redirect()->route('admin.view_loan_service')->with('message','Loan service is updated successfuly.');
+
+    }
+
+    public function edit_saving_service_form($id){
+        $total_request = RequestedLoan::get()->count();
+        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->paginate(5);
+
+        $saving_service = savingService::find($id);
+        return view('dashboards.admins.service_management.manage_saving_service.edit_saving_service', compact('saving_service','total_request','requested_loans'));
+    }
+
+    public function update_saving_service(Request $request,$id){
+        $request->validate([
+            'saving_service_name' => 'required|regex:/[a-zA-Z\s]+/|max:255',
+            'saving_service_description' => 'required|regex:/[a-zA-Z\s]+/|max:255',
+            'saving_service_interest_rate' => 'required|regex:/^\d+(\.\d{1,2})?/|min:1|max:5',
+            ],
+        );
+            SavingService::where('id',$id)->update([
+                'saving_service_name' => $request->get('saving_service_name'),
+                'saving_service_description' => $request->get('saving_service_description'),
+                'saving_service_interest_rate' => $request->get('saving_service_interest_rate'),
+            ]
+        );
+            return redirect()->route('admin.view_saving_service')->with('message','saving service is updated successfuly.');
+
+    }
+
+    public function upload_event_photo_form(){
+        $total_request = RequestedLoan::get()->count();
+        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->paginate(5);
+        $event_photos = EventPhoto::all();
+
+        return view('dashboards.admins.event_photo.upload_event_photo', compact('event_photos','total_request','requested_loans'));
+    }
+    public function upload_event_photo(Request $request){
+        $request->validate([
+            'event_description' => 'required|regex:/[a-zA-Z\s]+/|max:50',
+            'event_photo' => 'required|image|mimes:jpg,jpeg,png',
+            ]
+        );
+        if ($request->hasFile('event_photo')) {
+            $event_photo = $request->file('event_photo');
+            $orginal_name = $event_photo->getClientOriginalName();
+            $photo_name = time() .'-'.$orginal_name;
+        }
+        $event_description = $request->get('event_description');
+        $new_event_photo = new EventPhoto([
+            'event_description' => $event_description,
+            'event_photo' => $photo_name,
+        ]);
+        DB::transaction(function () use($new_event_photo,$event_photo,$photo_name){
+            $new_event_photo->save();
+            $event_photo->move('uploads/event_photo', $photo_name);
+        });
+
+        return redirect()->route('admin.event_photo_uploading_form')->with('message','Event photo uploaded successfully.');
+    }
+
+    public function delete_event_photo($id){
+        DB::transaction(function () use($id){
+            $event_photo = EventPhoto::find($id);
+            $deleted_photo = $event_photo->event_photo;
+            EventPhoto::where('id',$id)->delete();
+            unlink("uploads/event_photo/".$deleted_photo);
+        });
+        return redirect()->route('admin.event_photo_uploading')->with('message','Event photo deleted successfully.');
+
+    }
+
 
     public function profile(){
         return view('dashboards/admins/profile');
     }
-    public function settings(){
-        return view('dashboards/admins/settings');
+    public function change_password_form(){
+        $total_request = RequestedLoan::get()->count();
+        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->paginate(5);
+        return view('dashboards/admins/change_password', compact('total_request','requested_loans'));
+    }
+
+    public function reset_password(Request $request){
+        $request->validate([
+            'new_password' => ['required', 'string', 'min:8',],
+            'confirm_password' => ['required','string', 'min:8','same:new_password'],
+        ],
+        [
+            'confirm_password.same' => 'The two password are not the same. Please recorrect and try again.',
+        ]);
+        $username = Auth::user()->username;
+        $new_password = Hash::make($request->new_password);
+        $password_changed = User::where('username',$username)->update([
+            'password' => $new_password,
+        ]);
+        if ($password_changed) {
+            return redirect()->route('admin.change_password_form')->with('message','Your  password has been changed successfully.');
+        }else {
+            return redirect()->route('admin.change_password_form')->with('error_message','Your  password has not been changed successfully.. Please try again.');
+        }
+
+    }
+
+    public function change_user_password_form(){
+        $total_request = RequestedLoan::get()->count();
+        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->paginate(5);
+        return view('dashboards/admins/user_management/reset_user_password', compact('total_request','requested_loans'));
+    }
+
+    public function reset_user_password(Request $request){
+        $request->validate([
+            'username' => ['required', 'string','exists:users,username'],
+        ],
+        [
+            'username.exists' => 'Username does not exist. Please try again.',
+        ]);
+        $username = $request->username;
+        $new_user_pwd = Str::random(1).random_int(1,9).Str::random(1).random_int(1,9).Str::random(1).random_int(1,9).Str::random(1).random_int(1,9);
+        $new_password = Hash::make($new_user_pwd);
+        $password_changed = User::where('username',$username)->update([
+            'password' => $new_password,
+        ]);
+        if ($password_changed) {
+            return redirect()->route('admin.change_user_password_form', compact('new_user_pwd'))->with('message','User password has been changed successfully.')->with('pwd',$new_user_pwd);
+        }else {
+            return redirect()->route('admin.change_user_password_form')->with('error_message','Your  password has not been changed successfully.. Please try again.');
+        }
+
     }
 
 
 
     public function guest_page(){
-        $sliders = Employee::select('employee_photo')->get();
+        $sliders = EventPhoto::all();
         $loan_services = LoanService::all();
         $saving_services = SavingService::all();
         return view('welcome',compact('saving_services','loan_services','sliders'));

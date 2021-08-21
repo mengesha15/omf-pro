@@ -1,4 +1,3 @@
-<title>OMF - Requested loans list</title>
 @extends('layouts.admin')
 @section('admin_content')
 <section class="content">

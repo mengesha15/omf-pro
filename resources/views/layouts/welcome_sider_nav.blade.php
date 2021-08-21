@@ -21,6 +21,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/all.css') }}">
 
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">

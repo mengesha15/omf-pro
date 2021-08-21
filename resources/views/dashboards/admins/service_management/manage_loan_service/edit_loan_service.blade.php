@@ -41,18 +41,16 @@
                             <div class="card">
                                 <div class="card-header">Edit the form</div>
                                 <div class="card-body">
-                                    <form method="POST" action="{{ url('admin/edit_branch/'.$branch->id) }}" enctype="multipart/form-data" class="needs-validation" novalidate>
+                                    <form method="POST" action="{{ url('admin/edit_loan_service/'.$loan_service->id) }}" enctype="multipart/form-data" class="needs-validation" novalidate>
                                         @csrf
                                         <div class="row">
                                             <div class="col-md-3"></div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="branch_name">Branch_name</label>
-                                                    <input value="{{ $branch->branch_name }}" id="branch_name" type="text" class="form-control @error('branch_name') is-invalid @enderror" name="branch_name" required style="width: 90%;" autocomplete="branch_name">
-                                                    <div class="invalid-feedback">
-                                                        Valid input required.
-                                                    </div>
-                                                    @error('branch_name')
+                                                    <label for="loan_service_name">Loan service name</label>
+                                                    <input value="{{ $loan_service->loan_service_name }}" id="loan_service_name" type="text" class="form-control @error('loan_service_name') is-invalid @enderror" name="loan_service_name" required style="width: 90%;" autocomplete="loan_service_name">
+
+                                                    @error('loan_service_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -60,12 +58,31 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="branch_location">Branch location</label>
-                                                    <input value="{{ $branch->branch_location }}" id="branch_location" type="text" class="form-control @error('branch_location') is-invalid @enderror" name="branch_location" required autocomplete="branch_location" style="width: 90%;">
-                                                    <div class="invalid-feedback">
-                                                        Valid input required.
-                                                    </div>
-                                                    @error('branch_location')
+                                                    <label for="loan_service_description">Loan service description</label>
+                                                    <input value="{{ $loan_service->loan_service_description }}" id="loan_service_description" type="text" class="form-control @error('loan_service_description') is-invalid @enderror" name="loan_service_description" required autocomplete="loan_service_description" style="width: 90%;">
+
+
+                                                    @error('loan_service_description')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="loan_service_interest_rate">Interest rate</label>
+                                                    <input value="{{ $loan_service->loan_service_interest_rate }}" id="loan_service_interest_rate" type="text" class="form-control @error('loan_service_interest_rate') is-invalid @enderror" name="loan_service_interest_rate" required autocomplete="loan_service_interest_rate" style="width: 90%;">
+
+
+                                                    @error('loan_service_interest_rate')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="loan_term">Loann term</label>
+                                                    <input value="{{ $loan_service->loan_term }}" id="loan_term" type="text" class="form-control @error('loan_term') is-invalid @enderror" name="loan_term" required autocomplete="loan_term" style="width: 90%;">
+                                                    @error('loan_term')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>

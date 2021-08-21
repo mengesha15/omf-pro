@@ -48,8 +48,8 @@ class LoanInterestCalculator extends Command
             $borrowed_amount = $borrower->borrowed_amount;
             $roll_number = $borrower->roll_number;
             $interest_rate = $borrower->loan_service_interest_rate;
-            $intererst = ($borrowed_amount*$interest_rate)/518400;
-            $new__borrowed_amount = round($borrowed_amount + $intererst,2);
+            $interest = ($borrowed_amount*$interest_rate/100)/365;
+            $new__borrowed_amount = round($borrowed_amount + $interest,2);
             Borrower::where('roll_number',$roll_number)->update([
                 'borrowed_amount' => $new__borrowed_amount,
             ]);

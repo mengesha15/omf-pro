@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Branch;
-use App\Models\customer;
+use App\Models\Customer;
 use App\Models\SavingService;
 use App\Models\SavingTransaction;
 use App\Models\User;
@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Helpers\Helper;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -211,7 +212,29 @@ class CustomerRelationOfficer extends Controller
     public function profile(){
         return view('dashboards/customerRelationOfficers/profile');
     }
-    public function settings(){
-        return view('dashboards/customerRelationOfficers/settings');
+    public function change_password_form(){
+        return view('dashboards/customerRelationOfficers/change_password');
     }
+
+    public function reset_password(Request $request){
+        $request->validate([
+            'new_password' => ['required', 'string', 'min:8',],
+            'confirm_password' => ['required','string', 'min:8','same:new_password'],
+        ],
+        [
+            'confirm_password.same' => 'The two password are not the same. Please recorrect and try again.',
+        ]
+        );
+            $username = Auth::user()->username;
+            $new_password = Hash::make($request->new_password);
+            $password_changed = User::where('username',$username)->update([
+                'password' => $new_password,
+            ]);
+            if ($password_changed) {
+                return redirect()->route('customerRelationOfficer.change_password_form')->with('message','Your  password has been changed successfully.');
+            }else {
+                return redirect()->route('customerRelationOfficer.change_password_form')->with('error_message','Your  password has not been changed successfully.. Please try again.');
+            }
+
+        }
 }

@@ -46,8 +46,8 @@ class SavingInterestCalculator extends Command
             $account_balance = $customer->account_balance;
             $account_number = $customer->account_number;
             $interest_rate = $customer->saving_service_interest_rate;
-            $intererst = ($account_balance*$interest_rate)/518400;
-            $new_balance = round($account_balance + $intererst,2);
+            $interest = ($account_balance*$interest_rate/100)/365;
+            $new_balance = round($account_balance + $interest,2);
             Customer::where('account_number',$account_number)->update([
                 'account_balance' => $new_balance
             ]);

@@ -5,6 +5,7 @@ use App\http\Controllers\AuditorController;
 use App\http\Controllers\CustomerRelationOfficer;
 use App\http\Controllers\CustomerServiceOfficer;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\Auth\LoginController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -22,7 +23,8 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/',[AdminController::class,'guest_page'])->name('guest.dashboard');
 
-
+Auth::routes();
+Route::get('logout',[LoginController::class, 'logout']);
 //To protect back history after logout
 Route::middleware(['middleware'=>'PreventBackHistory'])->group(function () {
     Auth::routes();
@@ -58,10 +60,49 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHis
 
     Route::get('approved_loans_list',[AdminController::class,'approved_loans_list'])->name('admin.approved_loans_list');
 
+    //Registration of branch, loan service and saving srvice
+    Route::get('loan_service_registration',[AdminController::class,'loan_service_registration_form'])->name('admin.loan_service_registration_form');
+    Route::post('loan_service_registration',[AdminController::class,'add_new_loan_service'])->name('admin.add_new_loan_service');
 
+    Route::get('saving_service_registration',[AdminController::class,'loan_service_registration_form'])->name('admin.saving_service_registration_form');
+    Route::post('saving_service_registration',[AdminController::class,'add_new_saving_service'])->name('admin.add_new_saving_service');
+
+    Route::get('branch_registration',[AdminController::class,'branch_registration_form'])->name('admin.branch_registration_form');
+    Route::post('branch_registration',[AdminController::class,'branch_registration'])->name('admin.branch_registration');
+
+    // View branch, loan service and saving srvice
+    Route::get('loan_services_list',[AdminController::class,'view_loan_service'])->name('admin.view_loan_service');
+    Route::get('saving_services_list',[AdminController::class,'view_saving_service'])->name('admin.view_saving_service');
+    Route::get('branches_list',[AdminController::class,'view_branch'])->name('admin.view_branch');
+
+    //delete branch, loan service and saving service
+    Route::delete('delete_loan_service/{id}',[AdminController::class,'delete_loan_service'])->name('admin.delete_loan_service');
+    Route::delete('delete_saving_service/{id}',[AdminController::class,'delete_saving_service'])->name('admin.delete_saving_service');
+    Route::delete('delete_branch/{id}',[AdminController::class,'delete_branch'])->name('admin.delete_branch');
+
+    //edit branch, loan service and saving service
+    Route::get('edit_branch/{id}',[AdminController::class,'edit_branch_form'])->name('admin.edit_branch_form');
+    Route::post('edit_branch/{id}',[AdminController::class,'update_branch'])->name('admin.update_branch');
+
+    Route::get('edit_loan_service/{id}',[AdminController::class,'edit_loan_service_form'])->name('admin.edit_loan_service_form');
+    Route::post('edit_loan_service/{id}',[AdminController::class,'update_loan_service'])->name('admin.update_loan_service');
+
+    Route::get('edit_saving_service/{id}',[AdminController::class,'edit_saving_service_form'])->name('admin.edit_saving_service_form');
+    Route::post('edit_saving_service/{id}',[AdminController::class,'update_saving_service'])->name('admin.update_saving_service');
+
+
+    Route::get('event_photo_uploading',[AdminController::class,'upload_event_photo_form'])->name('admin.event_photo_uploading_form');
+    Route::post('event_photo_uploading',[AdminController::class,'upload_event_photo'])->name('admin.event_photo_uploading');
+    Route::delete('delete_event_photo/{id}',[AdminController::class,'delete_event_photo'])->name('admin.delete_event_photo');
 
     Route::get('profile',[AdminController::class,'profile'])->name('admin.profile');
-    Route::get('settings',[AdminController::class,'settings'])->name('admin.settings');
+    Route::get('change_password',[AdminController::class,'change_password_form'])->name('admin.change_password_form');
+    Route::post('reset_password',[AdminController::class,'reset_password'])->name('admin.reset_password');
+
+    // users password reset
+    Route::get('change_user_password',[AdminController::class, 'change_user_password_form'])->name('admin.change_user_password_form');
+    Route::post('reset_user_password',[AdminController::class, 'reset_user_password'])->name('admin.reset_user_password');
+
 
 });
 /*----</Admin's tasks>---*/
@@ -77,7 +118,9 @@ Route::group(['prefix'=>'auditor', 'middleware'=>['isAuditor','auth','PreventBac
     Route::get('loan_services_list',[AuditorController::class,'view_loan_services'])->name('auditor.view_loan_services');
 
     Route::get('profile',[AuditorController::class,'profile'])->name('auditor.profile');
-    Route::get('settings',[AuditorController::class,'settings'])->name('auditor.settings');
+
+    Route::get('change_password',[AuditorController::class,'change_password_form'])->name('auditor.change_password_form');
+    Route::post('reset_password',[AuditorController::class,'reset_password'])->name('auditor.reset_password');
 });
 
 /*----</Auditor's tasks>---*/
@@ -107,7 +150,9 @@ Route::group(['prefix'=>'customerRelationOfficer', 'middleware'=>['isCustomerRel
     Route::get('saving_services_list', [CustomerRelationOfficer::class,'view_saving_servises'])->name('customerRelationOfficer.saving_services_list');
 
     Route::get('profile',[CustomerRelationOfficer::class,'profile'])->name('customerRelationOfficer.profile');
-    Route::get('settings',[CustomerRelationOfficer::class,'settings'])->name('customerRelationOfficer.settings');
+
+    Route::get('change_password',[CustomerRelationOfficer::class,'change_password_form'])->name('customerRelationOfficer.change_password_form');
+    Route::post('reset_password',[CustomerRelationOfficer::class,'reset_password'])->name('customerRelationOfficer.reset_password');
 });
 
 /*----</Customer relation officers's tasks>---*/
@@ -142,7 +187,9 @@ Route::group(['prefix'=>'customerServiceOfficer', 'middleware'=>['isCustomerServ
     Route::get('loan_services_list',[CustomerServiceOfficer::class,'view_loan_services'])->name('customerServiceOfficer.view_loan_services');
 
     Route::get('profile',[CustomerServiceOfficer::class,'profile'])->name('customerServiceOfficer.profile');
-    Route::get('settings',[CustomerServiceOfficer::class,'settings'])->name('customerServiceOfficer.settings');
+
+    Route::get('change_password',[CustomerServiceOfficer::class,'change_password_form'])->name('customerServiceOfficer.change_password_form');
+    Route::post('reset_password',[CustomerServiceOfficer::class,'reset_password'])->name('customerServiceOfficer.reset_password');
 });
 
 /*----</Customer service officers's tasks>---*/

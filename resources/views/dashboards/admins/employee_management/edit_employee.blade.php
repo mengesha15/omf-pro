@@ -1,4 +1,3 @@
-<title>OMF- Updating employee</title>
 @extends('layouts.admin')
 @section('admin_content')
 <section class="content">
@@ -12,8 +11,8 @@
                     <!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Registration</li>
+                            <li class="breadcrumb-item"><a href="#">OMF</a></li>
+                            <li class="breadcrumb-item active">Updating employee</li>
                         </ol>
                     </div>
                     <!-- /.col -->
@@ -39,7 +38,7 @@
             <div class="col-12">
                         <div class="col-md-12">
                             <div class="card">
-                                <div class="card-header">Fill employee data</div>
+                                <div class="card-header">Edit employee data</div>
                                 <div class="card-body">
                                     <form method="POST" action="{{ url('admin/edit_employee/'.$employee->id) }}" enctype="multipart/form-data" class="needs-validation" novalidate>
                                         @csrf
@@ -52,7 +51,9 @@
                                                     <label for="first_name">First
                                                         name</label>
                                                     <input value="{{ $employee->first_name }}" id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" required style="width: 90%;" autocomplete="first_name">
-
+                                                    <div class="invalid-feedback">
+                                                        Valid input is required.
+                                                    </div>
                                                     @error('first_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -63,8 +64,9 @@
                                                 <div class="form-group">
                                                     <label for="middle_name">Middle name</label>
                                                     <input value="{{ $employee->middle_name }}" id="middle_name" type="text" class="form-control @error('middle_name') is-invalid @enderror" name="middle_name" required autocomplete="middle_name" style="width: 90%;">
-
-
+                                                    <div class="invalid-feedback">
+                                                        Valid input is required.
+                                                    </div>
                                                     @error('middle_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -74,8 +76,10 @@
 
                                                 <div class="form-group">
                                                     <label for="last_name">Last name</label>
-                                                    <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ $employee->middle_name }}" required autocomplete="last_name" style="width: 90%;">
-
+                                                    <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ $employee->last_name }}" required autocomplete="last_name" style="width: 90%;">
+                                                    <div class="invalid-feedback">
+                                                        Valid input is required.
+                                                    </div>
                                                     @error('last_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -85,8 +89,9 @@
                                                 <div class="form-group">
                                                     <label for="employee_salary">Employee salary</label>
                                                     <input value="{{ $employee->employee_salary }}" id="employee_salary" type="text" class="form-control @error('employee_salary') is-invalid @enderror" name="employee_salary" required autocomplete="employee_salary" style="width: 90%;">
-
-
+                                                    <div class="invalid-feedback">
+                                                        Valid input is required.
+                                                    </div>
                                                     @error('employee_salary')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -96,6 +101,9 @@
                                                 <div class="form-group">
                                                     <label for="employee_address">Address</label>
                                                     <input value="{{ $employee->employee_address }}" id="employee_address" type="text" class="form-control @error('employee_address') is-invalid @enderror" name="employee_address" required autocomplete="employee_address" style="width: 90%;">
+                                                    <div class="invalid-feedback">
+                                                        Valid input is required.
+                                                    </div>
                                                     @error('employee_address')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -109,6 +117,9 @@
                                                 <div class="form-group">
                                                     <label for="phone_number">Phone number</label>
                                                     <input value="{{ $employee->phone_number }}" id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" required autocomplete="phone_number" style="width: 70%;">
+                                                    <div class="invalid-feedback">
+                                                        Valid input is required.
+                                                    </div>
                                                     @error('phone_number')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -117,7 +128,11 @@
                                                 </div>
                                                 <div class="col-md-12 mb-3">
                                                     <label for="birth_date">Birth date</label>
-                                                    <input value="{{ $employee->birth_date }}" id="birth_date" type="date" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" required autocomplete="birth_date" style="width: 60%;">  @error('birth_date')
+                                                    <input value="{{ $employee->birth_date }}" id="birth_date" type="date" class="form-control @error('birth_date') is-invalid @enderror" name="birth_date" required autocomplete="birth_date" style="width: 60%;">  
+                                                    <div class="invalid-feedback">
+                                                        Valid input is required.
+                                                    </div>
+                                                    @error('birth_date')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -132,6 +147,9 @@
                                                         </option>
                                                         @endforeach
                                                     </datalist>
+                                                    <div class="invalid-feedback">
+                                                        Valid input is required.
+                                                    </div>
                                                     @error('branch_id')
 
                                                     <span class="invalid-feedback" role="alert">
@@ -151,6 +169,9 @@
                                                         </option>
                                                         @endforeach
                                                     </datalist>
+                                                    <div class="invalid-feedback">
+                                                        Valid input is required.
+                                                    </div>
                                                     @error('role_id')
 
                                                     <span class="invalid-feedback" role="alert">
@@ -195,9 +216,10 @@
                                                 <div class="form-group">
                                                     <label for="employee_photo">Choose
                                                         photo</label>
-                                                    <input value="{{ asset('uploads/employee-photo/'.$employee->employee_photo) }}" type="file" class="form-control @error('employee_photo') is-invalid @enderror" name="employee_photo" id="employee_photo" style="width: 90%; height: 10%;" required>
-
-
+                                                    <input value="{{ asset('uploads/employee-photo/'.$employee->employee_photo) }}" type="file" class="form-control @error('employee_photo') is-invalid @enderror" name="employee_photo" id="employee_photo" style="width: 90%; height: 10%;">
+                                                    <div class="invalid-feedback">
+                                                        Valid input is required.
+                                                    </div>
                                                     @error('employee_photo')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

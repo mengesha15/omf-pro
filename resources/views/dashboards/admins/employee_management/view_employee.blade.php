@@ -11,7 +11,7 @@
                     <!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">OMF</a></li>
                             <li class="breadcrumb-item active">Employees list</li>
                         </ol>
                     </div>
@@ -100,6 +100,7 @@
                                 @csrf
                                 <button><i class="far fa-trash-alt" style="color: red;"></i></button>
                             </form>
+                        </td>
                     </tr>
                     @endforeach
 

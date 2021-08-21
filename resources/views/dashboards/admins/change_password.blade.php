@@ -29,15 +29,12 @@
             <div class="card">
                 <div class="card-header">{{ __('Password change') }}</div>
                 <div class="card-body">
-                    <form action="{{ route('admin.reset_user_password') }}" method="POST">
+                    <form action="{{ route('admin.reset_password') }}" method="POST" class="neads-validation" novalidate>
                         @csrf
-                          <div class="col-md-9" style="padding-left: 15%">
+                          <div class="col-md-9" style="padding-left: 30%">
                                 @if (Session::has('message'))
                                     <div class="alert alert-success">
                                         {{ Session::get('message') }}
-                                    </div>
-                                    <div class="alert alert-default" style="font-family: 'Times New Roman', Times, serif;">
-                                        <h3>Password:{{' '. Session::get('pwd') }}</h3>
                                     </div>
                                 @endif
                                 @if (Session::has('error_message'))
@@ -46,16 +43,35 @@
                                     </div>
                                 @endif
                               <div class="form-group">
-                                <label for="username">Employee username</label>
-                                <input type="username" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Enter employee username" name="username" required value="{{ old('username') }}">
-                                @error('username')
+                                <label for="new_password">New password</label>
+                                <input type="password" class="form-control @error('new_password') is-invalid @enderror" id="new_password" placeholder="Enter new password" name="new_password" required>
+                                <div class="invalid-feedback">
+                                    Valid input is required.
+                                </div>
+                                @error('new_password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                               </div>
-                              <div class="card-footer col-md-7">
-                                <button type="submit" class="btn btn-primary">Reset user pwd</button>
+                              <div class="form-group">
+                                <label for="confirm_password">Confirm password</label>
+                                <input type="password" class="form-control @error('confirm_password') is-invalid @enderror" id="confirm_password" placeholder="Confirm password" name="confirm_password" required>
+                                <div class="invalid-feedback">
+                                    Valid input is required.
+                                </div>
+                                @error('confirm_password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                              </div>
+                              <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Reset Password') }}
+                                    </button>
+                                </div>
                             </div>
                           </div>
                     </form>

@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>OMF-Admin Home</title>
+        <title>OMF-Only admin page</title>
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dist/img/omf_logo.jpg') }}" />
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet"
@@ -77,13 +77,8 @@
                                 </div>
                             </span>
                             <div class="dropdown-divider"></div>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-users mr-2"></i> Change profile
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-users mr-2"></i> Change password
+                            <a href="{{ route('admin.change_password_form') }}" class="dropdown-item">
+                                <i class="fas fa-user-circle fa-fw"></i> Change password
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item dropdown-footer btn-danger" href="{{ route('login') }}"
@@ -188,7 +183,7 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="pages/UI/icons.html" class="nav-link">
+                                        <a href="{{ route('admin.change_user_password_form') }}" class="nav-link">
                                             <i class="far fa-plus nav-icon"></i>
                                             <p>Reset user password</p>
                                         </a>
@@ -211,58 +206,30 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{ route("admin.loan_service_registration_form") }}" class="nav-link">
                                             <i class="far fa-plus nav-icon"></i>
-                                            <i class="nav-icon fas fa-edit"></i>
-                                            <p>
-                                                Loan service
-                                                <i class="fas fa-angle-left right"></i>
-                                            </p>
+                                            <p>Add new loan service</p>
                                         </a>
-                                        <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="pages/forms/general.html" class="nav-link">
-                                                    <i class="far fa-plus nav-icon"></i>
-                                                    <p>Add new loan service</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/forms/validation.html" class="nav-link">
-                                                    <i class="far fa-plus nav-icon"></i>
-                                                    <p>View loan service</p>
-                                                </a>
-                                            </li>
-                                        </ul>
                                     </li>
-                            </li>
-                            <li class="nav-item">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-plus nav-icon"></i>
-                                    <i class="nav-icon fas fa-edit"></i>
-                                    <p>
-                                        Saving service
-                                        <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="pages/forms/general.html" class="nav-link">
+                                        <a href="{{ route('admin.add_new_loan_service') }}" class="nav-link">
                                             <i class="far fa-plus nav-icon"></i>
                                             <p>Add new saving service</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="pages/forms/validation.html" class="nav-link">
+                                        <a href="{{ route('admin.view_loan_service') }}" class="nav-link">
+                                            <i class="far fa-plus nav-icon"></i>
+                                            <p>View loan service</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.view_saving_service') }}" class="nav-link">
                                             <i class="far fa-plus nav-icon"></i>
                                             <p>View saving service</p>
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
-                            </li>
-                        </ul>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -274,20 +241,27 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/UI/icons.html" class="nav-link">
+                                    <a href="{{ route('admin.branch_registration_form') }}" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
                                         <p>Add new branch</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/UI/buttons.html" class="nav-link">
+                                    <a href="{{ route('admin.view_branch') }}" class="nav-link">
                                         <i class="far fa-plus nav-icon"></i>
                                         <p>View branches</p>
                                     </a>
                                 </li>
                             </ul>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.event_photo_uploading_form') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Upload event photo</p>
+                                </a>
+                            </li>
                         </li>
                         </ul>
+
                     </nav>
                     <!-- /.sidebar-menu -->
                 </div>
@@ -337,5 +311,29 @@
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
         </script>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
+</script>
 
 </html>

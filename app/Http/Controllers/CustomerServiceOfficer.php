@@ -19,6 +19,7 @@ use Gate;
 use Symfony\Component\HttpFoundation\Response;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 class CustomerServiceOfficer extends Controller
@@ -218,7 +219,29 @@ class CustomerServiceOfficer extends Controller
     public function profile(){
         return view('dashboards/customerServiceOfficers/profile');
     }
-    public function settings(){
-        return view('dashboards/customerServiceOfficers/settings');
+    public function change_password_form(){
+        return view('dashboards/customerServiceOfficers/change_password');
     }
+
+    public function reset_password(Request $request){
+        $request->validate([
+            'new_password' => ['required', 'string', 'min:8',],
+            'confirm_password' => ['required','string', 'min:8','same:new_password'],
+        ],
+        [
+            'confirm_password.same' => 'The two password are not the same. Please recorrect and try again.',
+        ]
+        );
+            $username = Auth::user()->username;
+            $new_password = Hash::make($request->new_password);
+            $password_changed = User::where('username',$username)->update([
+                'password' => $new_password,
+            ]);
+            if ($password_changed) {
+                return redirect()->route('customerServiceOfficer.change_password_form')->with('message','Your  password has been changed successfully.');
+            }else {
+                return redirect()->route('customerServiceOfficer.change_password_form')->with('error_message','Your  password has not been changed successfully.. Please try again.');
+            }
+
+        }
 }

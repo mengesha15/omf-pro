@@ -8,33 +8,37 @@
                     <div class="row mb-2">
                         <div class="col-sm-12">
                             <h2>
-                                
+
                                 OROMIA MICROFINANCE
                             </h2>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            @foreach($sliders as $key => $slider)
-                            <div class="carousel-item {{$key == 0 ? 'active' : '' }}">
-                                <img src="{{url('uploads/employee_photo', $slider->employee_photo)}}" class="img-animation"  alt="...">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-9">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                @foreach($sliders as $key => $slider)
+                                <div class="carousel-item {{$key == 0 ? 'active' : '' }}">
+                                    <img src="{{url('uploads/event_photo', $slider->event_photo)}}" class="img-animation"  alt="...">
+                                </div>
+                                @endforeach
                             </div>
-                            @endforeach
+                            <a class="carousel-control-prev" href="#myCarousel" role="button"  data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true">     </span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
-                        <a class="carousel-control-prev" href="#myCarousel" role="button"  data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true">     </span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
                     </div>
+
                 </div>
                 <br>
                 <div class="row" style="padding-right: 4%" id="omf-background">
@@ -202,7 +206,7 @@
                     <div class="col-md-12" id="omf-contacts">
                         <h5><b>Contacts</b></h5>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 Phone: <br>
                                 <p><i class="fa fa-phone" aria-hidden="true"></i></span>
                                     <span> +251 115 57 11 60</span></p>
@@ -224,58 +228,13 @@
                                         </p>
                                         <p>E-mail: ocssco@oromiamfi.com</p>
                                 </p>
-                                <div>
-                                    <form id="contact-form" action="/index.php/contact-us" method="post"
-                                        class="form-validate form-horizontal well">
-                                        <fieldset>
-                                            <legend>Send an Email</legend>
-                                            <div class="control-group">
-                                                <div class="control-label">
-                                                    <label id="jform_contact_name-lbl" for="jform_contact_name" class="hasPopover required"
-                                                        title="" data-content="Your name." data-original-title="Name">
-                                                        Name<span class="star">&nbsp;*</span></label>
-                                                </div>
-                                                <div class="controls"><input type="text" name="jform[contact_name]" id="jform_contact_name"
-                                                        value="" class="required" size="30" required="required" aria-required="true">
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <div class="control-label">
-                                                    <label id="jform_contact_email-lbl" for="jform_contact_email" class="hasPopover required"
-                                                        title="" data-content="Email Address for contact." data-original-title="Email">
-                                                        Email<span class="star">&nbsp;*</span></label>
-                                                </div>
-                                                <div class="controls"><input type="email" name="jform[contact_email]"
-                                                        class="validate-email required" id="jform_contact_email" value="" size="30"
-                                                        autocomplete="email" required="required" aria-required="true"></div>
-                                            </div>
-                                            <div class="control-group">
-                                                <div class="control-label">
-                                                    <label id="jform_contact_message-lbl" for="jform_contact_message"
-                                                        class="hasPopover required invalid" title="" data-content="Enter your message here."
-                                                        data-original-title="Message">
-                                                        Message<span class="star">&nbsp;*</span></label>
-                                                </div>
-                                                <div class="controls"><textarea name="jform[contact_message]" id="jform_contact_message"
-                                                        cols="50" rows="10" class="required invalid" required="required" aria-required="true"
-                                                        aria-invalid="true"></textarea></div>
-                                            </div>
-                                        </fieldset>
-                                        <div class="control-group">
-                                            <button class="btn btn-primary validate" type="submit">Send Email</button>
-
-                                        </div>
-                                    </form>
-                                </div>
                             </div>
                             <div class="col-md-2"></div>
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <h3>Head office, Addis Ababa</h3>
                                 <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1314.9893632910016!2d38.775837444089454!3d9.016655059231498!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b859e55555555%3A0x90dd74724ac6eaf4!2sOromia%20Credit%20and%20Saving%20S.C!5e0!3m2!1sen!2set!4v1629049195684!5m2!1sen!2set"
-                                    width="400" height="330" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                                    <h3>Regional office, Adama</h3>
-                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d910.3226426041751!2d39.25531150610622!3d8.538421755737215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b1f7f598a4325%3A0xace276c3ba7cee51!2sMebrat%20Hayil!5e1!3m2!1sen!2set!4v1629061127727!5m2!1sen!2set" width="400" height="330" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                    width="400" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                             </div>
                         </div>
                     </div>
@@ -321,7 +280,7 @@
         </div>
     </section>
     <script>
-        // to aviod hidden the part of same 
+        // to aviod hidden the part of same
         window.addEventListener("hashchange", function () {
     window.scrollTo(window.scrollX, window.scrollY - 100);
 });

@@ -1,4 +1,3 @@
-<title>OMF- Employee registration</title>
 @extends('layouts.admin')
 @section('admin_content')
 <section class="content">
@@ -12,7 +11,7 @@
                     <!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">OMF</a></li>
                             <li class="breadcrumb-item active">Employe registration</li>
                         </ol>
                     </div>
@@ -64,7 +63,7 @@
                                                 <label for="first_name">First
                                                     name</label>
                                                 <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" style="width: 90%;">
-                                                @error('middle_name')
+                                                @error('first_name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -138,7 +137,7 @@
                                             </div>
                                             <div class="col-md-12 mb-3">
                                                 <label for="branch_id">Branch</label><br>
-                                                <input list="branch_id" name="branch_id" class="col-sm-6 custom-select custom-select-sml @error('birth_date') is-invalid @enderror" required value="{{ old('branch_id') }}" placeholder="Choose role...">
+                                                <input list="branch_id" name="branch_id" class="col-sm-6 custom-select custom-select-sml @error('branch_id') is-invalid @enderror" required value="{{ old('branch_id') }}" placeholder="Choose role...">
                                                 <datalist id="branch_id">
                                                     @foreach ($branches as $branch)
                                                     <option value="{{ $branch->id }}">
@@ -156,7 +155,7 @@
                                             <div class="col-md-12 mb-3">
                                                 <label for="role_id">Employee
                                                     role</label><br>
-                                                <input list="role_id" name="role_id" class="col-sm-6 custom-select custom-select-sm @error('birth_date') @enderror" required value="{{ old('role_id') }}" placeholder="Choose role...">
+                                                <input list="role_id" name="role_id" class="col-sm-6 custom-select custom-select-sm @error('role_id') @enderror" required value="{{ old('role_id') }}" placeholder="Choose role...">
                                                 <datalist id="role_id">
                                                     @foreach ($roles as $role)
                                                     <option value="{{ $role->id }}">

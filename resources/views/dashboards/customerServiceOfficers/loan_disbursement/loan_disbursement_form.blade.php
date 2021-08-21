@@ -42,7 +42,6 @@
             </div>
             <div class="modal-footer justify-content-between">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="button" onclick="window.print()">Print this page</button>
             <button type="submit" class="btn btn-success">Disburse loan</button>
             </div>
     </form>

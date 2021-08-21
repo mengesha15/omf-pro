@@ -59,16 +59,8 @@
                                 </div>
                             </span>
                             <div class="dropdown-divider"></div>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-users mr-2"></i> Settings
-                            </a>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-users mr-2"></i> Change profile
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-file mr-2"></i> Change password
+                            <a href="{{ route('customerServiceOfficer.change_password_form') }}" class="dropdown-item">
+                                <i class="fas fa-user-circle fa-fw"></i> Change password
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item dropdown-footer btn-danger" href="{{ route('login') }}"
