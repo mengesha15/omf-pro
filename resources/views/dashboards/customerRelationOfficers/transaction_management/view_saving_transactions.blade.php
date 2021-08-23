@@ -52,6 +52,7 @@
                     <tr>
                         <th>Transaction date</th>
                         <th>Transaction type</th>
+                        <th>From/To</th>
                         <th>transaction amount</th>
                         <th>Branch</th>
                         <th>Account number</th>
@@ -64,6 +65,7 @@
                     <tr>
                         <td>{{date('d/m/Y',strtotime($saving_transaction->created_at))}}</td>
                         <td>{{ $saving_transaction->transaction_type }}</td>
+                        <td>{{ $saving_transaction->from_or_to }}</td>
                         <td>{{ $saving_transaction->transaction_amount }}</td>
                         <td>{{ $saving_transaction->branch_name }}</td>
                         <td>{{ $saving_transaction->customer_account_number }}</td>
@@ -71,7 +73,7 @@
                         <td class="text-center">
                             <ol>
                                 <li class="breadcrumb-item li-none"><a class="btn btn-lg btn-success"
-                                    href="{{ url('customerRelationOfficer/customer_detail/'. $saving_transaction->account_number) }}">Detail</a>
+                                    href="{{ url('customerRelationOfficer/customer_detail/'. $saving_transaction->customer_account_number) }}">Detail</a>
 
                             </ol>
                         </td>

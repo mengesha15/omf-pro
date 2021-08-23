@@ -95,7 +95,7 @@
                             <td><img src="{{ asset('uploads/event_photo/'.$event_photo->event_photo) }}" alt="event photo" width="60px" height="60px"></td>
                             <td>{{ $event_photo->event_description }}</td>
                             <td class="text-center">
-                                <a target="button" href="{{ url('admin/edit_branch/' . $event_photo->id) }}" class="btn btn-sm btn-success">
+                                <a href="#" class="btn btn-sm btn-success">
                                     <p class="fa fa-edit"></p>Edit
                                 </a>
                                 <form action="{{ url('admin/delete_event_photo/' . $event_photo->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure to delete this event photo?')">

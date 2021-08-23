@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>OMF-Only admin page</title>
+        <title>OMF- Admin only</title>
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dist/img/omf_logo.jpg') }}" />
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet"
@@ -34,10 +34,7 @@
                                 class="fas fa-bars"></i></a>
                     </li>
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="{{url('admin/dashboard')}}" class="nav-link">Contacts</a>
-                    </li>
-                    <li class="nav-item d-none d-sm-inline-block">
-                        <a href="#" class="nav-link">Help</a>
+                        <a href="#" class="nav-link">USER GUIDE</a>
                     </li>
                 </ul>
 
@@ -45,29 +42,40 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
-                            <i class="far fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge">{{ $total_request }}</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <span class="dropdown-item dropdown-header">{{ $total_request }}  Loan requests</span>
-                            @foreach ($requested_loans as $requested_loan)
+                        @if ($total_request>0)
+                            <a class="nav-link" data-toggle="dropdown" href="#">
+                                <i class="far fa-bell"></i>
+                                <span class="badge badge-warning navbar-badge">{{ $total_request }}</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                <span class="dropdown-item dropdown-header">{{ $total_request }} new  loan request</span>
+                                @foreach ($requested_loans as $requested_loan)
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" class="dropdown-item">
+                                        <i class="fas fa-envelope mr-2"></i> {{ $requested_loan->first_name.' '.$requested_loan->middle_name }}
+                                        <span class="float-right text-muted text-sm">{{ $requested_loan->created_at->diffForHumans() }}</span>
+                                    </a>
+                                @endforeach
                                 <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item">
-                                    <i class="fas fa-envelope mr-2"></i> {{ $requested_loan->first_name.' '.$requested_loan->middle_name }}
-                                    <span class="float-right text-muted text-sm">{{ $requested_loan->created_at->diffForHumans() }}</span>
-                                </a>
-                            @endforeach
-                            <div class="dropdown-divider"></div>
-                            <a href="{{ url('admin/requested_list') }}" class="dropdown-item dropdown-footer">See All</a>
-                        </div>
+                                <a href="{{ url('admin/requested_list') }}" class="dropdown-item dropdown-footer">See All</a>
+                            </div>
+                            @else
+                            <a class="nav-link" data-toggle="dropdown" href="#">
+                                <i class="far fa-bell"></i>
+                                <span class="badge badge-warning navbar-badge"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-xs dropdown-menu-right">
+                                <span class="dropdown-item dropdown-header">No new request</span>
+                            </div>
+
+                        @endif
                     </li>
                     <!-- Profile Dropdown Menu -->
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <i class="fas fa-user-circle fa-fw"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
+                        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                             <span class="dropdown-item dropdown-header">
                                 <div>
                                     <div class="image">
@@ -189,7 +197,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="pages/UI/buttons.html" class="nav-link">
+                                        <a href="{{ route('admin.users_list') }}" class="nav-link">
                                             <i class="far fa-plus nav-icon"></i>
                                             <p>View users</p>
                                         </a>
@@ -304,36 +312,37 @@
         <script>
         $(function() {
         $("#example1").DataTable({
+            "ordering": false,
             "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
+            "lengthChange": true,
+            "autoWidth": true,
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
         </script>
 
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
-        'use strict';
+        <script>
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function() {
+                'use strict';
 
-        window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
+                window.addEventListener('load', function() {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('needs-validation');
 
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
                 }, false);
-            });
-        }, false);
-    })();
+            })();
 
-</script>
+        </script>
 
 </html>

@@ -57,6 +57,7 @@
                         <th>Phone no</th>
                         <th>Balance</th>
                         <th>Statu</th>
+                        <th>Edit</th>
                         <th>Payment</th>
                     </tr>
                 </thead>
@@ -72,8 +73,19 @@
                         <td>{{ $borrower->status }}</td>
                         <td class="text-center">
                             <ol>
+                                @if ($borrower->status == "Pending")
+                                <a class="btn btn-lg btn-success"
+                                    href="{{ url('customerServiceOfficer/update_borrower/' . $borrower->roll_number) }}">Edit</a>
+                                @else
+                                <button class="btn btn-success" disabled> Edit</button>
+                                @endif
+
+                            </ol>
+                        </td>
+                        <td class="text-center">
+                            <ol>
                                 @if ($borrower->status == "Approved")
-                                <li class="breadcrumb-item li-none"><a class="btn btn-lg btn-success"
+                                <a class="btn btn-lg btn-success"
                                     href="{{ url('customerServiceOfficer/loan_payment/' . $borrower->roll_number) }}">Pay</a>
                                 @else
                                 <button class="btn btn-success" disabled> Pay</button>

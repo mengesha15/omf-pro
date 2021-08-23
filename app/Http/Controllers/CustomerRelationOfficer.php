@@ -77,7 +77,7 @@ class CustomerRelationOfficer extends Controller
 
             $profile_photo->move('uploads/customer_photo', $photo_name);
             });
-            return redirect()->route('customerRelationOfficer.customers_list');
+            return redirect()->route('customerRelationOfficer.customers_list',compact('message','New customer registered successfuly.'));
     }
 
     public function view_customers(){
@@ -88,7 +88,7 @@ class CustomerRelationOfficer extends Controller
     public function view_customer_detail($account_number){
         Customer::where('account_number',$account_number)->firstOrFail();
         $customer = Customer::join('branches','branches.id','=','customers.branch_id')->join('saving_services','saving_services.id','=','customers.saving_service_id')->find($account_number);
-        $saving_transactions = SavingTransaction::join('customers','saving_transactions.customer_account_number','=','customers.account_number')->join('branches','branches.id','=','saving_transactions.branch_id')->where('customer_account_number',$account_number)->select('transaction_type','saving_transactions.created_at','transaction_amount','branch_name')->orderBy('saving_transactions.created_at','desc')->get();
+        $saving_transactions = SavingTransaction::join('customers','saving_transactions.customer_account_number','=','customers.account_number')->join('branches','branches.id','=','saving_transactions.branch_id')->where('customer_account_number',$account_number)->select('transaction_type','saving_transactions.created_at','from_or_to','transaction_amount','branch_name')->orderBy('saving_transactions.created_at','desc')->get();
         return view('dashboards.customerRelationOfficers.customer_management.view_customer_detail', compact('customer','saving_transactions'));
     }
 
@@ -113,7 +113,7 @@ class CustomerRelationOfficer extends Controller
     }
 
     public function view_saving_transaction(){
-        $saving_transactions = DB::table('saving_transactions')->join('branches','branches.id','=','saving_transactions.branch_id')->join('customers','customers.account_number','=','saving_transactions.customer_account_number')->orderBy('saving_transactions.created_at','desc')->get();
+        $saving_transactions = SavingTransaction::join('branches','branches.id','=','saving_transactions.branch_id')->join('customers','customers.account_number','=','saving_transactions.customer_account_number')->select('transaction_type','from_or_to','transaction_amount','customer_account_number','user_username','saving_transactions.created_at','branch_name','first_name','middle_name','last_name')->orderBy('saving_transactions.created_at','desc')->get();
         return view('dashboards.customerRelationOfficers.transaction_management.view_saving_transactions', compact('saving_transactions'));
     }
 
@@ -151,6 +151,7 @@ class CustomerRelationOfficer extends Controller
                 $user = User::join('employees','employees.id','=','users.employee_id')->find($username);
                 $new_saving_transaction = new SavingTransaction([
                     'transaction_type' => 'Deposit',
+                    'from_or_to' => 'Self',
                     'transaction_amount' => $deposit_amount,
                     'customer_account_number' => $account_number,
                     'branch_id' => $user->branch_id,
@@ -195,6 +196,7 @@ class CustomerRelationOfficer extends Controller
                 $user = User::join('employees','employees.id','=','users.employee_id')->find($username);
                 $new_saving_transaction = new SavingTransaction([
                     'transaction_type' => 'Withdrawal',
+                    'from_or_to' => 'Self',
                     'transaction_amount' => $withdraw_amount,
                     'customer_account_number' => $account_number,
                     'branch_id' => $user->branch_id,
@@ -209,9 +211,20 @@ class CustomerRelationOfficer extends Controller
 
     }
 
-    public function profile(){
-        return view('dashboards/customerRelationOfficers/profile');
+    public function transfer_money(Request $request){
+        $request->validate([
+            'sender_account_number' => 'required|regex:/[0-9]/|min:10|max:10|exists:customers,account_number',
+            'receiver_account_number' => 'required|regex:/[0-9]/|min:10|max:10|exists:customers,account_number|different:sender_account_number',
+            'transfer_amount' => 'required|numeric|min:50|max:10000',
+        ],
+         [
+            'sender_account_number.exists' => 'Sender account number does not exist. Check and try again.',
+            'receiver_account_number.exists' => 'Sender account number does not exist. Check and try again.',
+         ]
+        );
+        dd('well');
     }
+
     public function change_password_form(){
         return view('dashboards/customerRelationOfficers/change_password');
     }

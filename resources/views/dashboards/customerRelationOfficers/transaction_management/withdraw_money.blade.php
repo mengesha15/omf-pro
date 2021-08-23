@@ -8,7 +8,7 @@
           </button>
         </div>
 
-        <form action="{{ route('customerRelationOfficer.withdraw_money') }}" method="post">
+        <form action="{{ route('customerRelationOfficer.withdraw_money') }}" method="post" class="needs-validation" novalidate>
             @csrf
             <div class="modal-body">
                 <div class="card">
@@ -19,6 +19,9 @@
                                     class="form-control @error('account_number') is-invalid @enderror"
                                     name="account_number" value="{{ old('account_number') }}" required
                                     autocomplete="account_number" style="width: 70%;" placeholder="Enter account number">
+                                    <div class="invalid-feedback">
+                                        Valid input is required.
+                                    </div>
                                 @error('account_number')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -31,6 +34,9 @@
                                     class="form-control @error('withdraw_amount') is-invalid @enderror"
                                     name="withdraw_amount" value="{{ old('withdraw_amount') }}" required
                                     autocomplete="withdraw_amount" style="width: 70%;" placeholder="Enter transaction amount">
+                                    <div class="invalid-feedback">
+                                        Valid input is required.
+                                    </div>
                                 @error('withdraw_amount')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

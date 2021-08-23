@@ -30,7 +30,17 @@
                              <h4><b>Loan disburses</b></h4>
                             </ol>
                         </div>
-                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                            @if (Session::has('message'))
+                            <div class="alert alert-success" role="alert">
+                                {{ Session::get('message') }}
+                            </div>
+                            @elseif (Session::has('error_message'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ Session::get('error_message') }}
+                            </div>
+                            @endif
+                        </div>
                         <div class="col-md-3">
                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
                                 <i class="fas fa-plus"></i> New disbursement
@@ -41,11 +51,6 @@
             </div>
         </div>
         <div class="card-body">
-            @if (Session::has('message'))
-            <div class="alert alert-success" role="alert">
-                {{ Session::get('message') }}
-            </div>
-            @endif
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
@@ -81,6 +86,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </div
 @endsection
 

@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>OMF-Auditor</title>
+        <title>OMF-Auditor only</title>
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dist/img/omf_logo.jpg') }}" />
 
         <!-- Google Font: Source Sans Pro -->
@@ -31,10 +31,7 @@
                                 class="fas fa-bars"></i></a>
                     </li>
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="#" class="nav-link">Contacts</a>
-                    </li>
-                    <li class="nav-item d-none d-sm-inline-block">
-                        <a href="#" class="nav-link">Help</a>
+                        <a href="#" class="nav-link">USER GUIDE</a>
                     </li>
                 </ul>
 
@@ -107,14 +104,14 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{ route('auditor.view_saving_transaction_audit') }}" class="nav-link">
 
-                                            <p>&nbsp &nbsp &nbsp &nbsp View saving transaction</p>
+                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; Saving transaction audit</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="{{ route('auditor.saving_services_list') }}" class="nav-link">
-                                            <p>&nbsp &nbsp &nbsp &nbsp View saving services</p>
+                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; View saving services</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -129,13 +126,13 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <p>&nbsp &nbsp &nbsp &nbsp View loan transaction</p>
+                                        <a href="{{ route('auditor.view_loan_transaction_audit') }}" class="nav-link">
+                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; Loan transaction audit</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="{{ route('auditor.view_loan_services') }}" class="nav-link">
-                                            <p>&nbsp &nbsp &nbsp &nbsp View loan services</p>
+                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; View loan services</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -193,21 +190,37 @@
         <script>
             $(function () {
         $("#example1").DataTable({
-          "responsive": true, "lengthChange": false, "autoWidth": false,
-          "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            "ordering": false,
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": true,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false,
-          "responsive": true,
-        });
       });
         </script>
+                <script>
+                    // Example starter JavaScript for disabling form submissions if there are invalid fields
+                    (function() {
+                        'use strict';
 
+                        window.addEventListener('load', function() {
+                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                            var forms = document.getElementsByClassName('needs-validation');
+
+                            // Loop over them and prevent submission
+                            var validation = Array.prototype.filter.call(forms, function(form) {
+                                form.addEventListener('submit', function(event) {
+                                    if (form.checkValidity() === false) {
+                                        event.preventDefault();
+                                        event.stopPropagation();
+                                    }
+                                    form.classList.add('was-validated');
+                                }, false);
+                            });
+                        }, false);
+                    })();
+
+                </script>
 
     </body>
 

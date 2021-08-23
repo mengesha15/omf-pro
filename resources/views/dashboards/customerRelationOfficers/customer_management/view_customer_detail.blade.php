@@ -33,7 +33,7 @@
         <div class="row">
             <div class="col-sm-1 col-md-1 col-xs-1">
             </div>
-            <div class="col-sm-5 col-md-5 col-xs-5">
+            <div class="col-sm-6 col-md-6 col-xs-6">
                 <div class="thumbnail">
                     <div>
                         <h5>Customer detail</h5>
@@ -122,6 +122,7 @@
                         <tr>
                             <th>Transaction date</th>
                             <th>Transaction type</th>
+                            <th>From/To</th>
                             <th>transaction amount</th>
                             <th>Branch</th>
                         </tr>
@@ -131,6 +132,7 @@
                         <tr>
                             <td>{{date('d/m/Y',strtotime($saving_transaction->created_at))}}</td>
                             <td>{{ $saving_transaction->transaction_type }}</td>
+                            <td>{{ $saving_transaction->from_or_to }}</td>
                             <td>{{ $saving_transaction->transaction_amount }}</td>
                             <td>{{ $saving_transaction->branch_name }}</td>
                         </tr>

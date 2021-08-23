@@ -12,7 +12,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">OMF</a></li>
-                            <li class="breadcrumb-item active">Password change</li>
+                            <li class="breadcrumb-item active">Password reset</li>
                         </ol>
                     </div>
                     <!-- /.col -->
@@ -27,9 +27,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Password change') }}</div>
+                <div class="card-header">{{ __('User password reset') }}</div>
                 <div class="card-body">
-                    <form action="{{ route('admin.reset_user_password') }}" method="POST">
+                    <form action="{{ route('admin.reset_user_password') }}" method="POST" class="needs-validation" novalidate>
                         @csrf
                           <div class="col-md-9" style="padding-left: 15%">
                                 @if (Session::has('message'))
@@ -48,6 +48,9 @@
                               <div class="form-group">
                                 <label for="username">Employee username</label>
                                 <input type="username" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Enter employee username" name="username" required value="{{ old('username') }}">
+                                <div class="invalid-feedback">
+                                    Valid input is required.
+                                </div>
                                 @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

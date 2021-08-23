@@ -22,7 +22,8 @@ class RequestedLoan extends Model
         'requested_amount',
         'borrower_roll_number',
         'requested_by',
-        'status'
+        'status',
+        'seen_unseen',
     ];
 
     protected $hidden = [

@@ -1,4 +1,3 @@
-<title>OMF - Requested loans list</title>
 @extends('layouts.customer_service_officer')
 @section('service_officer_content')
 <section class="content">

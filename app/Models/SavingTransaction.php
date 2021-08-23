@@ -19,6 +19,7 @@ class SavingTransaction extends Model
      */
     protected $fillable = [
         'transaction_type',
+        'from_or_to',
         'transaction_amount',
         'customer_account_number',
         'branch_id',

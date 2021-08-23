@@ -20,7 +20,7 @@ class CreateRequestedLoansTable extends Migration
             $table->string('requested_by')->nullable();
             $table->timestamps();
             $table->string('status'); // approved or pending
-
+            $table->string('seen_unseen')->nullable();
             $table->foreign('borrower_roll_number')->references('roll_number')->on('borrowers')->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->foreign('requested_by')->references('username')->on('users')->onUpdate('cascade')

@@ -23,11 +23,11 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Loan request form</h3>
+                <h3 class="card-title">Loan request edit form</h3>
             </div>
             <div class="col-md-12" style="padding-left: 10%">
                 <br>
-                <form method="POST" action="{{ route('customerServiceOfficer.add_new_request') }}"
+                <form method="POST" action="{{ url('customerServiceOfficer/update_borrower/'.$borrower->roll_number) }}"
                     enctype="multipart/form-data" class="needs-validation" novalidate>
                     @csrf
                     <div class="row">
@@ -37,7 +37,7 @@
                                     name</label>
                                 <input id="first_name" type="text"
                                     class="form-control @error('first_name') is-invalid @enderror" name="first_name"
-                                    value="{{ old('first_name') }}" required style="width: 90%;">
+                                    value="{{ $borrower->first_name }}" required style="width: 90%;">
                                 <div class="invalid-feedback">
                                     Valid input is required.
                                 </div>
@@ -53,7 +53,7 @@
                                     name</label>
                                 <input id="middle_name" type="text"
                                     class="form-control @error('middle_name') is-invalid @enderror" name="middle_name"
-                                    value="{{ old('middle_name') }}" autocomplete="middle_name" style="width: 90%;"
+                                    value="{{ $borrower->middle_name }}" autocomplete="middle_name" style="width: 90%;"
                                     required>
                                 <div class="invalid-feedback">
                                     Valid input is required.
@@ -69,7 +69,7 @@
                                     name</label>
                                 <input id="last_name" type="text"
                                     class="form-control @error('last_name') is-invalid @enderror" name="last_name"
-                                    value="{{ old('last_name') }}" autocomplete="last_name" style="width: 90%;"
+                                    value="{{ $borrower->last_name }}" autocomplete="last_name" style="width: 90%;"
                                     required>
                                 <div class="invalid-feedback">
                                     Valid input is required.
@@ -85,7 +85,7 @@
                                     amount</label>
                                 <input id="borrowed_amount" type="text"
                                     class="form-control @error('borrowed_amount') is-invalid @enderror"
-                                    name="borrowed_amount" value="{{ old('borrowed_amount') }}" required
+                                    name="borrowed_amount" value="{{ $borrower->borrowed_amount }}" required
                                     autocomplete="borrowed_amount" style="width: 90%;">
                                 <div class="invalid-feedback">
                                     Valid input is required.
@@ -101,7 +101,7 @@
                                     status</label>
                                 <input id="borrower_status	" type="text"
                                     class="form-control @error('borrower_status') is-invalid @enderror"
-                                    name="borrower_status" value="{{ old('borrower_status') }}"
+                                    name="borrower_status" value="{{ $borrower->borrower_status }}"
                                     autocomplete="borrower_status" style="width: 90%;" required>
                                 <div class="invalid-feedback">
                                     Valid input is required.
@@ -116,7 +116,7 @@
                                 <label for="borrower_address">Address</label>
                                 <input id="borrower_address" type="text"
                                     class="form-control @error('borrower_address') is-invalid @enderror"
-                                    name="borrower_address" value="{{ old('borrower_address') }}" required
+                                    name="borrower_address" value="{{ $borrower->borrower_address }}" required
                                     autocomplete="borrower_address" style="width: 90%;">
                                 <div class="invalid-feedback">
                                     Valid input is required.
@@ -132,7 +132,7 @@
                                     number</label>
                                 <input id="phone_number" type="text"
                                     class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
-                                    value="{{ old('phone_number') }}" required autocomplete="phone_number"
+                                    value="{{ $borrower->phone_number }}" required autocomplete="phone_number"
                                     style="width: 60%;">
                                 <div class="invalid-feedback">
                                     Valid input is required.
@@ -153,7 +153,7 @@
                                     date</label>
                                 <input id="birth_date" type="date"
                                     class="form-control @error('birth_date') is-invalid @enderror" name="birth_date"
-                                    value="{{ old('birth_date') }}" required autocomplete="birth_date"
+                                    value="{{ $borrower->birth_date }}" required autocomplete="birth_date"
                                     style="width: 50%;">
                                 <div class="invalid-feedback">
                                     Valid input is required.
@@ -168,7 +168,7 @@
                                 <label for="branch_id">Branch</label><br>
                                 <input list="branch_id" name="branch_id"
                                     class="col-sm-6 custom-select custom-select-sml @error('branch_id') is-invalid @enderror"
-                                    required value="{{ old('branch_id') }}" placeholder="Choose branch...">
+                                    required value="{{  $borrower->branch_id }}" placeholder="Choose branch...">
                                 <datalist id="branch_id">
                                     @foreach ($branches as $branch)
                                     <option value="{{ $branch->id }}">
@@ -191,7 +191,7 @@
                                     service type</label><br>
                                 <input list="loan_service_id" name="loan_service_id"
                                     class="col-sm-6 custom-select custom-select-sml @error('loan_service_id') is-invalid @enderror"
-                                    required value="{{ old('loan_service_id') }}" placeholder="Choose service...">
+                                    required value="{{ $borrower->loan_service_id }}" placeholder="Choose service...">
                                 <datalist id="loan_service_id">
                                     @foreach ($loan_services as
                                     $loan_service)
@@ -232,7 +232,7 @@
                                     photo</label>
                                 <input type="file" class="form-control @error('borrower_photo') is-invalid @enderror"
                                     name="borrower_photo" id="borrower_photo" value="{{ old('borrower_photo') }}"
-                                    style="width: 60%; height: 8.5%;" required>
+                                    style="width: 60%; height: 8.5%;">
                                 <div class="invalid-feedback">
                                     Valid input is required.
                                 </div>
@@ -245,7 +245,7 @@
                             <div class="position-relative"><br><br>
                             </div>
                             <div class="card-footer col-5">
-                                <button type="submit" class="btn btn-success">Send request</button>
+                                <button type="submit" class="btn btn-success">Update</button>
                             </div>
 
                         </div>

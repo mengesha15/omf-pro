@@ -9,6 +9,8 @@ use App\Models\SavingTransaction;
 use App\Models\RequestedLoan;
 use App\Models\LoanDisburseRecord;
 use App\Models\Employee;
+use App\Models\Borrower;
+use App\Models\Customer;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +27,24 @@ class AuditorController extends Controller
         return view('dashboards/auditors/index', compact('total_loan_services','total_saving_services'));
     }
 
+    public function view_saving_transaction_audit(){
+        $cards = Customer::select([
+            'first_name',
+            \DB::raw("DATE_FORMAT(created_at,'%d-%m-%Y') as month"),
+            \DB::raw( 'COUNT(account_number) as invoices'),
+            \DB::raw('SUM(account_balance) as amount'),
+        ])->groupBy('first_name')
+          ->groupBy('month')
+          ->orderBy('month')
+          ->get();
+          dd($cards);
+        return view('dashboards.auditors.saving_management.view_saving_transaction_audit');
+    }
+
+    public function view_loan_transaction_audit(){
+        return view('dashboards.auditors.loan_management.view_loan_transaction_audit');
+    }
+
     public function view_saving_servises(){
         $saving_services = DB::table('saving_services')->get();
         return view('dashboards\auditors\saving_management\view_saving_services', compact('saving_services'));
@@ -33,10 +53,6 @@ class AuditorController extends Controller
     public function view_loan_services(){
         $loan_services = LoanService::all();
         return view('dashboards\auditors\loan_management\view_loan_services',compact('loan_services'));
-    }
-
-     public function profile(){
-        return view('dashboards/auditors/profile');
     }
 
     public function change_password_form(){

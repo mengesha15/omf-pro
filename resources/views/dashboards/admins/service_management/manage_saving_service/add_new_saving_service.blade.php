@@ -46,7 +46,9 @@
                                                 <div class="form-group">
                                                     <label for="saving_service_name">Saving service name</label>
                                                     <input id="saving_service_name" type="text" value="{{ old('saving_service_name') }}"class="form-control @error('saving_service_name') is-invalid @enderror" name="saving_service_name" required style="width: 90%;" autocomplete="saving_service_name">
-
+                                                    <div class="invalid-feedback">
+                                                        Valid input required.
+                                                    </div>
                                                     @error('saving_service_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -57,6 +59,9 @@
                                                 <div class="form-group">
                                                     <label for="saving_service_description">Saving service description</label>
                                                     <input  id="saving_service_description" type="text" value="{{ old('saving_service_description') }}"class="form-control @error('saving_service_description') is-invalid @enderror" name="saving_service_description" required autocomplete="saving_service_description" style="width: 90%;">
+                                                    <div class="invalid-feedback">
+                                                        Valid input required.
+                                                    </div>
                                                     @error('saving_service_description')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -66,6 +71,9 @@
                                                 <div class="form-group">
                                                     <label for="saving_service_interest_rate">Interest rate</label>
                                                     <input  id="saving_service_interest_rate" type="text" value="{{ old('saving_service_interest_rate') }}"class="form-control @error('saving_service_interest_rate') is-invalid @enderror" name="saving_service_interest_rate" required autocomplete="saving_service_interest_rate" style="width: 90%;">
+                                                    <div class="invalid-feedback">
+                                                        Valid input required.
+                                                    </div>
                                                     @error('saving_service_interest_rate')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

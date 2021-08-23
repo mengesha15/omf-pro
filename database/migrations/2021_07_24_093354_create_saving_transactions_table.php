@@ -16,6 +16,7 @@ class CreateSavingTransactionsTable extends Migration
         Schema::create('saving_transactions', function (Blueprint $table) {
             $table->id();
             $table->string('transaction_type'); // withdrawal or deposit
+            $table->string('from_or_to')->nullable();
             $table->float('transaction_amount',10,2);
             $table->unsignedBigInteger('customer_account_number');
             $table->unsignedBigInteger('branch_id')->nullable();

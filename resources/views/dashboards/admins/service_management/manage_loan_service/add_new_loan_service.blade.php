@@ -46,7 +46,9 @@
                                                 <div class="form-group">
                                                     <label for="loan_service_name">Loan service name</label>
                                                     <input id="loan_service_name" type="text" value="{{ old('loan_service_name') }}"class="form-control @error('loan_service_name') is-invalid @enderror" name="loan_service_name" required style="width: 90%;" autocomplete="loan_service_name">
-
+                                                    <div class="invalid-feedback">
+                                                        Valid input required.
+                                                    </div>
                                                     @error('loan_service_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -57,6 +59,9 @@
                                                 <div class="form-group">
                                                     <label for="loan_service_description">Loan service description</label>
                                                     <input  id="loan_service_description" type="text" value="{{ old('loan_service_description') }}"class="form-control @error('loan_service_description') is-invalid @enderror" name="loan_service_description" required autocomplete="loan_service_description" style="width: 90%;">
+                                                    <div class="invalid-feedback">
+                                                        Valid input required.
+                                                    </div>
                                                     @error('loan_service_description')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -66,6 +71,9 @@
                                                 <div class="form-group">
                                                     <label for="loan_service_interest_rate">Interest rate</label>
                                                     <input  id="loan_service_interest_rate" type="text" value="{{ old('loan_service_interest_rate') }}"class="form-control @error('loan_service_interest_rate') is-invalid @enderror" name="loan_service_interest_rate" required autocomplete="loan_service_interest_rate" style="width: 90%;">
+                                                    <div class="invalid-feedback">
+                                                        Valid input required.
+                                                    </div>
                                                     @error('loan_service_interest_rate')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -75,6 +83,9 @@
                                                 <div class="form-group">
                                                     <label for="loan_term">Loann term</label>
                                                     <input  id="loan_term" type="text" value="{{ old('loan_term') }}"class="form-control @error('loan_term') is-invalid @enderror" name="loan_term" required autocomplete="loan_term" style="width: 90%;">
+                                                    <div class="invalid-feedback">
+                                                        Valid input required.
+                                                    </div>
                                                     @error('loan_term')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

@@ -29,7 +29,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Password change') }}</div>
                 <div class="card-body">
-                    <form action="{{ route('customerServiceOfficer.reset_password') }}" method="POST">
+                    <form action="{{ route('customerServiceOfficer.reset_password') }}" method="POST" class="needs-validation" novalidate>
                         @csrf
                           <div class="col-md-9" style="padding-left: 30%">
                                 @if (Session::has('message'))
@@ -45,6 +45,9 @@
                               <div class="form-group">
                                 <label for="new_password">New password</label>
                                 <input type="password" class="form-control @error('new_password') is-invalid @enderror" id="new_password" placeholder="Enter new password" name="new_password" required>
+                                <div class="invalid-feedback">
+                                    Valid input required.
+                                </div>
                                 @error('new_password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -54,6 +57,9 @@
                               <div class="form-group">
                                 <label for="confirm_password">Confirm password</label>
                                 <input type="password" class="form-control @error('confirm_password') is-invalid @enderror" id="confirm_password" placeholder="Confirm password" name="confirm_password" required>
+                                <div class="invalid-feedback">
+                                    Valid input required.
+                                </div>
                                 @error('confirm_password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

@@ -45,6 +45,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHis
 
     //viewing employee
     Route::get('view_employee/',[AdminController::class,'view_employee'])->name('admin.view_employee');
+    Route::get('users_list/',[AdminController::class,'users_list'])->name('admin.users_list');
 
     //Employee details
     Route::get('employee_detail/{id}',[AdminController::class, 'employee_detail'])->name('admin.employee_detail');
@@ -95,13 +96,13 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHis
     Route::post('event_photo_uploading',[AdminController::class,'upload_event_photo'])->name('admin.event_photo_uploading');
     Route::delete('delete_event_photo/{id}',[AdminController::class,'delete_event_photo'])->name('admin.delete_event_photo');
 
-    Route::get('profile',[AdminController::class,'profile'])->name('admin.profile');
     Route::get('change_password',[AdminController::class,'change_password_form'])->name('admin.change_password_form');
     Route::post('reset_password',[AdminController::class,'reset_password'])->name('admin.reset_password');
 
     // users password reset
     Route::get('change_user_password',[AdminController::class, 'change_user_password_form'])->name('admin.change_user_password_form');
     Route::post('reset_user_password',[AdminController::class, 'reset_user_password'])->name('admin.reset_user_password');
+    Route::delete('reset_user_password/{employee_id}',[AdminController::class, 'reset_user_password_from_view'])->name('admin.reset_user_password_from_view');
 
 
 });
@@ -112,12 +113,15 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHis
 Route::group(['prefix'=>'auditor', 'middleware'=>['isAuditor','auth','PreventBackHistory']], function(){
     Route::get('dashboard',[AuditorController::class,'index'])->name('auditor.dashboard');
 
+    Route::get('saving_transaction_audit',[AuditorController::class,'view_saving_transaction_audit'])->name('auditor.view_saving_transaction_audit');
+
+    Route::get('loan_transaction_audit',[AuditorController::class,'view_saving_transaction_audit'])->name('auditor.view_loan_transaction_audit');
+
     //Saving service
     Route::get('saving_services_list', [AuditorController::class,'view_saving_servises'])->name('auditor.saving_services_list');
 
     Route::get('loan_services_list',[AuditorController::class,'view_loan_services'])->name('auditor.view_loan_services');
 
-    Route::get('profile',[AuditorController::class,'profile'])->name('auditor.profile');
 
     Route::get('change_password',[AuditorController::class,'change_password_form'])->name('auditor.change_password_form');
     Route::post('reset_password',[AuditorController::class,'reset_password'])->name('auditor.reset_password');
@@ -145,11 +149,12 @@ Route::group(['prefix'=>'customerRelationOfficer', 'middleware'=>['isCustomerRel
 
     Route::post('deposit_money', [CustomerRelationOfficer::class, 'deposit_money'])->name('customerRelationOfficer.deposit_money');
     Route::post('withdraw_money', [CustomerRelationOfficer::class, 'withdraw_money'])->name('customerRelationOfficer.withdraw_money');
+    Route::post('transfer_money', [CustomerRelationOfficer::class, 'transfer_money'])->name('customerRelationOfficer.transfer_money');
+
 
     //Saving service
     Route::get('saving_services_list', [CustomerRelationOfficer::class,'view_saving_servises'])->name('customerRelationOfficer.saving_services_list');
 
-    Route::get('profile',[CustomerRelationOfficer::class,'profile'])->name('customerRelationOfficer.profile');
 
     Route::get('change_password',[CustomerRelationOfficer::class,'change_password_form'])->name('customerRelationOfficer.change_password_form');
     Route::post('reset_password',[CustomerRelationOfficer::class,'reset_password'])->name('customerRelationOfficer.reset_password');
@@ -168,6 +173,9 @@ Route::group(['prefix'=>'customerServiceOfficer', 'middleware'=>['isCustomerServ
 
    Route::get('borrowers_list',[CustomerServiceOfficer::class,'view_borrowers'])->name('customerServiceOfficer.borrowers_list');
 
+   Route::get('update_borrower/{roll_number}',[CustomerServiceOfficer::class,'edit_employee_form'])->name('customerServiceOfficer.edit_employee_form');
+   Route::post('update_borrower/{roll_number}',[CustomerServiceOfficer::class,'update_borrower'])->name('customerServiceOfficer.update_borrower');
+
    Route::get('requested_loan_list', [CustomerServiceOfficer::class, 'view_requested_loans'])->name('customerServiceOfficer.requested_loan_list');
 
    Route::get('approved_loans_list',[CustomerServiceOfficer::class,'view_approved_loans'])->name('customerServiceOfficer.approved_loans_list');
@@ -185,8 +193,6 @@ Route::group(['prefix'=>'customerServiceOfficer', 'middleware'=>['isCustomerServ
     Route::post('new_loan_disbursement', [CustomerServiceOfficer::class,'new_loan_disbursement'])->name('customerServiceOfficer.new_loan_disbursement');
 
     Route::get('loan_services_list',[CustomerServiceOfficer::class,'view_loan_services'])->name('customerServiceOfficer.view_loan_services');
-
-    Route::get('profile',[CustomerServiceOfficer::class,'profile'])->name('customerServiceOfficer.profile');
 
     Route::get('change_password',[CustomerServiceOfficer::class,'change_password_form'])->name('customerServiceOfficer.change_password_form');
     Route::post('reset_password',[CustomerServiceOfficer::class,'reset_password'])->name('customerServiceOfficer.reset_password');

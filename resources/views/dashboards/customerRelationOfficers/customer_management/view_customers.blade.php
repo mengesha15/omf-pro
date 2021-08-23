@@ -61,6 +61,7 @@
                         <th>Phone no</th>
                         <th>Balance</th>
                         <th>Gender</th>
+                        <th>Edit</th>
                         <th>Details</th>
                     </tr>
                 </thead>
@@ -72,6 +73,11 @@
                         <td>{{ $customer->phone_number }}</td>
                         <td>{{ $customer->account_balance }}</td>
                         <td>{{ $customer->customer_gender }}</td>
+                        <td class="text-center">
+                            <a href="#" class="btn btn-lg btn-primary">
+                                <p class="fa fa-edit"></p>
+                            </a>
+                        </td>
                         <td class="text-center">
                             <li class="breadcrumb-item li-none"><a class="btn btn-lg btn-success"
                                     href="{{ url('customerRelationOfficer/customer_detail/'. $customer->account_number) }}">Details</a>

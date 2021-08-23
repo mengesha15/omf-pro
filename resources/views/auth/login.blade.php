@@ -25,7 +25,7 @@
                 <div class="col-md-4 col-sm-4 col-xs-4">
                     <div class="card">
                         <div class="card-header">
-                            <div class="login-logo"><a href="/"><img src="/dist/img/omf_logo.jpg" class="img-circle" width="25%"></a></div><b style="padding-left: 30%">OMF</b> - Login
+                            <div class="login-logo"><a href="/"><img src="/dist/img/omf_logo.jpg" class="img-circle" width="25%"></a></div><b style="padding-left: 30%"><a href="/">OMF</a></b> - Login
                         </div>
 
                         <div class="card-body">
@@ -39,8 +39,7 @@
                                 <div class="col-md-11 mb-4">
                                     <label for="username">Username</label>
                                     <input type="text" name="username" class="form-control" id="username"
-                                        placeholder="Enter username" autofocus="autofocus" value="{{old('username')}}"
-                                        required>
+                                        placeholder="Enter username" autofocus="autofocus" value="{{old('username')}}" required>
                                     <div class="invalid-feedback">
                                         Valid username is required.
                                     </div>
@@ -49,7 +48,7 @@
                                 <div class="col-md-11 mb-4">
                                     <label for="password">Password</label>
                                     <input type="password" name="password" class="form-control" id="password"
-                                        placeholder="Enter Password" autofocus="autofocus" required>
+                                        placeholder="Enter Password" required>
                                     <div class="invalid-feedback">
                                         Please enter valid password.
                                     </div>
