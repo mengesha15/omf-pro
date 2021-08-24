@@ -188,11 +188,14 @@
             @yield('customer_relation_officer_content')
 
         </div>
+
+        @include('dashboards.customerRelationOfficers.print_deposit_receipt')
+
         @include('dashboards.customerRelationOfficers.transaction_management.deposit_money')
 
-        @include('dashboards.customerRelationOfficers.transaction_management.transfer_money')
-
         @include('dashboards.customerRelationOfficers.transaction_management.withdraw_money')
+
+        @include('dashboards.customerRelationOfficers.transaction_management.transfer_money')
 
         <footer class="main-footer">
 
@@ -261,6 +264,30 @@
                 })();
 
             </script>
+
+        <script>
+            @if(session()->has('modal'))
+            $("#print_deposit_receipt").modal("toggle");
+
+            @endif
+        </script>
+
+        <script type="text/javascript">
+            @if (count($errors->deposit_errors) > 0)
+                $('#deposit-money').modal('show');
+            @endif
+        </script>
+
+        <script type="text/javascript">
+            @if (count($errors->withdrawal_errors) > 0)
+                $('#withdraw-money').modal('show');
+            @endif
+        </script>
+        <script type="text/javascript">
+            @if (count($errors->transfer_errors) > 0)
+                $('#transfer-money').modal('show');
+            @endif
+        </script>
 
     </html>
 

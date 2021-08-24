@@ -42,7 +42,7 @@
                             @endif
                         </div>
                         <div class="col-md-3">
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#loan-disbursement">
                                 <i class="fas fa-plus"></i> New disbursement
                               </button>
                         </div>

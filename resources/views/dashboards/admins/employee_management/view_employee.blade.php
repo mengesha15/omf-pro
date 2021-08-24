@@ -69,6 +69,7 @@
                         <th>Gender</th>
                         <th>Salary</th>
                         <th>Employee role</th>
+                        <th>Hired Date</th>
                         <th>Detail</th>
                         <th>Edit</th>
                         <th style="color: red">Delete</th>
@@ -83,6 +84,7 @@
                         <td>{{ $employee->employee_gender }}</td>
                         <td>{{ $employee->employee_salary }}</td>
                         <td>{{ $employee->role_name }}</td>
+                        <td>{{ date('d-m-Y',strtotime($employee->created_at)) }}</td>
                         <td>
                             <ol>
                                 <li class="breadcrumb-item li-none"><a href="{{ url('admin/employee_detail/' . $employee->id) }}"><i class="fa fa-indent"></i></a>

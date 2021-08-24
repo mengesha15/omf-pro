@@ -22,11 +22,9 @@
                                     <div class="invalid-feedback">
                                         Valid input is required.
                                     </div>
-                                @error('account_number')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                @if ($errors->withdrawal_errors->has('account_number'))
+                                    <span class="text-danger">{{ $errors->withdrawal_errors->first('account_number') }}</span>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="withdraw_amount">Withdrawal amount</label>
@@ -37,11 +35,9 @@
                                     <div class="invalid-feedback">
                                         Valid input is required.
                                     </div>
-                                @error('withdraw_amount')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                @if ($errors->withdrawal_errors->has('withdraw_amount'))
+                                    <span class="text-danger">{{ $errors->withdrawal_errors->first('withdraw_amount') }}</span>
+                                @endif
                             </div>
                     </div>
                 </div>

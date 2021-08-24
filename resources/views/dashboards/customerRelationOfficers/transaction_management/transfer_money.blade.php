@@ -16,48 +16,39 @@
                             <div class="form-group">
                                 <label for="sender_account_number">Sender's account number</label>
                                 <input id="sender_account_number" type="text"
-                                    class="form-control @error('sender_account_number') is-invalid @enderror"
-                                    name="sender_account_number" value="{{ old('sender_account_number') }}" required
+                                    class="form-control" name="sender_account_number" value="{{ old('sender_account_number') }}" required
                                     autocomplete="sender_account_number" style="width: 70%;" placeholder="Enter sender account number">
                                     <div class="invalid-feedback">
                                         Valid input is required.
                                     </div>
-                                @error('sender_account_number')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                @if ($errors->transfer_errors->has('sender_account_number'))
+                                    <span class="text-danger">{{ $errors->transfer_errors->first('sender_account_number') }}</span>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="receiver_account_number">Receiver's account number</label>
                                 <input id="receiver_account_number" type="text"
-                                    class="form-control @error('receiver_account_number') is-invalid @enderror"
-                                    name="receiver_account_number" value="{{ old('receiver_account_number') }}" required
+                                    class="form-control" name="receiver_account_number" value="{{ old('receiver_account_number') }}" required
                                     autocomplete="receiver_account_number" style="width: 70%;" placeholder="Enter receiver account number">
                                     <div class="invalid-feedback">
                                         Valid input is required.
                                     </div>
-                                @error('receiver_account_number')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                @if ($errors->transfer_errors->has('receiver_account_number'))
+                                    <span class="text-danger">{{ $errors->transfer_errors->first('receiver_account_number') }}</span>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="transfer_amount">Amount</label>
                                 <input id="transfer_amount" type="text"
-                                    class="form-control @error('transfer_amount') is-invalid @enderror"
+                                    class="form-control"
                                     name="transfer_amount" value="{{ old('transfer_amount') }}" required
                                     autocomplete="transfer_amount" style="width: 70%;" placeholder="Enter transfer amount">
                                     <div class="invalid-feedback">
                                         Valid input is required.
                                     </div>
-                                @error('transfer_amount')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
+                                @if ($errors->transfer_errors->has('transfer_amount'))
+                                    <span class="text-danger">{{ $errors->transfer_errors->first('transfer_amount') }}</span>
+                                @endif
                     </div>
                 </div>
             </div>

@@ -34,41 +34,41 @@
         <div class="row" style="padding-left: 10%;">
             <div class="col-md-5">
                 <div>
-                    <label for="first_name">Full name</label>{{": " .$employee->first_name.' '.$employee->middle_name.' '.$employee->last_name }}
+                    <label for="full_name">Full name</label>{{": " .$employee->first_name.' '.$employee->middle_name.' '.$employee->last_name }}
                 </div>
                 <div>
-                    <label for="first_name">Username </label>{{": " .$employee->username}}
+                    <label for="username">Username </label>{{": " .$employee->username}}
                 </div>
                 <div>
-                    <label for="first_name">Address</label>{{": " .$employee->employee_address }}
+                    <label for="address">Address</label>{{": " .$employee->employee_address }}
                 </div>
                 <div>
-                    <label for="first_name">Branch</label>{{": " .$employee->branch_name}}
+                    <label for="branch">Branch</label>{{": " .$employee->branch_name}}
                 </div>
                 <div>
-                    <label for="first_name">Employee role</label>{{": " .$employee->role_name}}
+                    <label for="employee_role">Employee role</label>{{": " .$employee->role_name}}
                 </div>
                 <div>
-                    <label for="first_name">Phone number</label>{{": " .$employee->phone_number}}
+                    <label for="phone_number">Phone number</label>{{": " .$employee->phone_number}}
                 </div>
             </div>
             <div class="col-md-5">
                 <div>
-                    <label for="first_name">Birthdate:</label>{{' '.date('d/m/Y',strtotime($employee->birth_date))}}
+                    <label for="birth_date">Birthdate:</label>{{' '.date('d-m-Y',strtotime($employee->birth_date))}}
                 </div>
                 <div>
-                    <label for="first_name">Birthdate:</label>{{' '.date('d/m/Y',strtotime($employee->birth_date))}}
+                    <label for="first_name">Hired date:</label>{{' '.date('d-m-Y',strtotime($employee->created_at))}}
                 </div><div>
-                    <label for="first_name">Age:</label>{{ ' '.$age }}
+                    <label for="age">Age:</label>{{ ' '.$age }}
                 </div>
                 <div>
-                    <label for="first_name">Salary</label>{{": " .$employee->employee_salary }}
+                    <label for="salary">Salary</label>{{": " .$employee->employee_salary }}
                 </div>
                 <div>
-                    <label for="first_name">Gender</label>{{": " .$employee->employee_gender }}
+                    <label for="gender">Gender</label>{{": " .$employee->employee_gender }}
                 </div>
                 <div>
-                    <label for="first_name">Salary</label>{{": " .$employee->employee_salary }}
+                    <label for="salary">Branch</label>{{": " .$employee->branch_name }}
                 </div>
             </div>
         </div>

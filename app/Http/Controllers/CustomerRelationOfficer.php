@@ -124,7 +124,7 @@ class CustomerRelationOfficer extends Controller
 
 
     public function deposit_money(Request $request){
-        $request->validate([
+        Validator::make($request->all(),[
             'account_number' => 'required|regex:/[0-9]/|min:10|max:10|exists:customers,account_number',
             'deposit_amount' => 'required|numeric|min:50|max:1000000',
         ],
@@ -132,7 +132,7 @@ class CustomerRelationOfficer extends Controller
             'account_number.exists' => 'Accunt number does not exist. Please try again.',
 
         ]
-        );
+        )->validateWithBag('deposit_errors');
         $deposit_amount = $request->deposit_amount;
 
         $account_number = $request->account_number;
@@ -143,7 +143,7 @@ class CustomerRelationOfficer extends Controller
                 $customer = Customer::sharedLock()->find($account_number);
                 $current_balance = $customer->account_balance;
                 $new_balance = $current_balance+$deposit_amount;
-                $deposited_money = Customer::where('account_number',$account_number)->sharedLock()->update([
+                Customer::where('account_number',$account_number)->sharedLock()->update([
                     'account_balance' => $new_balance,
                 ]);
 
@@ -159,22 +159,22 @@ class CustomerRelationOfficer extends Controller
                 ]);
                 $new_saving_transaction->save();
             });
-            return redirect()->route('customerRelationOfficer.saving_transactions_list')->with('message','Deposit completed successfully!');
+            $customer = Customer::sharedLock()->find($account_number);
+            return redirect()->route('customerRelationOfficer.saving_transactions_list',compact('customer','deposit_amount'))->with('message','Deposit completed successfully!')->with('modal','true');
         }else {
             return redirect()->route('customerRelationOfficer.customers_list')->with('error','Insufficient balance');
         }
     }
 
     public function withdraw_money(Request $request){
-        $request->validate([
+        Validator::make($request->all(),[
             'account_number' => 'required|regex:/[0-9]/|min:10|max:10|exists:customers,account_number',
-            'withdraw_amount' => 'required|numeric|min:50|max:10000',
+            'withdraw_amount' => 'required|numeric|min:50|max:25000',
         ],
         [
             'account_number.exists' => 'Accunt number does not exist. Please try again.',
 
-        ]
-        );
+        ])->validateWithBag('withdrawal_errors');
 
         $withdraw_amount = $request->withdraw_amount;
         $account_number = $request->account_number;
@@ -212,16 +212,30 @@ class CustomerRelationOfficer extends Controller
     }
 
     public function transfer_money(Request $request){
-        $request->validate([
+        Validator::make($request->all(), [
             'sender_account_number' => 'required|regex:/[0-9]/|min:10|max:10|exists:customers,account_number',
             'receiver_account_number' => 'required|regex:/[0-9]/|min:10|max:10|exists:customers,account_number|different:sender_account_number',
-            'transfer_amount' => 'required|numeric|min:50|max:10000',
+            'transfer_amount' => 'required|numeric|min:50|max:25000',
         ],
          [
             'sender_account_number.exists' => 'Sender account number does not exist. Check and try again.',
             'receiver_account_number.exists' => 'Sender account number does not exist. Check and try again.',
-         ]
-        );
+         ])->validateWithBag('transfer_errors');
+
+         $sender_account_number = $request->get('sender_account_number');
+         $receiver_account_number = $request->get('receiver_account_number');
+         $transfer_amount = $request->get('transfer_amount');
+
+         $sender = Customer::find($sender_account_number);
+         $sender_current_balance = $sender->account_balance;
+         if ($sender_current_balance >= $transfer_amount) {
+             dd('well');
+             $sender = Customer::find($receiver_account_number);
+         }else {
+             dd('sorry insufficient balance');
+         }
+
+
         dd('well');
     }
 

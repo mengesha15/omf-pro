@@ -47,39 +47,31 @@
                 <thead>
                     <tr>
                         <th>Roll Number</th>
-                        {{-- <th>Photo</th> --}}
                         <th>Borrower name</th>
                         <th>Approved amount</th>
                         <th>Gender</th>
+                        <th>Requested by</th>
+                        <th>Approved by</th>
                         <th>Approved date</th>
                         <th>Detail</th>
-                        <th style="color: red">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($approved_loans as $approved_loan)
                     <tr>
                         <td>{{ $approved_loan->roll_number }}</td>
-                        {{-- <td>
-                                        <img src="{{ asset('uploads/employee_photo/'.$employee->employee_photo) }}" alt="Employee photo">
-                        </td> --}}
                         <td>{{ $approved_loan->first_name." " . $approved_loan->middle_name }}</td>
                         <td>{{ $approved_loan->approved_amount }}</td>
                         <td>{{ $approved_loan->borrower_gender }}</td>
-                        <td>{{ $approved_loan->created_at }}</td>
+                        <td>{{ $approved_loan->requested_by }}</td>
+                        <td>{{ $approved_loan->approved_by }}</td>
+                        <td>{{ date('d-m-Y H:m:s',strtotime($approved_loan->created_at)) }}</td>
                         <td class="text-center">
                             <ol>
                                 <li class="breadcrumb-item li-none"><a href="{{ url('admin/employee_detail/' . $approved_loan->id) }}"><i class="fa fa-indent"></i>Detail</a>
 
                             </ol>
                         </td>
-                        <td class="text-center">
-                            <form action="{{ url('admin/reject_loan_request/' .$approved_loan->roll_number) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure to delete approved loan?')">
-                                @method('delete')
-                                @csrf
-                                <button class="btn btn-danger btn-sm">Delete</button>
-                            </form>
-                    </tr>
                     @endforeach
                 </tbody>
             </table>

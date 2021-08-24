@@ -19,7 +19,7 @@
 
     </head>
 
-    <body style="padding-top: 8%;">
+    <body class="login-body">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-4 col-sm-4 col-xs-4">
@@ -55,8 +55,7 @@
                                 </div>
                                 <div class="form-group row mb-0">
                                     <div class="col-md-8 offset-md-2">
-                                        <button type="submit" class="btn btn-block btn-default btn-lg">
-                                            {{ __('Login') }}
+                                        <button type="submit" class="btn btn-block btn-default btn-lg">{{ __('Login') }}
                                         </button>
                                     </div>
                                 </div>

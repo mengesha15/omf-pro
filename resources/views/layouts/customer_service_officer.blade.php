@@ -166,7 +166,7 @@
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
                                         <a href="#" type="button" class="nav-link" data-toggle="modal"
-                                            data-target="#modal-default">
+                                            data-target="#loan-disbursement">
                                             <i class="far fa-plus nav-icon"></i>
                                             <p>New disbursement</p>
                                         </a>
@@ -275,5 +275,10 @@
 
 </script>
 
+<script type="text/javascript">
+    @if (count($errors) > 0)
+        $('#loan-disbursement').modal('show');
+    @endif
+</script>
 
 </html>

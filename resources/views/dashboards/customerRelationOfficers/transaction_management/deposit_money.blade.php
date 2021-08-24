@@ -12,36 +12,43 @@
             @csrf
             <div class="modal-body">
                 <div class="card">
+                    {{-- @if($errors->deposit_errors->any())
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <ul class="list-unstyled">
+                            @foreach($errors->deposit_errors->all() as $error)
+                            <li> {{ $error }} </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif --}}
                     <div class="card-body register-card-body">
                             <div class="form-group">
                                 <label for="account_number">Account number</label>
                                 <input id="account_number" type="text"
-                                    class="form-control @error('account_number') is-invalid @enderror"
+                                    class="form-control"
                                     name="account_number" value="{{ old('account_number') }}" required
                                     autocomplete="account_number" style="width: 70%;" placeholder="Enter account number">
                                     <div class="invalid-feedback">
                                         Valid input is required.
                                     </div>
-                                @error('account_number')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                    @if ($errors->deposit_errors->has('account_number'))
+                                        <span class="text-danger">{{ $errors->deposit_errors->first('account_number') }}</span>
+                                    @endif
                             </div>
                             <div class="form-group">
                                 <label for="deposit_amount">Deposit amount</label>
-                                <input id="deposit_amount" type="text"
-                                    class="form-control @error('deposit_amount') is-invalid @enderror"
+                                <input id="deposit_amount" type="text" class="form-control"
                                     name="deposit_amount" value="{{ old('deposit_amount') }}" required
                                     autocomplete="deposit_amount" style="width: 70%;" placeholder="Enter transaction amount">
                                     <div class="invalid-feedback">
                                         Valid input is required.
                                     </div>
-                                @error('deposit_amount')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                    @if ($errors->deposit_errors->has('deposit_amount'))
+                                        <span class="text-danger">{{ $errors->deposit_errors->first('deposit_amount') }}</span>
+                                    @endif
                             </div>
                     </div>
                 </div>

@@ -62,7 +62,7 @@ class AdminController extends Controller
             'middle_name' => 'required|regex:/^[a-zA-Z]+$/u|min:2|min:2|max:15',
             'last_name' => 'required|regex:/^[a-zA-Z]+$/u|min:2|max:15',
 
-            'birth_date' => 'required|date',
+            'birth_date' => 'required|date|before:now',
             // 'phone' => 'required|min:11|numeric',
             'phone_number' => 'required|regex:/^[0-9]+$/u|min:10|max:13',
             // 'amount' => 'required|digits_between:3,5',
@@ -217,11 +217,10 @@ class AdminController extends Controller
         $total_request = RequestedLoan::where('seen_unseen','unseen')->get()->count();
         $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->where('seen_unseen','unseen')->orderBy('requested_loans.created_at','desc')->paginate(5);
 
-
         $employees = Employee::join('roles','roles.id','=','employees.role_id')
                             ->join('users','users.employee_id','=','employees.id')
                             ->join('branches','employees.branch_id','=','branches.id')
-                            ->select('employees.id', 'first_name', 'middle_name', 'last_name', 'employee_gender', 'employee_address', 'birth_date', 'employee_salary', 'phone_number', 'employee_photo', 'branch_id', 'employees.created_at', 'employees.updated_at','role_name','username')->get();
+                            ->select('employees.id', 'first_name', 'middle_name', 'last_name', 'employee_gender', 'employee_address', 'birth_date', 'employee_salary', 'phone_number', 'employee_photo', 'branch_id', 'employees.created_at', 'employees.updated_at','role_name','username','employees.created_at')->orderBy('created_at','desc')->get();
 
         return view('dashboards.admins.employee_management.view_employee',compact('employees','requested_loans','total_request'));
     }
@@ -249,7 +248,7 @@ class AdminController extends Controller
     public function delete_employee($id){
         $employee = Employee::find($id);
         $employee->delete();
-        return redirect('admin/view_employee');
+        return redirect('admin/view_employee')->with('message','Employee is deleted successfully.');
 
     }
 
@@ -286,7 +285,7 @@ class AdminController extends Controller
             $approved_loans->save();
         });
 
-        return redirect()->route('admin.requested_list');
+        return redirect()->route('admin.requested_list')->with('message','Request approval comleted successfully.');
 
     }
 
@@ -318,7 +317,7 @@ class AdminController extends Controller
         $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->where('seen_unseen','unseen')->orderBy('requested_loans.created_at','desc')->paginate(5);
 
 
-        $approved_loans = ApprovedLoan::join('borrowers','borrowers.roll_number','=','approved_loans.borrower_roll_number')->get();
+        $approved_loans = ApprovedLoan::join('borrowers','borrowers.roll_number','=','approved_loans.borrower_roll_number')->select('id','approved_amount','requested_by','approved_by','approved_loans.created_at','roll_number','first_name', 'middle_name', 'last_name', 'borrower_gender', 'borrower_address', 'birth_date', 'phone_number', 'borrower_status', 'borrowed_amount', 'user_username', 'branch_id', 'loan_service_id', 'borrower_photo')->orderBy('approved_loans.created_at','desc')->get();
 
         return view('dashboards.admins.loan_management.approved_loan.view_approved_loan',compact('approved_loans','requested_loans','total_request'));
     }
