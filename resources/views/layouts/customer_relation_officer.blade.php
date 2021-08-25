@@ -22,6 +22,31 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
 
+    <style>
+        @media screen {
+        #printSection {
+            display: none;
+        }
+      }
+
+      @media print {
+        body * {
+          visibility:hidden;
+        }
+        #printSection, #printSection * {
+          visibility:visible;
+        }
+        #print-receipt, #close-print * {
+            display: none;
+        }
+        #printSection {
+          position:absolute;
+          left:0;
+          top:0;
+        }
+      }
+    </style>
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -166,7 +191,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
-                                    Saving ervices
+                                    Saving services
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -289,6 +314,28 @@
             @endif
         </script>
 
+
+        <script>
+            document.getElementById("btnPrint").onclick = function () {
+            printElement(document.getElementById("printThis"));
+        }
+
+        function printElement(elem) {
+            var domClone = elem.cloneNode(true);
+
+            var $printSection = document.getElementById("printSection");
+
+            if (!$printSection) {
+                var $printSection = document.createElement("div");
+                $printSection.id = "printSection";
+                document.body.appendChild($printSection);
+            }
+
+            $printSection.innerHTML = "";
+            $printSection.appendChild(domClone);
+            window.print();
+        }
+        </script>
     </html>
 
 

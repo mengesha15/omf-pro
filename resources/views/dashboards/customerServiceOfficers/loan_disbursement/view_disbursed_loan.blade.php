@@ -78,7 +78,7 @@
                             <ol>
                                 <li class="breadcrumb-item li-none"><a class="btn btn-lg btn-success"
                                     href="{{ url('customerServiceOfficer/loan_disbursemet_detail/' . $disbursement_record->roll_number) }}">Detail</a>
-
+                                </li>
                             </ol>
                         </td>
                     </tr>

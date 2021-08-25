@@ -51,7 +51,7 @@
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                    <a href="#" class="small-box-footer">View customers <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('admin.customers_list') }}" class="small-box-footer">View customers <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
-                    <a href="#" class="small-box-footer">View borrowers <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('admin.borrowers_list') }}" class="small-box-footer">View borrowers <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <div class="col-md-1"></div>
@@ -81,7 +81,7 @@
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                    <a href="#" class="small-box-footer">View services <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('admin.all_services_list') }}" class="small-box-footer">View services <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
         </div>

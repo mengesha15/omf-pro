@@ -320,6 +320,17 @@
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
         </script>
+        <script>
+            $(function() {
+            $("#example").DataTable({
+                "ordering": false,
+                "responsive": true,
+                "lengthChange": true,
+                "autoWidth": true,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            });
+            </script>
 
         <script>
             // Example starter JavaScript for disabling form submissions if there are invalid fields

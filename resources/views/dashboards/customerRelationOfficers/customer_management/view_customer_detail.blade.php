@@ -130,7 +130,7 @@
                     <tbody>
                         @foreach ($saving_transactions as $saving_transaction)
                         <tr>
-                            <td>{{date('d/m/Y',strtotime($saving_transaction->created_at))}}</td>
+                            <td>{{date('d-m-Y',strtotime($saving_transaction->created_at))}}</td>
                             <td>{{ $saving_transaction->transaction_type }}</td>
                             <td>{{ $saving_transaction->from_or_to }}</td>
                             <td>{{ $saving_transaction->transaction_amount }}</td>

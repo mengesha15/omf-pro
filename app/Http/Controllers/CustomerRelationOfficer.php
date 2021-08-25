@@ -87,8 +87,11 @@ class CustomerRelationOfficer extends Controller
 
     public function view_customer_detail($account_number){
         Customer::where('account_number',$account_number)->firstOrFail();
+
         $customer = Customer::join('branches','branches.id','=','customers.branch_id')->join('saving_services','saving_services.id','=','customers.saving_service_id')->find($account_number);
+
         $saving_transactions = SavingTransaction::join('customers','saving_transactions.customer_account_number','=','customers.account_number')->join('branches','branches.id','=','saving_transactions.branch_id')->where('customer_account_number',$account_number)->select('transaction_type','saving_transactions.created_at','from_or_to','transaction_amount','branch_name')->orderBy('saving_transactions.created_at','desc')->get();
+        
         return view('dashboards.customerRelationOfficers.customer_management.view_customer_detail', compact('customer','saving_transactions'));
     }
 
@@ -215,11 +218,11 @@ class CustomerRelationOfficer extends Controller
         Validator::make($request->all(), [
             'sender_account_number' => 'required|regex:/[0-9]/|min:10|max:10|exists:customers,account_number',
             'receiver_account_number' => 'required|regex:/[0-9]/|min:10|max:10|exists:customers,account_number|different:sender_account_number',
-            'transfer_amount' => 'required|numeric|min:50|max:25000',
+            'transfer_amount' => 'required|numeric|min:50|max:15000',
         ],
          [
             'sender_account_number.exists' => 'Sender account number does not exist. Check and try again.',
-            'receiver_account_number.exists' => 'Sender account number does not exist. Check and try again.',
+            'receiver_account_number.exists' => 'Receiver account number does not exist. Check and try again.',
          ])->validateWithBag('transfer_errors');
 
          $sender_account_number = $request->get('sender_account_number');
@@ -227,16 +230,57 @@ class CustomerRelationOfficer extends Controller
          $transfer_amount = $request->get('transfer_amount');
 
          $sender = Customer::find($sender_account_number);
+
          $sender_current_balance = $sender->account_balance;
+
          if ($sender_current_balance >= $transfer_amount) {
-             dd('well');
-             $sender = Customer::find($receiver_account_number);
+             DB::transaction(function () use($sender, $sender_account_number,$receiver_account_number,$sender_current_balance, $transfer_amount){
+
+             $sender_new_balance = $sender_current_balance - $transfer_amount;
+
+             $receiver = Customer::find($receiver_account_number);
+             $receiver_current_balance = $receiver->account_balance;
+             $receiver_new_balance = $receiver_current_balance + $transfer_amount;
+
+             $sender_name = $sender->first_name.' '.$sender->middle_name.' '.$sender->last_name;
+             $receiver_name = $receiver->first_name.' '.$receiver->middle_name.' '.$receiver->last_name;
+
+             Customer::where('account_number',$sender_account_number)->lockForUpdate()->update([
+                    'account_balance' => $sender_new_balance,
+             ]);
+
+             Customer::where('account_number',$receiver_account_number)->lockForUpdate()->update([
+                    'account_balance' => $receiver_new_balance,
+            ]);
+
+            $username = Auth::user()->username;
+            $user = User::join('employees','employees.id','=','users.employee_id')->find($username);
+
+            $sender_new_saving_transaction = new SavingTransaction([
+                'transaction_type' => 'Transfer',
+                'from_or_to' => $receiver_name,
+                'transaction_amount' => $transfer_amount,
+                'customer_account_number' => $sender_account_number,
+                'branch_id' => $user->branch_id,
+                'user_username' => $username,
+            ]);
+            $sender_new_saving_transaction->save();
+
+            $receiver_new_saving_transaction = new SavingTransaction([
+                'transaction_type' => 'Received',
+                'from_or_to' => $sender_name,
+                'transaction_amount' => $transfer_amount,
+                'customer_account_number' => $receiver_account_number,
+                'branch_id' => $user->branch_id,
+                'user_username' => $username,
+            ]);
+            $receiver_new_saving_transaction->save();
+
+             });
+             return redirect()->route('customerRelationOfficer.saving_transactions_list')->with('message','Transfering completed successfully!');
          }else {
-             dd('sorry insufficient balance');
+             return redirect()->route('customerRelationOfficer.customers_list')->with('error_message','Insufficient balance. Please recorrect and try again.');
          }
-
-
-        dd('well');
     }
 
     public function change_password_form(){

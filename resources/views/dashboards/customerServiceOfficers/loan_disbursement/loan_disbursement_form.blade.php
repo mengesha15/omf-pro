@@ -16,32 +16,28 @@
                             <div class="form-group">
                                 <label for="roll_number">Roll Number</label>
                                 <input id="roll_number" type="text"
-                                    class="form-control @error('roll_number') is-invalid @enderror"
+                                    class="form-control"
                                     name="roll_number" value="{{ old('roll_number') }}" required
                                     autocomplete="roll_number" style="width: 70%;" placeholder="Enter roll number">
                                     <div class="invalid-feedback">
                                         Valid input is required.
                                     </div>
-                                @error('roll_number')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                @if ($errors->loan_disburse_errors->has('roll_number'))
+                                    <span class="text-danger">{{ $errors->loan_disburse_errors->first('roll_number') }}</span>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="disburse_amount">Disburse amount</label>
                                 <input id="disburse_amount" type="text"
-                                    class="form-control @error('disburse_amount') is-invalid @enderror"
+                                    class="form-control"
                                     name="disburse_amount" value="{{ old('disburse_amount') }}" required
                                     autocomplete="disburse_amount" style="width: 70%;" placeholder="Enter disbursed amount">
                                     <div class="invalid-feedback">
                                         Valid input is required.
                                     </div>
-                                @error('disburse_amount')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                @if ($errors->loan_disburse_errors->has('disburse_amount'))
+                                    <span class="text-danger">{{ $errors->loan_disburse_errors->first('disburse_amount') }}</span>
+                                @endif
                             </div>
                     </div>
                 </div>
@@ -54,4 +50,4 @@
       </div>
     </div>
   </div>
-  
+

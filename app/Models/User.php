@@ -7,6 +7,7 @@ use App\Models\Borrower;
 use App\Models\ApprovedLoan;
 use App\Models\LoanDisburseRecord;
 use App\Models\SavingTransaction;
+use App\Models\MoneyTakenForWork;
 
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -64,6 +65,9 @@ class User extends Authenticatable
     }
     public function borrowers(){
         return $this->hasMony(Borrower::class);
+    }
+    public function money_taken_for_works(){
+        return $this->hasMony(MoneyTakenForWork::class);
     }
     public function approved_loans(){
         return $this->hasMony(ApprovedLoan::class);

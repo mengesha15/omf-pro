@@ -12,18 +12,6 @@
             @csrf
             <div class="modal-body">
                 <div class="card">
-                    {{-- @if($errors->deposit_errors->any())
-                    <div class="alert alert-danger alert-dismissible fade show">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <ul class="list-unstyled">
-                            @foreach($errors->deposit_errors->all() as $error)
-                            <li> {{ $error }} </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif --}}
                     <div class="card-body register-card-body">
                             <div class="form-group">
                                 <label for="account_number">Account number</label>

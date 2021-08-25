@@ -37,32 +37,47 @@
             </div>
         </div>
         <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped">
+            <div class="card-body table-responsive p-0">
+                <table id="example1" class="table table-striped table-bordered table-sm">
                 <thead>
                     <tr>
-                        <th>Month</th>
-                        @foreach ($job_comp_codes as $job_comp_code)
-                         <th>Job Amount {{ $job_comp_code }}</th>
+                        <th>Transaction date</th>
+                        <th>Username</th>
+                        @foreach ($transaction_types as $transaction_type)
+                            <th>{{ $transaction_type }}</th>
                         @endforeach
-                        @foreach ($job_comp_codes as $job_comp_code)
-                         <th>Job count {{ $job_comp_code }}</th>
+                        @foreach ($transaction_types as $transaction_type)
+                            <th>Count of {{ $transaction_type }}</th>
                         @endforeach
+                        <th>Taken amonut</th>
+                        <th>Net return</th>
+                        <th>Detail</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($report as $month => $values)
-                      <tr>
-                          <td>{{ \Carbon\Carbon::parse($month)->format('F Y') }}</td>
-                          @foreach ($job_comp_codes as $job_comp_code)
-                            <td>{{ $roport[$month][$job_comp_code]['amount'] ?? '0'}}</td>
-                          @endforeach
-                          @foreach ($job_comp_codes as $job_comp_code)
-                            <td>{{ $roport[$month][$job_comp_code]['count'] ?? '0' }}</td>
-                          @endforeach
-                      </tr>
+                    @foreach ($saving_report as $transaction_date => $values)
+                        <tr>
+                            <td>{{ \Carbon\Carbon::parse($transaction_date)->format('d-m-Y') }}</td>
+                            <td>{{ $saving_report[$transaction_date][$transaction_type]['username'] ?? '--' }}</td>
+                            @foreach ($transaction_types as $transaction_type)
+                                <td>{{ $saving_report[$transaction_date][$transaction_type]['amount'] ?? '0' }}</td>
+                            @endforeach
+                            @foreach ($transaction_types as $transaction_type)
+                            <td>{{ $saving_report[$transaction_date][$transaction_type]['count'] ?? '0' }}</td>
+                            @endforeach
+                            <td>taken for work</td>
+                            <td>Net return</td>
+                            <td class="text-center">
+                                <ol>
+                                    <a class="btn btn-lg btn-success"
+                                        href="#">Detail</a>
+                                </ol>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 @endsection

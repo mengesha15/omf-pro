@@ -200,9 +200,9 @@
                         </table>
                      </div>
                     </div>
-                    <div class="col-md-12" id="job-vacancy">
+                    {{-- <div class="col-md-12" id="job-vacancy">
                         <h1><b>job-vacancy</b></h1>
-                    </div>
+                    </div> --}}
                     <div class="col-md-12" id="omf-contacts">
                         <h5><b>Contacts</b></h5>
                         <div class="row">

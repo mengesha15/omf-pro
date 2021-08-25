@@ -45,6 +45,11 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHis
 
     //viewing employee
     Route::get('view_employee/',[AdminController::class,'view_employee'])->name('admin.view_employee');
+
+    Route::get('borrowers_list',[AdminController::class,'view_borrowers'])->name('admin.borrowers_list');
+
+    Route::get('customers_list', [AdminController::class,'view_customers'])->name('admin.customers_list');
+
     Route::get('users_list/',[AdminController::class,'users_list'])->name('admin.users_list');
 
     //Employee details
@@ -75,6 +80,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHis
     Route::get('loan_services_list',[AdminController::class,'view_loan_service'])->name('admin.view_loan_service');
     Route::get('saving_services_list',[AdminController::class,'view_saving_service'])->name('admin.view_saving_service');
     Route::get('branches_list',[AdminController::class,'view_branch'])->name('admin.view_branch');
+    Route::get('all_services_list',[AdminController::class,'all_services_list'])->name('admin.all_services_list');
 
     //delete branch, loan service and saving service
     Route::delete('delete_loan_service/{id}',[AdminController::class,'delete_loan_service'])->name('admin.delete_loan_service');
@@ -113,9 +119,12 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHis
 Route::group(['prefix'=>'auditor', 'middleware'=>['isAuditor','auth','PreventBackHistory']], function(){
     Route::get('dashboard',[AuditorController::class,'index'])->name('auditor.dashboard');
 
+
+    Route::post('add_new_taken_money',[AuditorController::class,'add_new_taken_money'])->name('auditor.add_new_taken_money');
+
     Route::get('saving_transaction_audit',[AuditorController::class,'view_saving_transaction_audit'])->name('auditor.view_saving_transaction_audit');
 
-    Route::get('loan_transaction_audit',[AuditorController::class,'view_saving_transaction_audit'])->name('auditor.view_loan_transaction_audit');
+    Route::get('loan_transaction_audit',[AuditorController::class,'view_loan_transaction_audit'])->name('auditor.view_loan_transaction_audit');
 
     //Saving service
     Route::get('saving_services_list', [AuditorController::class,'view_saving_servises'])->name('auditor.saving_services_list');

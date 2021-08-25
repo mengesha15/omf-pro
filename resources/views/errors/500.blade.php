@@ -1,6 +1,6 @@
 <div style="padding-top: 15%; padding-left: 40%">
     <h1 jstcache="0">
-        <span jsselect="heading" jsvalues=".innerHTML:msg" jstcache="10">Check the system</span>
+        <span jsselect="heading" jsvalues=".innerHTML:msg" jstcache="10">Connection problem</span>
     </h1>
     <div id="error-information-popup-container" jstcache="0">
         <div id="error-information-popup" jstcache="0">

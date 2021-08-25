@@ -117,7 +117,7 @@
                                         <a href="{{  route('customerServiceOfficer.add_new_request') }}"
                                             class="nav-link">
                                             <i class="far fa-plus nav-icon"></i>
-                                            <p>Add new borrower</p>
+                                            <p>Add new request</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -276,7 +276,7 @@
 </script>
 
 <script type="text/javascript">
-    @if (count($errors) > 0)
+    @if (count($errors->loan_disburse_errors) > 0)
         $('#loan-disbursement').modal('show');
     @endif
 </script>

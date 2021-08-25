@@ -39,9 +39,9 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#omf-about" class="nav-link">ABOUT</a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
+                {{-- <li class="nav-item d-none d-sm-inline-block">
                     <a href="#job-vacancy" class="nav-link">JOB VACANCIES</a>
-                </li>
+                </li> --}}
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#omf-contacts" class="nav-link">CONTACTS</a>
                 </li>

@@ -90,6 +90,7 @@ class CustomerServiceOfficer extends Controller
             'borrower_roll_number' => $new_borrower->roll_number,
             'requested_by' => $user_username,
             'status' => "Pending",
+            'seen_unseen' => "unseen",
         ]);
         // dd($new_request->requested_by);
         $new_borrower->save();
@@ -99,7 +100,7 @@ class CustomerServiceOfficer extends Controller
     }
 
     public function view_borrowers(){
-        $borrowers = Borrower::select('roll_number','first_name', 'middle_name', 'borrower_gender', 'phone_number', 'borrowed_amount', 'borrower_photo', 'created_at','status')->orderBy('created_at','desc')->get();
+        $borrowers = Borrower::select('*')->orderBy('updated_at','desc')->get();
         return view('dashboards.customerServiceOfficers.manage_loan.view_borrower',compact('borrowers'));
     }
 
@@ -210,16 +211,13 @@ class CustomerServiceOfficer extends Controller
     public function apply_loan_payment($roll_number){
         // loan_paid returns 1 if true 0 if false
         $username = Auth::user()->username;
-        $loan_paid = Borrower::where('roll_number',$roll_number)->sharedLock()->update([
-        'status' => "Paid",
-        'user_username' => $username,
-        ]);
-        if ($loan_paid) {
-            return redirect('customerServiceOfficer/search_borrower')->with('message','Payment successfull.');
-        }
-        else {
-            return redirect('customerServiceOfficer/search_borrower')->with('message','Payment not successfull.');
-        }
+        DB::transaction(function () use($username, $roll_number){
+            Borrower::where('roll_number',$roll_number)->lockForUpdate()->update([
+            'status' => "Paid",
+            'user_username' => $username,
+            ]);
+        });
+        return redirect('customerServiceOfficer/borrowers_list')->with('message','Payment completed successfully.');
     }
 
     public function view_loan_disbursemet(){
@@ -237,7 +235,7 @@ class CustomerServiceOfficer extends Controller
 
     public function new_loan_disbursement(Request $request){
 
-        $request->validate([
+        Validator::make($request->all(),[
             'roll_number' => 'required|regex:/[0-9]/|max:10|exists:borrowers,roll_number',
             'disburse_amount' => 'required|numeric|min:0|max:500000',
         ],
@@ -246,7 +244,7 @@ class CustomerServiceOfficer extends Controller
             'roll_number.regex' => 'Roll number must be number only. Please try again.',
             'roll_number.exists' => 'Wrong roll number. Please try again.',
 
-        ]);
+        ])->validateWithBag('loan_disburse_errors');
         $roll_number = $request->get('roll_number');
         $borrower = Borrower::find($roll_number);
         if ($borrower->status == 'Paid') {

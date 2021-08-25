@@ -103,7 +103,7 @@ class AdminController extends Controller
             $new_employee_id = $new_employee->id;
 
             $new_user = new User([
-                'username' => $request->first_name . random_int(10000, 99999) . "/" . date('y'),
+                'username' => $request->first_name . random_int(10000, 99999) . "-" . date('y'),
                 'employee_id' => $new_employee_id,
                 'role_id' => $request->role_id,
                 'password' => Hash::make('password'),
@@ -225,9 +225,25 @@ class AdminController extends Controller
         return view('dashboards.admins.employee_management.view_employee',compact('employees','requested_loans','total_request'));
     }
 
+    public function view_customers(){
+        $total_request = RequestedLoan::where('seen_unseen',"unseen")->get()->count();
+        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->where('seen_unseen',"unseen")->orderBy('requested_loans.created_at','desc')->paginate(5);
+
+        $customers = DB::table('customers')->get();
+        return view('dashboards\admins\borrower_and_customer\view_customers', compact('customers','total_request','requested_loans'));
+    }
+
+    public function view_borrowers(){
+        $total_request = RequestedLoan::where('seen_unseen',"unseen")->get()->count();
+        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->where('seen_unseen',"unseen")->orderBy('requested_loans.created_at','desc')->paginate(5);
+
+        $borrowers = Borrower::select('*')->orderBy('updated_at','desc')->get();
+        return view('dashboards\admins\borrower_and_customer\view_borrower', compact('borrowers','total_request','requested_loans'));
+    }
     public function users_list(){
-        $total_request = RequestedLoan::get()->count();
-        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->paginate(5);
+        $total_request = RequestedLoan::where('seen_unseen',"unseen")->get()->count();
+        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->where('seen_unseen',"unseen")->orderBy('requested_loans.created_at','desc')->paginate(5);
+
         $users = User::join('employees','employees.id','=','users.employee_id')->join('roles','roles.id','=','users.role_id')->get();
         return view('dashboards.admins.user_management.view_user',compact('total_request','requested_loans','users'));
 
@@ -402,6 +418,15 @@ class AdminController extends Controller
         $saving_services = SavingService::all();
 
         return view('dashboards.admins.service_management.manage_saving_service.view_saving_service',compact('total_request','requested_loans','saving_services'));
+    }
+    public function all_services_list(){
+        $total_request = RequestedLoan::where('seen_unseen','unseen')->get()->count();
+        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->where('seen_unseen','unseen')->orderBy('requested_loans.created_at','desc')->paginate(5);
+
+        $saving_services = SavingService::all();
+        $loan_services = LoanService::all();
+
+        return view('dashboards.admins.service_management.view_all_services',compact('total_request','requested_loans','saving_services','loan_services'));
     }
     public function view_branch(){
         $total_request = RequestedLoan::where('seen_unseen','unseen')->get()->count();

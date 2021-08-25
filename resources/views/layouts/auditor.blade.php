@@ -106,7 +106,7 @@
                                     <li class="nav-item">
                                         <a href="{{ route('auditor.view_saving_transaction_audit') }}" class="nav-link">
 
-                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; Saving transaction audit</p>
+                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; Saving audit</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -127,7 +127,7 @@
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
                                         <a href="{{ route('auditor.view_loan_transaction_audit') }}" class="nav-link">
-                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; Loan transaction audit</p>
+                                            <p>&nbsp; &nbsp; &nbsp; &nbsp; Loan audit</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -136,6 +136,13 @@
                                         </a>
                                     </li>
                                 </ul>
+                                <li class="nav-item">
+                                    <a type="button" href="#" class="nav-link" data-toggle="modal"
+                                    data-target="#new-taken-money">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Register taken money</p>
+                                    </a>
+                                </li>
                             </li>
                         </ul>
                         </li>
@@ -148,6 +155,7 @@
             </aside>
             <div class="content-wrapper">
                 @yield('auditor_content')
+                @include('dashboards.auditors.money_for_work.add_new_taken_money')
             </div>
             <!-- Main Footer -->
             <footer class="main-footer">
@@ -191,7 +199,6 @@
             $(function () {
         $("#example1").DataTable({
             "ordering": false,
-            "responsive": true,
             "lengthChange": true,
             "autoWidth": true,
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
@@ -222,6 +229,11 @@
 
                 </script>
 
+                <script type="text/javascript">
+                    @if (count($errors) > 0)
+                        $('#new-taken-money').modal('show');
+                    @endif
+                </script>
     </body>
 
 </html>
