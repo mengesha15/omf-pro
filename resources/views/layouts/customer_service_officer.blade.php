@@ -35,9 +35,9 @@
                         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
                                 class="fas fa-bars"></i></a>
                     </li>
-                    <li class="nav-item d-none d-sm-inline-block">
+                    {{-- <li class="nav-item d-none d-sm-inline-block">
                         <a href="#" class="nav-link">USER GUIDE</a>
-                    </li>
+                    </li> --}}
                 </ul>
                 <!-- Right navbar links -->
                 <ul class="navbar-nav ml-auto">
@@ -184,7 +184,7 @@
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-copy"></i>
                                     <p>
-                                        Loan ervices
+                                        Loan services
                                         <i class="fas fa-angle-left right"></i>
                                     </p>
                                 </a>

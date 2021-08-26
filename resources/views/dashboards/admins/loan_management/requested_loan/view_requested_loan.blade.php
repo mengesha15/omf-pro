@@ -57,7 +57,6 @@
                         <th>Requested amount</th>
                         <th>Gender</th>
                         <th>Requested date</th>
-                        <th>Detail</th>
                         <th>Approve</th>
                         <th style="color: red">Reject</th>
                     </tr>
@@ -73,12 +72,6 @@
                         <td>{{ $requested_loan->borrowed_amount }}</td>
                         <td>{{ $requested_loan->borrower_gender }}</td>
                         <td>{{ $requested_loan->created_at }}</td>
-                        <td class="text-center">
-                            <ol>
-                                <li class="breadcrumb-item li-none"><a href="{{ url('admin/employee_detail/' . $requested_loan->id) }}"><i class="fa fa-indent"></i>Detail</a>
-
-                            </ol>
-                        </td>
                         <td class="text-center">
                             <a href="{{ url('admin/loan_request_approvement/' . $requested_loan->roll_number) }}" class=" breadcrumb-item li-none btn btn-success btn-sm">Approve
                             </a>

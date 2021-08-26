@@ -77,7 +77,7 @@ class CustomerRelationOfficer extends Controller
 
             $profile_photo->move('uploads/customer_photo', $photo_name);
             });
-            return redirect()->route('customerRelationOfficer.customers_list',compact('message','New customer registered successfuly.'));
+            return redirect()->route('customerRelationOfficer.customers_list')->with('message','New customer registered successfuly.');
     }
 
     public function view_customers(){
@@ -91,7 +91,7 @@ class CustomerRelationOfficer extends Controller
         $customer = Customer::join('branches','branches.id','=','customers.branch_id')->join('saving_services','saving_services.id','=','customers.saving_service_id')->find($account_number);
 
         $saving_transactions = SavingTransaction::join('customers','saving_transactions.customer_account_number','=','customers.account_number')->join('branches','branches.id','=','saving_transactions.branch_id')->where('customer_account_number',$account_number)->select('transaction_type','saving_transactions.created_at','from_or_to','transaction_amount','branch_name')->orderBy('saving_transactions.created_at','desc')->get();
-        
+
         return view('dashboards.customerRelationOfficers.customer_management.view_customer_detail', compact('customer','saving_transactions'));
     }
 

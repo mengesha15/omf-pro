@@ -338,6 +338,14 @@ class AdminController extends Controller
         return view('dashboards.admins.loan_management.approved_loan.view_approved_loan',compact('approved_loans','requested_loans','total_request'));
     }
 
+    public function saving_service_registration_form(){
+        $total_request = RequestedLoan::where('seen_unseen','unseen')->get()->count();
+        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->where('seen_unseen','unseen')->orderBy('requested_loans.created_at','desc')->paginate(5);
+
+
+        return view ('dashboards/admins/service_management/manage_saving_service/add_new_saving_service', compact('total_request','requested_loans'));
+    }
+
     public function add_new_saving_service(Request $request){
         $request->validate([
             'saving_service_name' => 'required|regex:/[a-zA-Z\s]+/|max:255|unique:saving_services,saving_service_name',
@@ -374,12 +382,31 @@ class AdminController extends Controller
       return redirect()->route('admin.view_branch')->with('message','Branch registered successfuly.');
     }
 
+    public function role_registration_form(){
+        $total_request = RequestedLoan::get()->count();
+        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->paginate(5);
+
+        return view('dashboards.admins.role_management.add_new_role', compact('total_request','requested_loans'));
+    }
+
+    public function role_registration(Request $request){
+        $request->validate([
+            'role_name' => 'required|regex:/[a-zA-Z\s]+/|max:50|unique:roles,role_name',
+      ]);
+      $new_role = new Role([
+          'role_name' => $request->get('role_name'),
+      ]);
+      $new_role->save();
+      return redirect()->route('admin.view_role')->with('message','Role registered successfuly.');
+    }
+
+
     public function loan_service_registration_form(){
         $total_request = RequestedLoan::where('seen_unseen','unseen')->get()->count();
         $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->where('seen_unseen','unseen')->orderBy('requested_loans.created_at','desc')->paginate(5);
 
 
-        return view('dashboards.admins.service_management.manage_saving_service.add_new_saving_service', compact('total_request','requested_loans'));
+        return view ('dashboards/admins/service_management/manage_loan_service/add_new_loan_service', compact('total_request','requested_loans'));
     }
 
     public function add_new_loan_service(Request $request){
@@ -436,6 +463,14 @@ class AdminController extends Controller
         return view('dashboards.admins.branch_management.view_branch',compact('branches','total_request','requested_loans'));
     }
 
+    public function view_role(){
+        $total_request = RequestedLoan::where('seen_unseen','unseen')->get()->count();
+        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->where('seen_unseen','unseen')->orderBy('requested_loans.created_at','desc')->paginate(5);
+
+        $roles = Role::all();
+        return view('dashboards.admins.role_management.view_role', compact('roles','total_request','requested_loans'));
+    }
+
     public function delete_loan_service($id){
         LoanService::where('id',$id)->delete();
         return redirect()->route('admin.view_loan_service')->with('message', 'loan service deleted successfully.');
@@ -468,6 +503,26 @@ class AdminController extends Controller
           'branch_location' => $request->get('branch_location'),
       ]);
       return redirect()->route('admin.view_branch')->with('message','Branch updated successfully.');
+
+    }
+
+    public function edit_role_form($id){
+        $total_request = RequestedLoan::where('seen_unseen','unseen')->get()->count();
+        $requested_loans = Borrower::join('requested_loans','borrowers.roll_number','=','requested_loans.borrower_roll_number')->where('seen_unseen','unseen')->orderBy('requested_loans.created_at','desc')->paginate(5);
+
+
+        $role = Role::find($id);
+        return view('dashboards.admins.role_management.edit_role', compact('role','total_request','requested_loans'));
+    }
+
+    public function update_role(Request $request,$id){
+        $request->validate([
+            'role_name' => 'required|regex:/[a-zA-Z\s]+/|max:50',
+      ]);
+      Role::where('id',$id)->update([
+          'role_name' => $request->get('role_name'),
+      ]);
+      return redirect()->route('admin.view_role')->with('message','Role updated successfully.');
 
     }
 

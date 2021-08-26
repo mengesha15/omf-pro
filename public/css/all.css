@@ -28,13 +28,12 @@ div h2, h3, h4, h5{
 }
 
 .img-animation {
-    border: 3px solid #555;
-    height: 350px;
-    width: 640px;
+    height: 400px;
+    width: 100%;
 }
 
 .login-body {
-    padding-top: 8%; 
+    padding-top: 8%;
     background:lightgrey;
 }
 

@@ -17,14 +17,14 @@
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-9">
-                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <div id="myCarousel" class="responsive carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                             </ol>
                             <div class="carousel-inner">
                                 @foreach($sliders as $key => $slider)
                                 <div class="carousel-item {{$key == 0 ? 'active' : '' }}">
-                                    <img src="{{url('uploads/event_photo', $slider->event_photo)}}" class="img-animation"  alt="...">
+                                    <img src="{{url('uploads/event_photo', $slider->event_photo)}}" class="responsive img-animation"  alt="...">
                                 </div>
                                 @endforeach
                             </div>

@@ -1,65 +1,31 @@
 New loan update
 ----------------
-Roll No: 1000000000 Current borrowed: 147910.24 Interest rate 11.85 New borrowed: 147958.26
-Roll No: 1000000002 Current borrowed: 150989.1 Interest rate 11.85 New borrowed: 151038.12
-Roll No: 1000000003 Current borrowed: 151998.56 Interest rate 11.85 New borrowed: 152047.91
-Roll No: 1000000004 Current borrowed: 151998.56 Interest rate 11.85 New borrowed: 152047.91
-Roll No: 1000000005 Current borrowed: 151998.56 Interest rate 11.85 New borrowed: 152047.91
-Roll No: 1000000006 Current borrowed: 201489.31 Interest rate 15.65 New borrowed: 201575.7
-Roll No: 1000000007 Current borrowed: 150981.29 Interest rate 10.82 New borrowed: 151026.05
+Roll No: 1000000000 Current borrowed: 50000 Interest rate 17 New borrowed: 50023.29
+Roll No: 1000000001 Current borrowed: 50000 Interest rate 17 New borrowed: 50023.29
+Roll No: 1000000002 Current borrowed: 10000 Interest rate 17 New borrowed: 10004.66
 
 
  New saving update
 ----------------
-Acc No: 1000069087 Current balance :535377.04 Interest rate: 9.27 New balance:535513.01
-Acc No: 1001732867 Current balance :35324.09 Interest rate: 12.74 New balance:35336.42
-Acc No: 1006908888 Current balance :15164.05 Interest rate: 9.27 New balance:15167.9
-Acc No: 1009088884 Current balance :20193.88 Interest rate: 8.22 New balance:20198.43
-Acc No: 1009349284 Current balance :10100.87 Interest rate: 9.27 New balance:10103.44
+Acc No: 1004321120 Current balance :496 Interest rate: 7 New balance:496.1
+Acc No: 1006573927 Current balance :1150 Interest rate: 10 New balance:1150.32
+Acc No: 1009133195 Current balance :5000 Interest rate: 7 New balance:5000.96
 
 
 Wait for next update
 ---------------------
 New loan update
 ----------------
-Roll No: 1000000000 Current borrowed: 147958.26 Interest rate 11.85 New borrowed: 148006.3
-Roll No: 1000000002 Current borrowed: 151038.12 Interest rate 11.85 New borrowed: 151087.16
-Roll No: 1000000003 Current borrowed: 152047.91 Interest rate 11.85 New borrowed: 152097.27
-Roll No: 1000000004 Current borrowed: 152047.91 Interest rate 11.85 New borrowed: 152097.27
-Roll No: 1000000005 Current borrowed: 152047.91 Interest rate 11.85 New borrowed: 152097.27
-Roll No: 1000000006 Current borrowed: 201575.7 Interest rate 15.65 New borrowed: 201662.13
-Roll No: 1000000007 Current borrowed: 151026.05 Interest rate 10.82 New borrowed: 151070.82
+Roll No: 1000000000 Current borrowed: 50023.29 Interest rate 17 New borrowed: 50046.59
+Roll No: 1000000001 Current borrowed: 50023.29 Interest rate 17 New borrowed: 50046.59
+Roll No: 1000000002 Current borrowed: 10004.66 Interest rate 17 New borrowed: 10009.32
 
 
  New saving update
 ----------------
-Acc No: 1000069087 Current balance :535513.01 Interest rate: 9.27 New balance:535649.02
-Acc No: 1001732867 Current balance :35336.42 Interest rate: 12.74 New balance:35348.75
-Acc No: 1006908888 Current balance :15167.9 Interest rate: 9.27 New balance:15171.75
-Acc No: 1009088884 Current balance :20198.43 Interest rate: 8.22 New balance:20202.98
-Acc No: 1009349284 Current balance :10103.44 Interest rate: 9.27 New balance:10106.01
-
-
-Wait for next update
----------------------
-New loan update
-----------------
-Roll No: 1000000000 Current borrowed: 148006.3 Interest rate 11.85 New borrowed: 148054.35
-Roll No: 1000000002 Current borrowed: 151087.16 Interest rate 11.85 New borrowed: 151136.21
-Roll No: 1000000003 Current borrowed: 152097.27 Interest rate 11.85 New borrowed: 152146.65
-Roll No: 1000000004 Current borrowed: 152097.27 Interest rate 11.85 New borrowed: 152146.65
-Roll No: 1000000005 Current borrowed: 152097.27 Interest rate 11.85 New borrowed: 152146.65
-Roll No: 1000000006 Current borrowed: 201662.13 Interest rate 15.65 New borrowed: 201748.6
-Roll No: 1000000007 Current borrowed: 151070.82 Interest rate 10.82 New borrowed: 151115.6
-
-
- New saving update
-----------------
-Acc No: 1000069087 Current balance :535649.02 Interest rate: 9.27 New balance:535785.06
-Acc No: 1001732867 Current balance :35348.75 Interest rate: 12.74 New balance:35361.09
-Acc No: 1006908888 Current balance :15171.75 Interest rate: 9.27 New balance:15175.6
-Acc No: 1009088884 Current balance :20202.98 Interest rate: 8.22 New balance:20207.53
-Acc No: 1009349284 Current balance :10106.01 Interest rate: 9.27 New balance:10108.58
+Acc No: 1004321120 Current balance :496.1 Interest rate: 7 New balance:496.2
+Acc No: 1006573927 Current balance :1150.32 Interest rate: 10 New balance:1150.64
+Acc No: 1009133195 Current balance :5000.96 Interest rate: 7 New balance:5001.92
 
 
 Wait for next update

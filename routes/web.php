@@ -66,30 +66,41 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHis
 
     Route::get('approved_loans_list',[AdminController::class,'approved_loans_list'])->name('admin.approved_loans_list');
 
-    //Registration of branch, loan service and saving srvice
+    //Registration of role, branch, loan service and saving srvice
     Route::get('loan_service_registration',[AdminController::class,'loan_service_registration_form'])->name('admin.loan_service_registration_form');
     Route::post('loan_service_registration',[AdminController::class,'add_new_loan_service'])->name('admin.add_new_loan_service');
 
-    Route::get('saving_service_registration',[AdminController::class,'loan_service_registration_form'])->name('admin.saving_service_registration_form');
+    Route::get('saving_service_registration',[AdminController::class,'saving_service_registration_form'])->name('admin.saving_service_registration_form');
     Route::post('saving_service_registration',[AdminController::class,'add_new_saving_service'])->name('admin.add_new_saving_service');
 
     Route::get('branch_registration',[AdminController::class,'branch_registration_form'])->name('admin.branch_registration_form');
     Route::post('branch_registration',[AdminController::class,'branch_registration'])->name('admin.branch_registration');
 
-    // View branch, loan service and saving srvice
+    Route::get('role_registration',[AdminController::class,'role_registration_form'])->name('admin.role_registration_form');
+    Route::post('role_registration',[AdminController::class,'role_registration'])->name('admin.role_registration');
+
+    // View role, branch, loan service and saving srvice
     Route::get('loan_services_list',[AdminController::class,'view_loan_service'])->name('admin.view_loan_service');
     Route::get('saving_services_list',[AdminController::class,'view_saving_service'])->name('admin.view_saving_service');
+
     Route::get('branches_list',[AdminController::class,'view_branch'])->name('admin.view_branch');
+
+    Route::get('role_list',[AdminController::class,'view_role'])->name('admin.view_role');
+
     Route::get('all_services_list',[AdminController::class,'all_services_list'])->name('admin.all_services_list');
 
-    //delete branch, loan service and saving service
+    //delete role, branch, loan service and saving service
     Route::delete('delete_loan_service/{id}',[AdminController::class,'delete_loan_service'])->name('admin.delete_loan_service');
     Route::delete('delete_saving_service/{id}',[AdminController::class,'delete_saving_service'])->name('admin.delete_saving_service');
     Route::delete('delete_branch/{id}',[AdminController::class,'delete_branch'])->name('admin.delete_branch');
+    Route::delete('delete_role/{id}',[AdminController::class,'delete_role'])->name('admin.delete_role');
 
-    //edit branch, loan service and saving service
+    //edit role, branch, loan service and saving service
     Route::get('edit_branch/{id}',[AdminController::class,'edit_branch_form'])->name('admin.edit_branch_form');
     Route::post('edit_branch/{id}',[AdminController::class,'update_branch'])->name('admin.update_branch');
+
+    Route::get('edit_role/{id}',[AdminController::class,'edit_role_form'])->name('admin.edit_role_form');
+    Route::post('edit_role/{id}',[AdminController::class,'update_role'])->name('admin.update_role');
 
     Route::get('edit_loan_service/{id}',[AdminController::class,'edit_loan_service_form'])->name('admin.edit_loan_service_form');
     Route::post('edit_loan_service/{id}',[AdminController::class,'update_loan_service'])->name('admin.update_loan_service');

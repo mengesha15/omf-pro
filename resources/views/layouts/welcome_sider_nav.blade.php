@@ -50,7 +50,7 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ url('login') }}" class="nav-link">SIGN IN</a>
+                    <a href="{{ url('login') }}" class="nav-link">SIGNIN</a>
                 </li>
             </ul>
         </nav>

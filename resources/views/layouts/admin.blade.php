@@ -33,9 +33,9 @@
                         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
                                 class="fas fa-bars"></i></a>
                     </li>
-                    <li class="nav-item d-none d-sm-inline-block">
+                    {{-- <li class="nav-item d-none d-sm-inline-block">
                         <a href="#" class="nav-link">USER GUIDE</a>
-                    </li>
+                    </li> --}}
                 </ul>
 
                 <!-- Right navbar links -->
@@ -220,7 +220,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('admin.add_new_loan_service') }}" class="nav-link">
+                                        <a href="{{ route('admin.saving_service_registration_form') }}" class="nav-link">
                                             <i class="far fa-plus nav-icon"></i>
                                             <p>Add new saving service</p>
                                         </a>
@@ -261,6 +261,30 @@
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Roles
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.role_registration_form') }}" class="nav-link">
+                                        <i class="far fa-plus nav-icon"></i>
+                                        <p>Add new role</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.view_role') }}" class="nav-link">
+                                        <i class="far fa-plus nav-icon"></i>
+                                        <p>View roles</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                             <li class="nav-item">
                                 <a href="{{ route('admin.event_photo_uploading_form') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>

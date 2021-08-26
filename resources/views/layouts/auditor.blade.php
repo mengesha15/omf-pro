@@ -30,9 +30,9 @@
                         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
                                 class="fas fa-bars"></i></a>
                     </li>
-                    <li class="nav-item d-none d-sm-inline-block">
+                    {{-- <li class="nav-item d-none d-sm-inline-block">
                         <a href="#" class="nav-link">USER GUIDE</a>
-                    </li>
+                    </li> --}}
                 </ul>
 
                 <!-- Right navbar links -->
@@ -155,7 +155,7 @@
             </aside>
             <div class="content-wrapper">
                 @yield('auditor_content')
-                @include('dashboards.auditors.money_for_work.add_new_taken_money')
+                {{-- @include('dashboards.auditors.money_for_work.add_new_taken_money') --}}
             </div>
             <!-- Main Footer -->
             <footer class="main-footer">
@@ -229,11 +229,11 @@
 
                 </script>
 
-                <script type="text/javascript">
+                {{-- <script type="text/javascript">
                     @if (count($errors) > 0)
                         $('#new-taken-money').modal('show');
                     @endif
-                </script>
+                </script> --}}
     </body>
 
 </html>

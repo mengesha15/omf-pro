@@ -15,13 +15,13 @@ class CreateMoneyTakenForWorksTable extends Migration
     {
         Schema::create('money_taken_for_works', function (Blueprint $table) {
             $table->id();
-            $table->string('user_username');
+            $table->string('user_username')->nullable();
             $table->float('taken_amount',10,2);
-            $table->string('given_by');
+            $table->string('given_by')->nullable();
             $table->timestamps();
 
             $table->foreign('user_username')->references('username')->on('users')->onUpdate('cascade')
-                ->onDelete('no action');
+                ->onDelete('set null');
             $table->foreign('given_by')->references('username')->on('users')->onUpdate('cascade')
                 ->onDelete('set null');
         });
